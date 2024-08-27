@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title style="text-align: center;">TECNO STORE</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+   <!-- Cuadro que encierra los campos de usuario y contraseña -->
+  <ion-card class="content-center">
+    <ion-card-header>
+      <ion-card-title style="text-align: center;">Sign-Up</ion-card-title>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <!-- Campo de Usuario -->
+      <ion-item>
+        <ion-input placeholder="Ingrese su correo" ></ion-input>
+      </ion-item>
+
+      <!-- Campo de Contraseña -->
+      <ion-item>
+        <ion-input type="password" placeholder="Crea una contraseña" value="">
+          <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input type="password" placeholder="Valide su contraseña" value="">
+          <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+        </ion-input>
+      </ion-item>
+
+      <!-- Botón de Ingresar -->
+      <ion-button expand="block" color="success" [routerLink]="['/login']">Crear Cuenta</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

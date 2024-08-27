@@ -1,0 +1,46 @@
+<ion-app>
+  <!-- Side Menu -->
+  <ion-menu side="start" contentId="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Categorias</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-list>
+        <ion-item button>
+          Teclados
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <!-- Main Content -->
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start"> 
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title style="text-align: center;">TECNO STORE</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content [fullscreen]="true" id="main-content">
+    <ion-searchbar color="light" placeholder="Buscar"></ion-searchbar>
+    <ion-card>
+      <img alt="tc" src="assets/icon/tc.jpg" />
+      <ion-card-header>
+        <ion-card-title>Teclado Mecánico Red Dragon </ion-card-title>
+        <ion-card-subtitle>RED DRAGON</ion-card-subtitle>
+      </ion-card-header>
+    
+    <ion-card-content>
+      $34.990
+    </ion-card-content>
+      <ion-card-content>
+        Este increíble teclado está diseñado para ofrecerte una experiencia de juego única y mejorada. 
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+</ion-app>

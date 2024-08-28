@@ -23,6 +23,18 @@ const routes: Routes = [
     path: 'perfil',
     loadChildren: () => import('./pages/perfil/perfil.module').then( m => m.PerfilPageModule)
   },
+  {
+    path: 'teclados',
+    loadChildren: () => import('./pages/teclados/teclados.module').then( m => m.TecladosPageModule)
+  },
+  {
+    path: 'monitores',
+    loadChildren: () => import('./pages/monitores/monitores.module').then( m => m.MonitoresPageModule)
+  },
+  {
+    path: 'carrito',
+    loadChildren: () => import('./pages/carrito/carrito.module').then( m => m.CarritoPageModule)
+  },
 ];
 
 @NgModule({

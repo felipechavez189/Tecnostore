@@ -1,0 +1,23 @@
+ion-content {
+    --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
+  }
+
+
+
+ion-content {
+  ion-list, ion-item {
+    background: transparent;
+  }
+
+  ion-item {
+    --background: transparent;
+    --ion-item-background: transparent;
+  }
+
+}
+
+.center-button-container {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center;     /* Centra verticalmente */
+}

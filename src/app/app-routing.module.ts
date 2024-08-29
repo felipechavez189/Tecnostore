@@ -34,7 +34,19 @@ const routes: Routes = [
   {
     path: 'carrito',
     loadChildren: () => import('./pages/carrito/carrito.module').then( m => m.CarritoPageModule)
+  },  {
+    path: 'audifonos',
+    loadChildren: () => import('./pages/audifonos/audifonos.module').then( m => m.AudifonosPageModule)
   },
+  {
+    path: 'mouse',
+    loadChildren: () => import('./pages/mouse/mouse.module').then( m => m.MousePageModule)
+  },
+  {
+    path: 'sillas',
+    loadChildren: () => import('./pages/sillas/sillas.module').then( m => m.SillasPageModule)
+  },
+
 ];
 
 @NgModule({

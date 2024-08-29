@@ -3,37 +3,31 @@
     <ion-menu contentId="main-content">
       <ion-header>
         <ion-toolbar>
-          <ion-title>Categorias</ion-title>
+          <ion-title>Categorías</ion-title>
         </ion-toolbar>
       </ion-header>
   
-      <ion-content>
+      <ion-content class="content">
         <ion-list>
-          <ion-item button routerLink="/teclados">
-            <ion-icon></ion-icon>
+          <ion-item class="custom-category-item" button routerLink="/teclados">
             <ion-label>Teclados</ion-label>
           </ion-item>
 
-          <ion-item button routerLink="/monitores">
-            <ion-icon></ion-icon>
+          <ion-item class="custom-category-item" button routerLink="/monitores">
             <ion-label>Monitores</ion-label>
           </ion-item>
           
-          <ion-item button routerLink="/audifonos">
-            <ion-icon></ion-icon>
-            <ion-label>Audifonos</ion-label>
+          <ion-item class="custom-category-item" button routerLink="/audifonos">
+            <ion-label>Audífonos</ion-label>
           </ion-item>
         
-          <ion-item button routerLink="/mouse">
-            <ion-icon></ion-icon>
+          <ion-item class="custom-category-item" button routerLink="/mouse">
             <ion-label>Mouse</ion-label>
           </ion-item>
 
-          <ion-item button routerLink="/sillas">
-            <ion-icon></ion-icon>
+          <ion-item class="custom-category-item" button routerLink="/sillas">
             <ion-label>Sillas</ion-label>
           </ion-item>
-
         </ion-list>
       </ion-content>
     </ion-menu>
@@ -60,5 +54,20 @@
     </ion-toolbar>
   </ion-header>
 
+  <ion-footer>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-icon name="mail"></ion-icon>
+        <p class="footer-text">tecnostore&#64;gmail.com</p>
+      </ion-buttons>
+  
+      <ion-buttons slot="end">
+        <ion-icon name="logo-instagram"></ion-icon>
+        <p class="footer-text">tecnostore</p>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-footer>
+  
+  
   <ion-router-outlet id="main-content"></ion-router-outlet>
 </ion-app>

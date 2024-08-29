@@ -2,3 +2,9 @@ ion-content {
   --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
 }
 
+.banner-image {
+  margin-left: 38px;
+  width: 80%; /* Ajusta al ancho del contenedor */
+  height: auto; /* Ajusta el margen según tus necesidades (16px es un ejemplo) */
+}
+

@@ -10,20 +10,57 @@
 
   <ion-content [fullscreen]="true" id="main-content">
     <ion-searchbar color="light" placeholder="Buscar"></ion-searchbar>
-    <ion-card>
-      <img alt="tc" src="assets/icon/tc.jpg" />
-      <ion-card-header>
-        <ion-card-title>Teclado Mecánico Red Dragon </ion-card-title>
-        <ion-card-subtitle>RED DRAGON</ion-card-subtitle>
-      </ion-card-header>
-    
-    <ion-card-content>
-      $34.990
-    </ion-card-content>
-      <ion-card-content>
-        Este increíble teclado está diseñado para ofrecerte una experiencia de juego única y mejorada. 
-      </ion-card-content>
-    </ion-card>
+    <img class="banner-image" alt="amd" src="/assets/icon/ryzen.jpg"/>
+    <h1 style="text-align: center;"><b>PRODUCTOS DESTACADOS</b></h1>
+
+    <!-- Añadido ion-grid y ion-row -->
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-card>
+            <ion-img src="/assets/icon/teclado4.jpg"></ion-img>
+            <ion-card-content>
+              <h2>Teclado Gamer Xpg Mage Rgb Gaming Red Switch Acuario</h2>
+              <p>$12.990</p>
+              <ion-button expand="block" color="primary">Agregar al carrito</ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col size="6">
+          <ion-card>
+            <ion-img src="/assets/icon/monitor2.jpg"></ion-img>
+            <ion-card-content>
+              <h2>Monitor Gamer Samsung Odyssey G3 S27ag32 Lcd 27 Negro</h2>
+              <p>$178.990</p>
+              <ion-button expand="block" color="primary">Agregar al carrito</ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col size="6">
+          <ion-card>
+            <ion-img src="/assets/icon/mouse6.jpg"></ion-img>
+            <ion-card-content>
+              <h2>Mouse Gamer Hourglass Óptico RGB USB Negro</h2>
+              <p>$13.990</p>
+              <ion-button expand="block" color="primary">Agregar al carrito</ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col size="6">
+          <ion-card>
+            <ion-img src="/assets/icon/audifono6.jpg"></ion-img>
+            <ion-card-content>
+              <h2>Audífonos Gamer Logitech G335, Wired, Auricular Tamaño Completo</h2>
+              <p>$59.990</p>
+              <ion-button expand="block" color="primary">Agregar al carrito</ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <img class="banner-image" alt="win" src="/assets/icon/valorant2.jpg"/>
   </ion-content>
 </ion-app>
-

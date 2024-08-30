@@ -1,13 +1,31 @@
+/* Fondo del ion-content */
 ion-content {
-    --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
-  }
+  --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
+}
+/* Estilo para el menú */
+ion-menu {
+  --background: #004d74; /* Fondo del menú */
+}
 
-  .footer-text {
-    margin-left: 8px; /* Espacio entre el ícono y el texto */
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-  }
+/* Estilo para los elementos del menú */
+.custom-category-item {
+  --background: #004d74; /* Fondo de los ítems del menú */
+  --color: #ffffff; /* Color del texto en los ítems del menú */
+}
 
-  
+/* Estilo para el encabezado */
+ion-header {
+  --background: #004d74; /* Fondo del encabezado */
+  color: #ffffff; /* Color del texto en el encabezado */
+}
+
+/* Estilo para los botones del encabezado */
+ion-button {
+  --background: #004d74; /* Fondo del botón */
+  --color: #ffffff; /* Color del texto en el botón */
+}
+
+/* Estilo para los íconos dentro de los botones */
+ion-icon {
+  color: #ffffff; /* Color de los íconos */
+}

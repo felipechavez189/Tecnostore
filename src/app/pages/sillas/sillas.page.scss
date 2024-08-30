@@ -1,31 +1,91 @@
+/* Fondo del ion-content */
 ion-content {
-    --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
-  }
+  --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
+}
 
-  .banner-image {
-    margin-left: 38px;
-    width: 80%; /* Ajusta al ancho del contenedor */
-    height: auto; /* Ajusta el margen según tus necesidades (16px es un ejemplo) */
-  }
+/* Colores de fondo para cada tarjeta */
+.card-1 {
+  --background: #ffffff; /* Color de fondo para la tarjeta 1 */
+}
 
-  .card-fixed-size {
-    height: 400px; /* Ajusta según lo que necesites */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    overflow: hidden; /* Asegura que no se muestre el contenido que excede la tarjeta */
-  }
-  
-  .card-img {
-    height: 200px; /* Ajusta según lo que necesites */
-    object-fit: cover; /* Asegura que la imagen se ajuste sin distorsionar */
-    width: 100%; /* Asegura que la imagen ocupe todo el ancho de la tarjeta */
-  }
-  
-  .card-fixed-size ion-card-content {
-    flex: 1; /* Permite que el contenido ocupe el espacio restante */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
+.card-2 {
+  --background: #ffffff; /* Color de fondo para la tarjeta 2 */
+}
+
+.card-3 {
+  --background: #ffffff; /* Color de fondo para la tarjeta 3 */
+}
+
+.card-4 {
+  --background: #ffffff; /* Color de fondo para la tarjeta 4 */
+}
+
+.card-5 {
+  --background: #ffffff; /* Color de fondo para la tarjeta 5 */
+}
+
+.card-6 {
+  --background: #ffffff; /* Color de fondo para la tarjeta 6 */
+}
+
+/* Estilos para el contenido dentro de las tarjetas */
+.card-1 ion-card-content,
+.card-2 ion-card-content,
+.card-3 ion-card-content,
+.card-4 ion-card-content,
+.card-5 ion-card-content,
+.card-6 ion-card-content {
+  color: #000000; /* Color del texto en negro */
+}
+
+.card-1 ion-card-content h2,
+.card-1 ion-card-content p,
+.card-2 ion-card-content h2,
+.card-2 ion-card-content p,
+.card-3 ion-card-content h2,
+.card-3 ion-card-content p,
+.card-4 ion-card-content h2,
+.card-4 ion-card-content p,
+.card-5 ion-card-content h2,
+.card-5 ion-card-content p,
+.card-6 ion-card-content h2,
+.card-6 ion-card-content p {
+  color: #000000; /* Color del texto y precio en negro */
+}
+
+/* Estilos adicionales para mejorar la apariencia de las tarjetas */
+ion-card {
+  border-radius: 10px; /* Redondear las esquinas de las tarjetas */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Agregar sombra para un efecto de profundidad */
+  display: flex;
+  flex-direction: column; /* Asegura que el contenido se apile verticalmente */
+}
+
+ion-card-content {
+  display: flex;
+  flex-direction: column; /* Asegura que el contenido se apile verticalmente dentro de la tarjeta */
+  flex: 1; /* Permite que el contenido ocupe todo el espacio disponible */
+}
+
+ion-button {
+  margin-top: auto; /* Empuja el botón al final del contenedor flex */
+  --background: transparent; /* Elimina el color de fondo del botón */
+  --color: inherit; /* Hereda el color del texto del botón del elemento padre */
+  --border-radius: 0; /* Opcional: elimina el radio de borde para un diseño plano */
+}
+
+/* Asegurarse de que todas las tarjetas tengan el mismo tamaño */
+ion-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+ion-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+ion-col {
+  display: flex;
+  align-items: stretch; /* Estira las tarjetas para que todas tengan la misma altura */
+}

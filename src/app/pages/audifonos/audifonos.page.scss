@@ -1,4 +1,31 @@
 ion-content {
     --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
   }
+
+  .banner-image {
+    margin-left: 38px;
+    width: 80%; /* Ajusta al ancho del contenedor */
+    height: auto; /* Ajusta el margen según tus necesidades (16px es un ejemplo) */
+  }
+
+  .card-fixed-size {
+    height: 400px; /* Ajusta según lo que necesites */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden; /* Asegura que no se muestre el contenido que excede la tarjeta */
+  }
+  
+  .card-img {
+    height: 200px; /* Ajusta según lo que necesites */
+    object-fit: cover; /* Asegura que la imagen se ajuste sin distorsionar */
+    width: 100%; /* Asegura que la imagen ocupe todo el ancho de la tarjeta */
+  }
+  
+  .card-fixed-size ion-card-content {
+    flex: 1; /* Permite que el contenido ocupe el espacio restante */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
   

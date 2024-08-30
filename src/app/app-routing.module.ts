@@ -46,6 +46,10 @@ const routes: Routes = [
     path: 'sillas',
     loadChildren: () => import('./pages/sillas/sillas.module').then( m => m.SillasPageModule)
   },
+  {
+    path: 'pc',
+    loadChildren: () => import('./pages/pc/pc.module').then( m => m.PcPageModule)
+  },
 
 ];
 

@@ -50,6 +50,26 @@ const routes: Routes = [
     path: 'pc',
     loadChildren: () => import('./pages/pc/pc.module').then( m => m.PcPageModule)
   },
+  {
+    path: 'contacto',
+    loadChildren: () => import('./pages/contacto/contacto.module').then( m => m.ContactoPageModule)
+  },
+  {
+    path: 'crud',
+    loadChildren: () => import('./pages/crud/crud.module').then( m => m.CrudPageModule)
+  },
+  {
+    path: 'recuperar',
+    loadChildren: () => import('./pages/recuperar/recuperar.module').then( m => m.RecuperarPageModule)
+  },
+  {
+    path: 'codigo',
+    loadChildren: () => import('./pages/codigo/codigo.module').then( m => m.CodigoPageModule)
+  },
+  {
+    path: 'nueva',
+    loadChildren: () => import('./pages/nueva/nueva.module').then( m => m.NuevaPageModule)
+  },
 
 ];
 

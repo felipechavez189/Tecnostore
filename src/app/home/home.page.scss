@@ -13,7 +13,8 @@ ion-content {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  overflow: hidden; /* Asegura que no se muestre el contenido que excede la tarjeta */
+  overflow: hidden;
+  background-color: white; /* Asegura que no se muestre el contenido que excede la tarjeta */
 }
 
 .card-img {

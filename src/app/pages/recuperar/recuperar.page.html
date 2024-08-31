@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Recuperar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Cuadro que encierra los campos de usuario y contraseña -->
+  <ion-card class="content-center">
+    <ion-card-header>
+      <ion-card-title style="text-align: center;">Recuperar Cuenta</ion-card-title>
+    </ion-card-header>
+
+    <ion-label>Al ingresar su correo, recibirá un código para renovar su contraseña</ion-label>
+    
+    <ion-card-content>
+      <!-- Campo de Usuario -->
+      <ion-item>
+        <ion-input placeholder="Ingrese su correo"></ion-input>
+      </ion-item>
+
+      <!-- Botón de Enviar Código -->
+      <ion-button expand="block" class="custom-button" [routerLink]="['/login']">Enviar Código</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

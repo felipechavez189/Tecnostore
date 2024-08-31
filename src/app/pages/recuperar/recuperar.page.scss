@@ -1,9 +1,7 @@
 ion-content {
-  --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
-}
-
-
-/* Estilo general para los botones personalizados */
+    --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
+  }
+  /* Estilo general para los botones personalizados */
 .custom-button {
   --background: #5fbded; /* Color celeste para el fondo del botón */
   --color: #ffffff; /* Color blanco para el texto del botón */
@@ -11,6 +9,7 @@ ion-content {
   padding: 12px 20px; /* Ajusta el tamaño del botón para hacerlo más rectangular */
   margin: 10px 0; /* Añade márgenes verticales si es necesario */
 }
+
 .custom-button:focus, .custom-button:hover {
   --background: #5fbded; /* Color celeste más oscuro al hacer hover o al enfocar el botón */
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { AlertController, ToastController } from '@ionic/angular'; 
 
 @Component({
   selector: 'app-login',
@@ -8,32 +8,44 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  comuna:string=" lo espejo ";
-  edad:number=25;
-  nombreUsuario: string=" ";
 
-  arreglo:any = {
-    nombre: 'José',
-    apellido: 'Gutierrez',
-    edad: 29
-  }
+  email: string = ''; 
+  password: string = '';
 
-  lista: any = [
-    {
-    id: 1,
-    nombre: 'María'
+  constructor(private router: Router, private alertController: AlertController, private toastController: ToastController) { }
+
+  ngOnInit() { }
+
+  async onLogin() {
+    if (this.email === 'admin@example.com' && this.password === 'admin123') {
+      this.router.navigate(['/home']);
+      await this.presentToast('Inicio de sesión exitoso');
+    } else {
+      await this.presentAlert('Usuario o contraseña incorrectas');
     }
-  ]
-
-
-  constructor(private router: Router) { }
-
-  ngOnInit() {
   }
 
-  irPagina(){
-    //Puedo crear cualquier logica de programación
+  async presentAlert(message: string) {
+    const alert = await this.alertController.create({
+      header: 'Error',
+      message: message,
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,  
+      position: 'bottom'  
+    });
+
+    toast.present();
+  }
+
+  irPagina() {
     this.router.navigate(['/signup']);
   }
-
 }

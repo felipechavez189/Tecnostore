@@ -14,33 +14,33 @@
     </ion-card-header>
   </ion-card>
 
-    <ion-button class="center-button-container">
-      <ion-icon name="camera-outline"></ion-icon>
-    </ion-button>
+  <ion-button class="center-button-container custom-button">
+    <ion-icon name="camera-outline"></ion-icon>
+  </ion-button>
 
   <ion-list>
-    <ion-item>
+    <ion-item class="profile-item">
       <ion-label>Nombre:</ion-label>
       <ion-text>Juan Peréz</ion-text>
     </ion-item>
-    <ion-item>
+    <ion-item class="profile-item">
       <ion-label>Email:</ion-label>
       <ion-text>ju.perez&#64;gmail.com</ion-text>
     </ion-item>
-    <ion-item>
+    <ion-item class="profile-item">
       <ion-label>Teléfono:</ion-label>
       <ion-text>+56 9xxxxxxxx</ion-text>
     </ion-item>
-    <ion-item>
+    <ion-item class="profile-item">
       <ion-label>Dirección:</ion-label>
       <ion-text>Santiago, Chile</ion-text>
     </ion-item>
   </ion-list>
 
-  <ion-button expand="full" color="primary" style="margin: 20px;">
+  <ion-button expand="full" class="custom-button" style="margin: 20px;">
     Editar Perfil
   </ion-button>
-  <ion-button expand="full" [routerLink]="'/login'">
+  <ion-button expand="full" class="custom-button" [routerLink]="'/login'">
     Cerrar Sesión<ion-icon name="log-out-outline"></ion-icon>
   </ion-button>
 </ion-content>

@@ -5,9 +5,33 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">nueva</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- Cuadro que encierra los campos de usuario y contraseña -->
+ <ion-card class="content-center">
+   <ion-card-header>
+     <ion-card-title style="text-align: center;">Nueva Contraseña</ion-card-title>
+   </ion-card-header>
+   
+   <ion-card-content>
+     <!-- Campo de Usuario -->
+     <ion-item>
+       <ion-input placeholder="Ingrese su correo" ></ion-input>
+     </ion-item>
+
+     <!-- Campo de Contraseña -->
+     <ion-item>
+       <ion-input type="password" placeholder="Nueva contraseña" value="">
+         <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+       </ion-input>
+     </ion-item>
+
+     <ion-item>
+       <ion-input type="password" placeholder="Valide su contraseña" value="">
+         <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+       </ion-input>
+     </ion-item>
+
+     <!-- Botón de Ingresar -->
+     <ion-button expand="block" color="success" [routerLink]="['/login']">Inicio de Sesión</ion-button>
+   </ion-card-content>
+ </ion-card>
 </ion-content>

@@ -5,9 +5,23 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">codigo</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- Cuadro que encierra los campos de usuario y contraseña -->
+ <ion-card class="content-center">
+   <ion-card-header>
+     <ion-card-title style="text-align: center;">Código de Verificación</ion-card-title>
+   </ion-card-header>
+
+   <ion-label>Ingrese el codigo enviado a su correo</ion-label>
+   
+   <ion-card-content>
+     <!-- Campo de Usuario -->
+     <ion-item>
+       <ion-input placeholder="XXXX-XXXX" ></ion-input>
+     </ion-item>
+
+     <!-- Botón de Ingresar -->
+     <ion-button expand="block" color="success" [routerLink]="['/nueva']">Validar</ion-button>
+     <ion-button expand="block" color="primary">Reenviar Correo</ion-button>
+   </ion-card-content>
+ </ion-card>
 </ion-content>

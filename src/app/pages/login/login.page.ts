@@ -17,9 +17,18 @@ export class LoginPage implements OnInit {
   ngOnInit() { }
 
   async onLogin() {
-    if (this.email === 'admin@example.com' && this.password === 'admin123') {
+    if (this.email === 'usuario@example.com' && this.password === 'usuario123') {
       this.router.navigate(['/home']);
       await this.presentToast('Inicio de sesión exitoso');
+    } else {
+      await this.presentAlert('Usuario o contraseña incorrectas');
+    }
+  }
+
+  async inLogin() {
+    if (this.email === 'admin@example.com' && this.password === 'admin123') {
+      this.router.navigate(['/home']);
+      await this.presentToast('Inicio de sesión exitoso como admin');
     } else {
       await this.presentAlert('Usuario o contraseña incorrectas');
     }

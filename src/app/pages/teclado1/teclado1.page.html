@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Teclado Redragon Kumara K552</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <!-- Título eliminado para no mostrar el nombre encima de la imagen -->
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <!-- Imagen del teclado sin título encima -->
+        <ion-img src="/assets/icon/teclado1.jpg" style="width: 100%;"></ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" class="product-description">
+        <!-- Breve descripción del teclado con fondo blanco -->
+        <h2>Teclado Mecánico Gamer Redragon Kumara K552</h2>
+        <p>
+          El Teclado Redragon Kumara K552 es ideal para gamers que buscan 
+          un teclado compacto, con switches mecánicos, retroiluminación y 
+          excelente durabilidad. Perfecto para largas sesiones de juego.
+        </p>
+        <!-- Precio del teclado -->
+        <h3>Precio: $34.990</h3>
+        <!-- Botón de agregar al carrito -->
+        <ion-button expand="block" class="custom-button">Agregar al carrito</ion-button>
+        <!-- Botón para volver a la página de teclados -->
+        <ion-button expand="block" color="light" [routerLink]="'/teclados'">Volver a seccion de teclados</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

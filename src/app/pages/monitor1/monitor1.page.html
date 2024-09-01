@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Monitor 27" FHD 240HZ 1MS</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <!-- Imagen del Monitor sin título encima -->
+        <ion-img src="/assets/icon/monitor1.jpg" style="width: 100%;"></ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" class="product-description">
+        <!-- Breve descripción del monitor con fondo blanco -->
+        <h2>Monitor 27" FHD 240HZ 1MS</h2>
+        <p>
+          El Monitor Caixun 27" FHD destaca por su 240Hz y 1ms, 
+          brindando una experiencia de juego ultra fluida. 
+          Ideal para gamers, su diseño moderno complementa 
+          cualquier setup, mientras que su pantalla de alta calidad
+           garantiza imágenes nítidas y detalladas. Perfecto para 
+           quienes buscan rendimiento y estilo en un solo paquete.
+        </p>
+        <!-- Precio del monitor -->
+        <h3>Precio: $191.990</h3>
+        <!-- Botón de agregar al carrito -->
+        <ion-button expand="block" class="custom-button">Agregar al carrito</ion-button>
+        <!-- Botón para volver a la página de monitores -->
+        <ion-button expand="block" color="light" [routerLink]="'/monitores'">Volver a seccion de monitores</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

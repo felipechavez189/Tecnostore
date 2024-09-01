@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Pc gamer vibora black v1</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <!-- Título eliminado para no mostrar el nombre encima de la imagen -->
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <!-- Imagen del pc armado sin título encima -->
+        <ion-img src="/assets/icon/pc1.jpg" style="width: 100%;"></ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" class="product-description">
+        <!-- Breve descripción del pc con fondo blanco -->
+        <h2>Pc gamer vibora black v1</h2>
+
+        <p>Potente configuracióm con procesador
+           AMD Ryzen 5 4600G, 16 GB de RAM 
+           y SSD de 256 GB. Incluye placa base A520 y fuente
+           de 600W, ofreciendo un rendimiento fluido y rápido
+           para juegos exigentes y multitarea. Ideal para gamers
+           que buscan una máquina robusta y confiable.</p>
+
+        <!-- Precio del pc armado -->
+        <h3>Precio: $389.990</h3>
+        <!-- Botón de agregar al carrito -->
+        <ion-button expand="block" class="custom-button">Agregar al carrito</ion-button>
+        <!-- Botón para volver a la página de pc armados -->
+        <ion-button expand="block" color="light" [routerLink]="'/pc'">Volver a seccion de pc armados</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

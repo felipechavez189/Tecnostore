@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Mouse Gamer Redragon Vampire M720</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <!-- Imagen del mouse sin título encima -->
+        <ion-img src="/assets/icon/mouse1.jpg" style="width: 100%;"></ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" class="product-description">
+        <!-- Breve descripción del mouse con fondo blanco -->
+        <h2>Mouse Gamer Redragon Vampire M720</h2>
+
+        <p>Mouse Gamer Redragon Vampire M720: Este mouse 
+          ofrece precisión de alta calidad con sensores 
+          avanzados y múltiples botones programables.
+          Su diseño ergonómico y retroiluminación personalizable
+           lo convierten en una excelente herramienta para una 
+           experiencia de juego superior.</p>
+           
+        <!-- Precio del mouse -->
+        <h3>Precio: $19.900</h3>
+        <!-- Botón de agregar al carrito -->
+        <ion-button expand="block" class="custom-button">Agregar al carrito</ion-button>
+        <!-- Botón para volver a la página de mouse -->
+        <ion-button expand="block" color="light" [routerLink]="'/mouse'">Volver a seccion de mouse</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

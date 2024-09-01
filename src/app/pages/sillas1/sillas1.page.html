@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Silla Gamer Wetech Color Gris/Negro Modelo LS-1118</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <!-- Título eliminado para no mostrar el nombre encima de la imagen -->
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <!-- Imagen de la silla sin título encima -->
+        <ion-img src="/assets/icon/silla1.jpg" style="width: 100%;"></ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" class="product-description">
+        <!-- Breve descripción de la silla con fondo blanco -->
+        <h2>Silla Gamer Wetech Color Gris/Negro Modelo LS-1118</h2>
+
+        <p>Silla Gamer Wetech LS-1118 Gris/Negro: Diseñada para
+          comodidad y soporte durante largas sesiones de juego,
+          esta silla cuenta con un acolchado de alta densidad y
+          un diseño ergonómico. Ajustable y con respaldo reclinable,
+          es ideal para jugadores que buscan estilo y confort.</p>
+
+        <!-- Precio de la silla -->
+        <h3>Precio: $81.290</h3>
+        <!-- Botón de agregar al carrito -->
+        <ion-button expand="block" class="custom-button">Agregar al carrito</ion-button>
+        <!-- Botón para volver a la página de sillas -->
+        <ion-button expand="block" color="light" [routerLink]="'/sillas'">Volver a seccion de sillas</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

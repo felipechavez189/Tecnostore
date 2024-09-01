@@ -78,6 +78,30 @@ const routes: Routes = [
     path: 'agregar',
     loadChildren: () => import('./pages/agregar/agregar.module').then( m => m.AgregarPageModule)
   },
+  {
+    path: 'teclado1',
+    loadChildren: () => import('./pages/teclado1/teclado1.module').then( m => m.Teclado1PageModule)
+  },
+  {
+    path: 'monitor1',
+    loadChildren: () => import('./pages/monitor1/monitor1.module').then( m => m.Monitor1PageModule)
+  },
+  {
+    path: 'audifonos1',
+    loadChildren: () => import('./pages/audifonos1/audifonos1.module').then( m => m.Audifonos1PageModule)
+  },
+  {
+    path: 'mouse1',
+    loadChildren: () => import('./pages/mouse1/mouse1.module').then( m => m.Mouse1PageModule)
+  },
+  {
+    path: 'sillas1',
+    loadChildren: () => import('./pages/sillas1/sillas1.module').then( m => m.Sillas1PageModule)
+  },
+  {
+    path: 'pc1',
+    loadChildren: () => import('./pages/pc1/pc1.module').then( m => m.Pc1PageModule)
+  },
 
 ];
 

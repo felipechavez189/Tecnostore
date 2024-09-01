@@ -1,3 +1,17 @@
 ion-content {
-    --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
-  }
+  --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
+}
+
+.input-item {
+  --background: white;
+  --color: black;
+}
+
+.button-agregar,
+.button-cancelar {
+  --background: #5fbded;
+  --color: white;
+  border-radius: 8px; /* Reduce el valor para hacer los botones más rectangulares */
+  padding: 12px; /* Ajusta el padding para un tamaño de botón más alto o bajo */
+  font-size: 16px; /* Puedes ajustar el tamaño del texto si lo deseas */
+}

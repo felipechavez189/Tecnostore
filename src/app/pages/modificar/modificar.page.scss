@@ -1,0 +1,11 @@
+ion-content {
+    --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
+  }
+
+  .margin-bottom {
+    margin-bottom: 20px; /* Ajusta el valor según lo necesario */
+  }
+  
+  .no-background {
+    --ion-background-color: transparent;
+  }

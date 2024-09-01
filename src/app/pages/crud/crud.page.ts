@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertController } from '@ionic/angular'; // Importa AlertController
 
 @Component({
   selector: 'app-crud',
@@ -7,9 +8,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CrudPage implements OnInit {
 
-  constructor() { }
+  constructor(private alertController: AlertController) { } // Inyecta AlertController
 
   ngOnInit() {
+  }
+
+  // Función para mostrar la alerta
+  async EliminarAlerta() {
+    const alert = await this.alertController.create({
+      header: 'Confirmar Eliminación',
+      message: '¿Estás seguro de que deseas eliminar este producto?',
+      buttons: [
+        {
+          text: 'Cancelar',
+        },
+        {
+          text: 'Eliminar',
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
 }

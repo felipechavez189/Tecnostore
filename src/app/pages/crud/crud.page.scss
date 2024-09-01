@@ -1,0 +1,18 @@
+ion-content {
+    --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
+  }
+
+  .no-background {
+    --ion-background-color: transparent;
+  }
+  
+  .center-buttons {
+    display: flex;
+    justify-content: center;
+    margin: 16px 0; /* Ajusta el margen superior e inferior según lo necesites */
+  }
+  
+  .button-margin {
+    margin: 16px; /* Ajusta el margen alrededor del botón según lo necesites */
+  }
+  

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-codigo',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CodigoPage implements OnInit {
 
-  constructor() { }
+  constructor(private toastController: ToastController) { }
 
   ngOnInit() {
+  }
+
+  async reenviarCorreo() {
+    const toast = await this.toastController.create({
+      message: 'Correo reenviado',
+      duration: 3000,
+      position: 'bottom',
+    });
+    toast.present();
   }
 
 }

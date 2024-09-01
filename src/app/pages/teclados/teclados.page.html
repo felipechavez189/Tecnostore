@@ -1,12 +1,29 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Teclados</ion-title>
-  </ion-toolbar>
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start"> 
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title style="text-align: center;">
+        <ion-button fill="clear" [routerLink]="['/home']">
+          TECNO STORE
+        </ion-button>
+      </ion-title>
+      <ion-buttons slot="end"> 
+        <ion-button [routerLink]="['/perfil']">
+          <ion-icon slot="icon-only" name="person-outline"></ion-icon>
+        </ion-button>
+        <ion-button [routerLink]="['/carrito']">
+          <ion-icon name="bag-handle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
 </ion-header>
 
 <ion-content>
   <ion-searchbar color="light" placeholder="Buscar"></ion-searchbar>
-  <img class="banner-image" alt="tcpromo" src="assets/icon/tecladopromo.jpg"/>
+  <img style="border-radius: 15px;" class="banner-image" alt="tcpromo" src="assets/icon/tecladopromo.jpg"/>
   <ion-grid>
     <ion-row>
       <!-- Teclado 1 -->

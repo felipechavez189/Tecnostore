@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,20 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor(private menuCtrl: MenuController, private router: Router) {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.toggleMenuVisibility(event.url);
+      }
+    });
+  }
+
+  toggleMenuVisibility(url: string) {
+    const hiddenRoutes = ['/login', '/signup', '/recuperar', '/codigo', '/nueva'];
+    if (hiddenRoutes.includes(url)) {
+      this.menuCtrl.enable(false);
+    } else {
+      this.menuCtrl.enable(true);
+    }
+  }
 }

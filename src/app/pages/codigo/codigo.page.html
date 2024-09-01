@@ -1,10 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>codigo</ion-title>
+    <ion-title>TECNO STORE</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="content-center">
   <!-- Cuadro que encierra los campos de usuario y contraseña -->
  <ion-card class="content-center">
    <ion-card-header>
@@ -12,7 +12,7 @@
    </ion-card-header>
 
    <ion-label>Ingrese el codigo enviado a su correo</ion-label>
-   
+      
    <ion-card-content>
      <!-- Campo de Usuario -->
      <ion-item>
@@ -21,7 +21,7 @@
 
      <!-- Botón de Ingresar -->
      <ion-button expand="block" color="success" [routerLink]="['/nueva']">Validar</ion-button>
-     <ion-button expand="block" color="primary">Reenviar Correo</ion-button>
+     <ion-button expand="block" color="primary" (click)="reenviarCorreo()">Reenviar Correo</ion-button>
    </ion-card-content>
  </ion-card>
 </ion-content>

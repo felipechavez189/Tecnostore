@@ -40,6 +40,7 @@ ion-img {
 }
 
 ion-card-content h6 {
+<<<<<<< HEAD
   font-size: 0.9rem;
   margin: 0;
 }
@@ -47,6 +48,17 @@ ion-card-content h6 {
 ion-card-content p {
   font-size: 1rem;
   margin: 0.2rem 0;
+=======
+  font-size: 0.9rem; /* Ajusta el tamaño del texto del título */
+  margin: 0; /* Elimina el margen superior e inferior */
+  color: #000000; /* Color del texto en negro */
+}
+
+ion-card-content p {
+  font-size: 1rem; /* Ajusta el tamaño del texto del párrafo */
+  margin: 0.2rem 0; /* Reduce el margen superior e inferior */
+  color: #000000; /* Color del texto en negro */
+>>>>>>> 6eba6952b969bf93f8ff5991fb1b753e604adebd
 }
 
 ion-button {
@@ -83,4 +95,12 @@ ion-button {
 
 ion-icon {
   color: #ffffff;
+}
+
+/* Estilo para el título de productos destacados */
+.featured-title {
+  text-align: center; /* Centra el texto horizontalmente */
+  margin: 20px 0; /* Ajusta el margen superior e inferior según sea necesario */
+  font-size: 1.6rem; /* Ajusta el tamaño del texto si es necesario */
+  color: white; /* Color del texto (opcional, puedes ajustarlo si es necesario) */
 }

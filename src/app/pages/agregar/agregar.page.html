@@ -27,7 +27,7 @@
     </ion-button>
 
     <ion-card-content>
-      <form (ngSubmit)="agregarProducto()" #agregarForm="ngForm">
+    
         <ion-item class="input-item">
           <ion-label class="form-label">Categoría:</ion-label>
           <ion-input [(ngModel)]="categoria" name="categoria"></ion-input>
@@ -48,9 +48,15 @@
           <ion-input type="number" [(ngModel)]="precio" name="precio"></ion-input>
         </ion-item>
 
+<<<<<<< HEAD
         <ion-button type="submit" expand="block" class="custom-button">Agregar Producto</ion-button>
         <ion-button expand="block" class="custom-button" [routerLink]="'/crud'">Cancelar</ion-button>
       </form>
+=======
+        <ion-button type="submit" expand="block" class="button-agregar" (click)="agregarProducto()">Agregar Producto</ion-button>
+        <ion-button expand="block" class="button-cancelar" [routerLink]="'/crud'">Cancelar</ion-button>
+  
+>>>>>>> 6eba6952b969bf93f8ff5991fb1b753e604adebd
     </ion-card-content>
   </ion-card>
 </ion-content>

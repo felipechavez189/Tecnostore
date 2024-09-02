@@ -30,12 +30,12 @@ export class AgregarPage implements OnInit {
 
     // Validar que stock y precio no sean menores a 0
     if (this.stock === null || this.stock < 0) {
-      this.mostrarAlerta('El stock no puede ser menor a 0 ni estar vacío.');
+      this.mostrarAlerta('El stock no puede ser menor a 0, ni estar vacío.');
       return;
     }
 
     if (this.precio === null || this.precio < 0) {
-      this.mostrarAlerta('El precio no puede ser menor a 0 ni estar vacío.');
+      this.mostrarAlerta('El precio no puede ser menor a 0, ni estar vacío.');
       return;
     }
 

@@ -16,8 +16,21 @@ export class LoginPage implements OnInit {
 
   ngOnInit() { }
 
-  async inLogin() {
-    if (this.email === 'usuario@example.com' && this.password === 'usuario123') {
+  async onLogin() {
+    if (!this.validarCorreo(this.email)) {
+      await this.presentAlert('El correo debe contener un único @.');
+      return;
+    }
+
+    if (!this.validarContrasena(this.password)) {
+      await this.presentAlert('La contraseña debe tener al menos 6 caracteres, una mayúscula, un número y un carácter especial.');
+      return;
+    }
+
+    if (this.email === 'admin@example.com' && this.password === 'Admin@123') {
+      this.router.navigate(['/home']);
+      await this.presentToast('Inicio de sesión exitoso como admin');
+    } else if (this.email === 'usuario@example.com' && this.password === 'usuario123') {
       this.router.navigate(['/home']);
       await this.presentToast('Inicio de sesión exitoso');
     } else {
@@ -25,14 +38,19 @@ export class LoginPage implements OnInit {
     }
   }
 
-  async onLogin() {
-    if (this.email === 'admin@example.com' && this.password === 'admin123') {
-      this.router.navigate(['/home']);
-      await this.presentToast('Inicio de sesión exitoso como admin');
-    } else {
-      await this.presentAlert('Usuario o contraseña incorrectas');
-    }
+  validarCorreo(email: string): boolean {
+    // Verifica que haya solo un @ en el correo
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const atSymbolCount = email.split('@').length - 1;
+    return emailPattern.test(email) && atSymbolCount === 1;
   }
+
+  validarContrasena(password: string): boolean {
+    // Este patrón verifica que la contraseña tenga al menos 6 caracteres, una mayúscula, un número y un carácter especial
+    const passwordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+    return passwordPattern.test(password);
+  }
+  
 
   async presentAlert(message: string) {
     const alert = await this.alertController.create({

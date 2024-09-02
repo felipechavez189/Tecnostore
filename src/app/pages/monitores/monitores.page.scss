@@ -34,6 +34,27 @@ ion-content {
   --background: #ffffff; /* Color de fondo para la tarjeta 6 */
 }
 
+/* Tamaño de fuente para los títulos en las tarjetas */
+.card-1 h6,
+.card-2 h6,
+.card-3 h6,
+.card-4 h6,
+.card-5 h6,
+.card-6 h6 {
+  font-size: 0.9rem; /* Ajusta este valor según tus necesidades */
+  margin: 0; /* Elimina el margen si es necesario */
+}
+
+/* Tamaño de fuente para el precio en las tarjetas */
+.card-1 p,
+.card-2 p,
+.card-3 p,
+.card-4 p,
+.card-5 p,
+.card-6 p {
+  font-size: 1rem; /* Ajusta este valor según tus necesidades */
+}
+
 /* Estilos para el contenido dentro de las tarjetas */
 .card-1 ion-card-content,
 .card-2 ion-card-content,
@@ -61,7 +82,7 @@ ion-content {
 
 /* Estilos adicionales para mejorar la apariencia de las tarjetas */
 ion-card {
-  border-radius: 10px; /* Redondear las esquinas de las tarjetas */
+  border-radius: 14px; /* Redondear las esquinas de las tarjetas */
   box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Agregar sombra para un efecto de profundidad */
   display: flex;
   flex-direction: column; /* Asegura que el contenido se apile verticalmente */

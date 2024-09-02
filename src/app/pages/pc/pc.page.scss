@@ -10,28 +10,8 @@ ion-content {
 }
 
 /* Colores de fondo para cada tarjeta */
-.card-1 {
-  --background: #ffffff; /* Color de fondo para la tarjeta 1 */
-}
-
-.card-2 {
-  --background: #ffffff; /* Color de fondo para la tarjeta 2 */
-}
-
-.card-3 {
-  --background: #ffffff; /* Color de fondo para la tarjeta 3 */
-}
-
-.card-4 {
-  --background: #ffffff; /* Color de fondo para la tarjeta 4 */
-}
-
-.card-5 {
-  --background: #ffffff; /* Color de fondo para la tarjeta 5 */
-}
-
-.card-6 {
-  --background: #ffffff; /* Color de fondo para la tarjeta 6 */
+.card-1, .card-2, .card-3, .card-4, .card-5, .card-6 {
+  --background: #ffffff; /* Color de fondo para todas las tarjetas */
 }
 
 /* Estilos para el contenido dentro de las tarjetas */
@@ -44,19 +24,15 @@ ion-content {
   color: #000000; /* Color del texto en negro */
 }
 
-.card-1 ion-card-content h2,
-.card-1 ion-card-content p,
-.card-2 ion-card-content h2,
-.card-2 ion-card-content p,
-.card-3 ion-card-content h2,
-.card-3 ion-card-content p,
-.card-4 ion-card-content h2,
-.card-4 ion-card-content p,
-.card-5 ion-card-content h2,
-.card-5 ion-card-content p,
-.card-6 ion-card-content h2,
-.card-6 ion-card-content p {
-  color: #000000; /* Color del texto y precio en negro */
+/* Ajustar tamaño del texto h6 en las tarjetas */
+.card-1 ion-card-content h6,
+.card-2 ion-card-content h6,
+.card-3 ion-card-content h6,
+.card-4 ion-card-content h6,
+.card-5 ion-card-content h6,
+.card-6 ion-card-content h6 {
+  font-size: 14px !important; /* Ajusta el tamaño de la fuente y usa !important */
+  color: #000000;
 }
 
 /* Estilos adicionales para mejorar la apariencia de las tarjetas */

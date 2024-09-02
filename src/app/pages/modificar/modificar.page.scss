@@ -1,28 +1,70 @@
+.custom-button {
+  --background: #5fbded;
+  --color: #ffffff;
+  --border-radius: 4px;
+  padding: 12px 20px;
+  margin: 10px 0;
+}
+
+.custom-button-image {
+  --background: #5fbded;
+  --color: #ffffff;
+  --border-radius: 4px;
+  padding: 12px 20px;
+}
+
+.custom-button-cancelar {
+  --background: #5fbded;
+  --color: #ffffff;
+  --border-radius: 4px;
+  padding: 12px 20px;
+}
+
+.custom-button:focus, .custom-button:hover {
+  --background: #5fbded;
+}
+
 ion-content {
-    --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
-  }
+  --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
+}
 
-  .margin-bottom {
-    margin-bottom: 20px; /* Ajusta el valor según lo necesario */
-  }
-  
-  .no-background {
-    --ion-background-color: transparent;
-  }
+ion-content ion-list, ion-content ion-item {
+  background: transparent;
+}
 
-  /* Estilo para el encabezado */
+ion-content ion-item {
+  --background: transparent;
+  --ion-item-background: transparent;
+}
+
+.center-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ion-item {
+  --background: transparent;
+}
+
+ion-item.input-item {
+  background-color: transparent;
+}
+
+ion-label.form-label {
+  color: #ffffff;
+}
+
 ion-header {
-  --background: #004d74; /* Fondo del encabezado */
-  color: #ffffff; /* Color del texto en el encabezado */
+  --background: #004d74;
+  color: #ffffff;
 }
 
-/* Estilo para los botones del encabezado */
 ion-button {
-  --background: #004d74; /* Fondo del botón */
-  --color: #ffffff; /* Color del texto en el botón */
+  --background: #004d74;
+  --color: #ffffff;
 }
 
-/* Estilo para los íconos dentro de los botones */
 ion-icon {
-  color: #ffffff; /* Color de los íconos */
+  color: #ffffff;
 }

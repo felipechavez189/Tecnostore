@@ -1,20 +1,44 @@
+
+.custom-button {
+  --background: #5fbded;
+  --color: #ffffff;
+  --border-radius: 4px;
+  padding: 12px 20px;
+  margin: 10px 0; 
+}
+
+.custom-button:focus, .custom-button:hover {
+  --background: #5fbded; 
+}
+
+
 ion-content {
-    --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
-  }
+  --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
+}
 
-  /* Estilo para el encabezado */
+
+.form-label {
+  color: #ffffff !important;
+}
+
+
+ion-item.input-item {
+  --background: transparent; 
+}
+
+
 ion-header {
-  --background: #004d74; /* Fondo del encabezado */
-  color: #ffffff; /* Color del texto en el encabezado */
+  --background: #004d74; 
+  color: #ffffff; 
 }
 
-/* Estilo para los botones del encabezado */
+
 ion-button {
-  --background: #004d74; /* Fondo del botón */
-  --color: #ffffff; /* Color del texto en el botón */
+  --background: #004d74; 
+  --color: #ffffff; 
 }
 
-/* Estilo para los íconos dentro de los botones */
+
 ion-icon {
-  color: #ffffff; /* Color de los íconos */
+  color: #ffffff; 
 }

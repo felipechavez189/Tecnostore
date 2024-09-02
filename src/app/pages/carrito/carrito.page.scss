@@ -1,20 +1,49 @@
+/* Fondo del ion-content */
 ion-content {
-    --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
-  }
-  
-  /* Estilo para el encabezado */
+  --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
+}
+
+/* Estilo para el encabezado */
 ion-header {
-  --background: #004d74; /* Fondo del encabezado */
-  color: #ffffff; /* Color del texto en el encabezado */
+  --background: #004d74;
+  color: #ffffff;
 }
 
 /* Estilo para los botones del encabezado */
 ion-button {
-  --background: #004d74; /* Fondo del botón */
-  --color: #ffffff; /* Color del texto en el botón */
+  --background: #004d74;
+  --color: #ffffff;
 }
 
 /* Estilo para los íconos dentro de los botones */
 ion-icon {
-  color: #ffffff; /* Color de los íconos */
+  color: #ffffff;
+}
+
+/* Ajustar tamaño del texto h6 */
+ion-label h6 {
+  font-size: 16px; /* Tamaño reducido del texto h6 */
+}
+
+/* Estilo para el ion-thumbnail */
+ion-thumbnail {
+  width: 120px; /* Ajusta el tamaño según sea necesario */
+  height: 120px; /* Ajusta el tamaño según sea necesario */
+}
+
+ion-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Mantiene la proporción de la imagen */
+}
+
+/* Alinear horizontalmente los elementos dentro del ion-label */
+.horizontal-align {
+  display: flex;
+  flex-direction: row; /* Alinea los elementos horizontalmente */
+  align-items: center; /* Centra verticalmente los elementos */
+}
+
+.horizontal-align h6, .horizontal-align p {
+  margin: 0 4px; /* Ajusta el espacio entre los elementos */
 }

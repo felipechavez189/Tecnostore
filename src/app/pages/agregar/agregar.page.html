@@ -20,37 +20,36 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
   <ion-card>
     <ion-img src="/assets/icon/galeria.jpg"></ion-img>
-    <ion-button expand="block" style="color: blue;">
+    <ion-button expand="block" class="custom-button">
       <ion-icon name="image-outline"></ion-icon>
     </ion-button>
 
     <ion-card-content>
       <form (ngSubmit)="agregarProducto()" #agregarForm="ngForm">
         <ion-item class="input-item">
-          <ion-label>Categoría:</ion-label>
+          <ion-label class="form-label">Categoría:</ion-label>
           <ion-input [(ngModel)]="categoria" name="categoria"></ion-input>
         </ion-item>
 
         <ion-item class="input-item">
-          <ion-label>Nombre:</ion-label>
+          <ion-label class="form-label">Nombre:</ion-label>
           <ion-input [(ngModel)]="nombre" name="nombre"></ion-input>
         </ion-item>
 
         <ion-item class="input-item">
-          <ion-label>Stock:</ion-label>
+          <ion-label class="form-label">Stock:</ion-label>
           <ion-input type="number" [(ngModel)]="stock" name="stock"></ion-input>
         </ion-item>
 
         <ion-item class="input-item">
-          <ion-label>Precio:</ion-label>
+          <ion-label class="form-label">Precio:</ion-label>
           <ion-input type="number" [(ngModel)]="precio" name="precio"></ion-input>
         </ion-item>
 
-        <ion-button type="submit" expand="block" class="button-agregar">Agregar Producto</ion-button>
-        <ion-button expand="block" class="button-cancelar" [routerLink]="'/crud'">Cancelar</ion-button>
+        <ion-button type="submit" expand="block" class="custom-button">Agregar Producto</ion-button>
+        <ion-button expand="block" class="custom-button" [routerLink]="'/crud'">Cancelar</ion-button>
       </form>
     </ion-card-content>
   </ion-card>

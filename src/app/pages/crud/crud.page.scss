@@ -1,58 +1,58 @@
-ion-content {
-  --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
+/* Estilo para el botón "Agregar" con color #5fbded */
+ion-button.custom-agregar-btn {
+  --background: #5fbded !important;
+  --color: #ffffff !important;
 }
 
+/* Estilo para el botón "Modificar" */
+ion-button.modificar-btn {
+  --background: #5fbded !important;
+  --color: #ffffff !important;
+}
 
-  .no-background {
-    --ion-background-color: transparent;
-  }
-  
-  .center-buttons {
-    display: flex;
-    justify-content: center;
-    margin: 16px 0; /* Ajusta el margen superior e inferior según lo necesites */
-  }
-  
-  .button-margin {
-    margin: 16px; /* Ajusta el margen alrededor del botón según lo necesites */
-  }
+/* Estilo para el botón "Eliminar" */
+ion-button[color="danger"] {
+  --background: #e03e3e !important; /* Color rojo para el botón de eliminar */
+  --color: #ffffff !important;
+}
 
-  /* Estilo para el encabezado */
+/* Estilo para el encabezado */
 ion-header {
-  --background: #004d74; /* Fondo del encabezado */
-  color: #ffffff; /* Color del texto en el encabezado */
+  --background: #004d74;
+  color: #ffffff;
 }
 
 /* Estilo para los botones del encabezado */
 ion-button {
-  --background: #004d74; /* Fondo del botón */
-  --color: #ffffff; /* Color del texto en el botón */
+  --background: #004d74;
+  --color: #ffffff;
 }
 
 /* Estilo para los íconos dentro de los botones */
 ion-icon {
-  color: #ffffff; /* Color de los íconos */
+  color: #ffffff;
 }
 
-  
+/* Estilo para el contenido */
+ion-content {
+  --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
+}
+
+/* Estilo para el contenido sin fondo */
 .no-background {
   --ion-background-color: transparent;
 }
 
+/* Estilo para el contenedor de botones centrados */
 .center-buttons {
   display: flex;
   justify-content: center;
-  margin: 16px 0; /* Ajusta el margen superior e inferior según lo necesites */
+  margin: 16px 0;
 }
 
+/* Estilo para el margen de los botones */
 .button-margin {
-  margin: 16px; /* Ajusta el margen alrededor del botón según lo necesites */
-}
-
-/* Estilo para el botón "Agregar" con color #5fbded */
-ion-button.custom-agregar-btn {
-  --background: #5fbded !important;
-  --color: white !important;
+  margin: 16px;
 }
 
 /* Estilo para las tarjetas de color blanco */

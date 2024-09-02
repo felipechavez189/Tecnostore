@@ -66,12 +66,12 @@ ion-content {
 .card-4 ion-card-content h6,
 .card-5 ion-card-content h6,
 .card-6 ion-card-content h6 {
-  font-size: 14px; /* Ajusta el tamaño de fuente según tu preferencia */
+  font-size: 20px; /* Ajusta el tamaño de fuente según tu preferencia */
 }
 
 /* Estilos adicionales para mejorar la apariencia de las tarjetas */
 ion-card {
-  border-radius: 14px; /* Redondear las esquinas de las tarjetas */
+  border-radius: 20px; /* Redondear las esquinas de las tarjetas */
   box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Agregar sombra para un efecto de profundidad */
   display: flex;
   flex-direction: column; /* Asegura que el contenido se apile verticalmente */

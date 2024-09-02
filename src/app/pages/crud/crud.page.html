@@ -9,10 +9,10 @@
       </ion-button>
     </ion-title>
     <ion-buttons slot="end"> 
-      <ion-button [routerLink]="['/perfil']">
+      <ion-button [routerLink]="'/perfil'">
         <ion-icon slot="icon-only" name="person-outline"></ion-icon>
       </ion-button>
-      <ion-button [routerLink]="['/carrito']">
+      <ion-button [routerLink]="'/carrito'">
         <ion-icon name="bag-handle-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -35,7 +35,7 @@
           <ion-card-content>
             <h4>Monitor 27" FHD 240HZ 1MS</h4>
             <p>$191.990</p>
-            <ion-button expand="block" color="primary" [routerLink]="'/modificar'">Modificar</ion-button>
+            <ion-button expand="block" class="modificar-btn" [routerLink]="'/modificar'">Modificar</ion-button>
             <ion-button expand="block" color="danger" (click)="EliminarAlerta()">Eliminar</ion-button>
           </ion-card-content>
         </ion-card>
@@ -48,7 +48,7 @@
           <ion-card-content>
             <h4>Monitor Gamer Samsung Odyssey G3 S27ag32 Lcd 27 Negro</h4>
             <p>$178.990</p>
-            <ion-button expand="block" color="primary">Modificar</ion-button>
+            <ion-button expand="block" class="modificar-btn">Modificar</ion-button>
             <ion-button expand="block" color="danger" (click)="EliminarAlerta()">Eliminar</ion-button>
           </ion-card-content>
         </ion-card>
@@ -61,7 +61,7 @@
           <ion-card-content>
             <h4>Monitor Gaming Aoc C27g2z 27 240hz 0.5ms</h4>
             <p>$219.990</p>
-            <ion-button expand="block" color="primary">Modificar</ion-button>
+            <ion-button expand="block" class="modificar-btn">Modificar</ion-button>
             <ion-button expand="block" color="danger" (click)="EliminarAlerta()">Eliminar</ion-button>
           </ion-card-content>
         </ion-card>
@@ -74,7 +74,7 @@
           <ion-card-content>
             <h4>Monitor Gamer Led 24 Full Hd 180hz 1ms</h4>
             <p>$129.990</p>
-            <ion-button expand="block" color="primary">Modificar</ion-button>
+            <ion-button expand="block" class="modificar-btn">Modificar</ion-button>
             <ion-button expand="block" color="danger" (click)="EliminarAlerta()">Eliminar</ion-button>
           </ion-card-content>
         </ion-card>
@@ -87,7 +87,7 @@
           <ion-card-content>
             <h4>Monitor Gamer Curvo Kolke 31,5 Full Hd 165hz 1ms Freesync Color Negro</h4>
             <p>$130.990</p>
-            <ion-button expand="block" color="primary">Modificar</ion-button>
+            <ion-button expand="block" class="modificar-btn">Modificar</ion-button>
             <ion-button expand="block" color="danger" (click)="EliminarAlerta()">Eliminar</ion-button>
           </ion-card-content>
         </ion-card>
@@ -100,7 +100,7 @@
           <ion-card-content>
             <h4>Monitor Gamer Kolke 27 Ips Ejecutivo 100hz 1ms Freesync Color Negro</h4>
             <p>$100.990</p>
-            <ion-button expand="block" color="primary">Modificar</ion-button>
+            <ion-button expand="block" class="modificar-btn">Modificar</ion-button>
             <ion-button expand="block" color="danger" (click)="EliminarAlerta()">Eliminar</ion-button>
           </ion-card-content>
         </ion-card>

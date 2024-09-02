@@ -1,19 +1,23 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+    </ion-buttons>
     <ion-title>TECNO STORE</ion-title>
   </ion-toolbar>
 </ion-header>
+
 
 <ion-content [fullscreen]="true">
   <!-- Cuadro que encierra los campos de usuario y contraseña -->
   <ion-card class="content-center">
     <ion-card-header>
-      <ion-card-title style="text-align: center;">Recuperar Cuenta</ion-card-title>
+      <ion-card-title class="ion-text-center">Recuperar Cuenta</ion-card-title>
     </ion-card-header>
 
-    <ion-label>Al ingresar su correo, recibirá un código para renovar su contraseña</ion-label>
-    
     <ion-card-content>
+      <ion-label class="ion-text-center">recibirá un código para renovar su contraseña</ion-label>
+      
       <!-- Campo de Usuario -->
       <ion-item>
         <ion-input placeholder="Ingrese su correo"></ion-input>
@@ -24,3 +28,4 @@
     </ion-card-content>
   </ion-card>
 </ion-content>
+

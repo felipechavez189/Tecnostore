@@ -1,73 +1,10 @@
 /* Fondo del ion-content */
 ion-content {
   --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
-}
-
-.banner-image {
-  margin-left: 38px;
-  width: 80%; /* Ajusta al ancho del contenedor */
-  height: auto; /* Ajusta la altura automáticamente */
-}
-
-/* Estilo para el título "PRODUCTOS DESTACADOS" */
-.featured-title {
-  background-color: #ffffff; /* Fondo blanco para el título */
-  color: #000000; /* Texto negro para el título */
-  padding: 10px; /* Ajusta el espacio alrededor del texto si es necesario */
-  text-align: center; /* Centra el texto */
-}
-
-/* Colores de fondo para cada tarjeta */
-.card-fixed-size {
-  --background: #ffffff; /* Color de fondo para las tarjetas */
-}
-
-/* Estilos para el contenido dentro de las tarjetas */
-ion-card-content {
-  color: #000000; /* Color del texto en negro */
-}
-
-ion-card-content h2,
-ion-card-content p {
-  color: #000000; /* Color del texto y precio en negro */
-}
-
-/* Estilos adicionales para mejorar la apariencia de las tarjetas */
-ion-card {
-  border-radius: 10px; /* Redondear las esquinas de las tarjetas */
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Agregar sombra para un efecto de profundidad */
   display: flex;
-  flex-direction: column; /* Asegura que el contenido se apile verticalmente */
+  flex-direction: column;
 }
 
-ion-card-content {
-  display: flex;
-  flex-direction: column; /* Asegura que el contenido se apile verticalmente dentro de la tarjeta */
-  flex: 1; /* Permite que el contenido ocupe todo el espacio disponible */
-}
-
-ion-button {
-  margin-top: auto; /* Empuja el botón al final del contenedor flex */
-  --background: transparent; /* Elimina el color de fondo del botón */
-  --color: inherit; /* Hereda el color del texto del botón del elemento padre */
-  --border-radius: 0; /* Opcional: elimina el radio de borde para un diseño plano */
-}
-
-/* Asegurarse de que todas las tarjetas tengan el mismo tamaño */
-ion-grid {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-ion-row {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-ion-col {
-  display: flex;
-  align-items: stretch; /* Estira las tarjetas para que todas tengan la misma altura */
-}
 /* Estilo para el encabezado */
 ion-header {
   --background: #004d74; /* Fondo del encabezado */
@@ -85,3 +22,58 @@ ion-icon {
   color: #ffffff; /* Color de los íconos */
 }
 
+/* Estilo para el título "PRODUCTOS DESTACADOS" */
+.featured-title {
+  background-color: #ffffff; /* Fondo blanco para el título */
+  color: #000000; /* Texto negro para el título */
+  padding: 10px; /* Ajusta el espacio alrededor del texto si es necesario */
+  text-align: center; /* Centra el texto */
+}
+
+/* Estilo para las imágenes de banner */
+.banner-image {
+  width: 100%; /* Ajusta el ancho al 100% del contenedor */
+  height: auto; /* Mantiene la proporción de la imagen */
+  margin: 0 auto; /* Centra la imagen horizontalmente */
+}
+
+/* Establecer un tamaño fijo para las tarjetas */
+/* Asegurarse de que las tarjetas tengan un fondo blanco */
+.card-fixed-size {
+  --background: #ffffff; /* Fondo blanco para las tarjetas */
+  border-radius: 10px; /* Redondear las esquinas de las tarjetas */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Agregar sombra para un efecto de profundidad */
+  min-height: 300px; /* Ajusta la altura mínima de las tarjetas */
+}
+
+/* Ajustar el espaciado entre tarjetas */
+ion-col {
+  margin-bottom: 20px; /* Ajusta el margen inferior */
+}
+
+/* Ajustar el tamaño del texto en las tarjetas */
+ion-card-content h2 {
+  font-size: 1.2rem; /* Ajusta el tamaño del título */
+  margin: 0; /* Elimina el margen superior e inferior */
+}
+
+ion-card-content h5 {
+  font-size: 1rem; /* Ajusta el tamaño del subtítulo */
+  margin: 0; /* Elimina el margen superior e inferior */
+}
+
+ion-card-content p {
+  font-size: 0.9rem; /* Ajusta el tamaño del texto del párrafo */
+  margin: 0.2rem 0; /* Reduce el margen superior e inferior */
+}
+
+/* Ajustar el padding dentro de las tarjetas */
+ion-card-content {
+  padding: 5px; /* Reduce el padding interno */
+}
+
+/* Ajustar la imagen en la tarjeta */
+ion-img {
+  width: 100%; /* Asegura que la imagen ocupe todo el ancho de la tarjeta */
+  height: auto; /* Mantiene la proporción de la imagen */
+}

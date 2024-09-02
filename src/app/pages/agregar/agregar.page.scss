@@ -1,5 +1,4 @@
 ion-content {
-<<<<<<< HEAD
     --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
   }
 
@@ -18,21 +17,4 @@ ion-button {
 /* Estilo para los íconos dentro de los botones */
 ion-icon {
   color: #ffffff; /* Color de los íconos */
-=======
-  --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
-}
-
-.input-item {
-  --background: white;
-  --color: black;
-}
-
-.button-agregar,
-.button-cancelar {
-  --background: #5fbded;
-  --color: white;
-  border-radius: 8px; /* Reduce el valor para hacer los botones más rectangulares */
-  padding: 12px; /* Ajusta el padding para un tamaño de botón más alto o bajo */
-  font-size: 16px; /* Puedes ajustar el tamaño del texto si lo deseas */
->>>>>>> bae8a3bc1c590ffe5bf1b40a1b04630b62d9f265
 }

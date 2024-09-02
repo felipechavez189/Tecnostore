@@ -88,3 +88,11 @@ ion-button {
 ion-icon {
   color: #ffffff; /* Color de los íconos */
 }
+
+/* Estilo para el título de productos destacados */
+.featured-title {
+  text-align: center; /* Centra el texto horizontalmente */
+  margin: 20px 0; /* Ajusta el margen superior e inferior según sea necesario */
+  font-size: 1.6rem; /* Ajusta el tamaño del texto si es necesario */
+  color: white; /* Color del texto (opcional, puedes ajustarlo si es necesario) */
+}

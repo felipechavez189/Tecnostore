@@ -1,7 +1,8 @@
 ion-content {
-    --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
-  }
+  --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
+}
 
+<<<<<<< HEAD
   .no-background {
     --ion-background-color: transparent;
   }
@@ -34,3 +35,34 @@ ion-icon {
 }
 
   
+=======
+.no-background {
+  --ion-background-color: transparent;
+}
+
+.center-buttons {
+  display: flex;
+  justify-content: center;
+  margin: 16px 0; /* Ajusta el margen superior e inferior según lo necesites */
+}
+
+.button-margin {
+  margin: 16px; /* Ajusta el margen alrededor del botón según lo necesites */
+}
+
+/* Estilo para el botón "Agregar" con color #5fbded */
+ion-button.custom-agregar-btn {
+  --background: #5fbded !important;
+  --color: white !important;
+}
+
+/* Estilo para las tarjetas de color blanco */
+ion-card.card-1,
+ion-card.card-2,
+ion-card.card-3,
+ion-card.card-4,
+ion-card.card-5,
+ion-card.card-6 {
+  background-color: white !important;
+}
+>>>>>>> bae8a3bc1c590ffe5bf1b40a1b04630b62d9f265

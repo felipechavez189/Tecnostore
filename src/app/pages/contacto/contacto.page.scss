@@ -8,6 +8,11 @@
   color: black !important;
 }
 
+/* Estilo para el título en negro */
+.title-black {
+  color: black !important;
+}
+
 ion-content {
   --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
 }
@@ -42,6 +47,7 @@ ion-label {
   font-size: 14px; /* Ajusta el tamaño del texto según sea necesario */
 }
 
+<<<<<<< HEAD
 /* Estilo para el encabezado */
 ion-header {
   --background: #004d74; /* Fondo del encabezado */
@@ -58,3 +64,5 @@ ion-button {
 ion-icon {
   color: #ffffff; /* Color de los íconos */
 }
+=======
+>>>>>>> bae8a3bc1c590ffe5bf1b40a1b04630b62d9f265

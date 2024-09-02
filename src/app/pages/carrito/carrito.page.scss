@@ -1,8 +1,8 @@
 ion-content {
-    --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
-  }
-  
-  /* Estilo para el encabezado */
+  --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
+}
+
+/* Estilo para el encabezado */
 ion-header {
   --background: #004d74; /* Fondo del encabezado */
   color: #ffffff; /* Color del texto en el encabezado */
@@ -17,4 +17,48 @@ ion-button {
 /* Estilo para los íconos dentro de los botones */
 ion-icon {
   color: #ffffff; /* Color de los íconos */
+}
+
+.item-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.item-details {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.action-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.large-label {
+  font-size: 24px; /* Ajusta el tamaño de la fuente a tu preferencia */
+  font-weight: bold; /* Opcional: hace que el texto sea negrita */
+  margin: 0 15px; /* Espacio entre los botones y el número */
+}
+
+.action-container ion-button {
+  --padding-start: 12px; /* Ajusta el relleno interno del botón */
+  --padding-end: 12px; /* Ajusta el relleno interno del botón */
+  --padding-top: 8px; /* Ajusta el relleno interno del botón */
+  --padding-bottom: 8px; /* Ajusta el relleno interno del botón */
+  --font-size: 20px; /* Ajusta el tamaño de la fuente del botón */
+}
+
+.trash-button {
+  align-self: flex-end; /* Alinea el botón de basura en la parte inferior del contenedor */
+  --padding-start: 12px; /* Ajusta el relleno interno del botón */
+  --padding-end: 12px; /* Ajusta el relleno interno del botón */
+  --padding-top: 12px; /* Ajusta el relleno interno del botón */
+  --padding-bottom: 12px; /* Ajusta el relleno interno del botón */
+  --font-size: 24px; /* Ajusta el tamaño de la fuente del botón de basura */
+}
+
+.colorp{
+  color: white;
 }

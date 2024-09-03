@@ -52,42 +52,42 @@ ion-thumbnail img {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 10px; /* Ajusta el padding si es necesario para aumentar la altura del contenedor */
+  min-height: 120px; /* Ajusta la altura mínima si es necesario */
 }
 
+/* Estilo para el contenido del ítem */
 .item-details {
   flex: 1;
   margin-right: 10px;
 }
 
+/* Estilo para el contenedor de las acciones */
 .action-container {
   display: flex;
-  align-items: center;
+  flex-direction: column; /* Alinea verticalmente los elementos */
+  align-items: center; /* Centra los elementos horizontalmente */
   justify-content: center;
 }
 
+/* Estilo para el botón de basura */
+.trash-button {
+  margin-top: 10px; /* Espacio entre el número y el botón de basura */
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  --font-size: 24px;
+}
+
+/* Estilo para el número grande en la acción */
 .large-label {
   font-size: 24px; /* Ajusta el tamaño de la fuente a tu preferencia */
   font-weight: bold; /* Opcional: hace que el texto sea negrita */
   margin: 0 15px; /* Espacio entre los botones y el número */
 }
 
-.action-container ion-button {
-  --padding-start: 12px; /* Ajusta el relleno interno del botón */
-  --padding-end: 12px; /* Ajusta el relleno interno del botón */
-  --padding-top: 8px; /* Ajusta el relleno interno del botón */
-  --padding-bottom: 8px; /* Ajusta el relleno interno del botón */
-  --font-size: 20px; /* Ajusta el tamaño de la fuente del botón */
-}
-
-.trash-button {
-  align-self: flex-end; /* Alinea el botón de basura en la parte inferior del contenedor */
-  --padding-start: 12px; /* Ajusta el relleno interno del botón */
-  --padding-end: 12px; /* Ajusta el relleno interno del botón */
-  --padding-top: 12px; /* Ajusta el relleno interno del botón */
-  --padding-bottom: 12px; /* Ajusta el relleno interno del botón */
-  --font-size: 24px; /* Ajusta el tamaño de la fuente del botón de basura */
-}
-
-.colorp{
+/* Estilo para el texto del ítem */
+.colorp {
   color: white;
 }

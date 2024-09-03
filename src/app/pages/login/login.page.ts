@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router'; // Importa NavigationExtras
 import { AlertController, ToastController } from '@ionic/angular'; 
 
 @Component({
@@ -27,11 +27,18 @@ export class LoginPage implements OnInit {
       return;
     }
 
+    // Define los NavigationExtras para pasar el correo
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        email: this.email
+      }
+    };
+
     if (this.email === 'admin@example.com' && this.password === 'Admin@123') {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/perfil'], navigationExtras);  // Navegación con extras
       await this.presentToast('Inicio de sesión exitoso como admin');
     } else if (this.email === 'usuario@example.com' && this.password === 'usuario123') {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/perfil'], navigationExtras);  // Navegación con extras
       await this.presentToast('Inicio de sesión exitoso');
     } else {
       await this.presentAlert('Usuario o contraseña incorrectas');
@@ -50,7 +57,6 @@ export class LoginPage implements OnInit {
     const passwordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
     return passwordPattern.test(password);
   }
-  
 
   async presentAlert(message: string) {
     const alert = await this.alertController.create({

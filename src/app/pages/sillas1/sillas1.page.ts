@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastController } from '@ionic/angular'; // Importa el ToastController
 
 @Component({
   selector: 'app-sillas1',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Sillas1Page implements OnInit {
 
-  constructor() { }
+  constructor(private toastController: ToastController) { }
 
   ngOnInit() {
   }
 
+  async alarmaCarrito() {
+    const toast = await this.toastController.create({
+      message: 'Se añadió al carrito.',
+      duration: 2000, // Duración en milisegundos
+      position: 'bottom',
+      color: 'success',
+    });
+    toast.present();
+  }
 }

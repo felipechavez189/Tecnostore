@@ -99,3 +99,13 @@ ion-col {
   display: flex;
   align-items: stretch;
 }
+
+.banner-image {
+  margin-left: 38px;
+  width: 80%; /* Ajusta al ancho del contenedor */
+  height: auto; /* Ajusta el margen según tus necesidades (16px es un ejemplo) */
+}
+
+ion-card-content h6, ion-card-content p {
+  color: #000000; /* Color negro para el texto dentro de las cards */
+}

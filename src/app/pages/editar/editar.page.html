@@ -20,7 +20,6 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  
   <ion-card>
     <img alt="Perfil" src="/assets/icon/perfil.jpg"/>
     <ion-card-header>
@@ -29,33 +28,33 @@
     </ion-card-header>
   </ion-card>
 
-  <ion-button class="center-button-container custom-button">
+  <ion-button expand="block" class="center-button-container custom-button">
     <ion-icon name="camera-outline"></ion-icon>
   </ion-button>
 
   <ion-list>
     <ion-item class="profile-item">
       <ion-label>Nombre:</ion-label>
-      <ion-text>Juan Peréz</ion-text>
+      <ion-input [(ngModel)]="profile.name" placeholder="Juan Peréz"></ion-input>
     </ion-item>
     <ion-item class="profile-item">
       <ion-label>Email:</ion-label>
-      <ion-text>ju.perez&#64;gmail.com</ion-text>
+      <ion-input [(ngModel)]="profile.email" placeholder="ju.perez&#64;gmail.com"></ion-input>
     </ion-item>
     <ion-item class="profile-item">
       <ion-label>Teléfono:</ion-label>
-      <ion-text>+56 9xxxxxxxx</ion-text>
+      <ion-input [(ngModel)]="profile.phone" placeholder="+56 9xxxxxxxx"></ion-input>
     </ion-item>
     <ion-item class="profile-item">
       <ion-label>Dirección:</ion-label>
-      <ion-text>Santiago, Chile</ion-text>
+      <ion-input [(ngModel)]="profile.address" placeholder="Santiago, Chile"></ion-input>
     </ion-item>
   </ion-list>
 
-  <ion-button expand="full" class="custom-button" style="margin: 20px;" [routerLink]="'/editar'">
-    Editar Perfil
+  <ion-button color="success" expand="full" class="custom-button" style="margin: 20px;" (click)="camposVacios()">
+    Guardar Cambios
   </ion-button>
-  <ion-button expand="full" class="custom-button" [routerLink]="'/login'">
-    Cerrar Sesión<ion-icon name="log-out-outline"></ion-icon>
+  <ion-button color="warning" expand="full" class="custom-button" [routerLink]="'/perfil'">
+    Cancelar
   </ion-button>
 </ion-content>

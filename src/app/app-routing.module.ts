@@ -102,6 +102,10 @@ const routes: Routes = [
     path: 'pc1',
     loadChildren: () => import('./pages/pc1/pc1.module').then( m => m.Pc1PageModule)
   },
+  {
+    path: 'editar',
+    loadChildren: () => import('./pages/editar/editar.module').then( m => m.EditarPageModule)
+  },
 
 ];
 

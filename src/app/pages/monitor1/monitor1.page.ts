@@ -16,7 +16,7 @@ export class Monitor1Page implements OnInit {
   async alarmaCarrito() {
     const toast = await this.toastController.create({
       message: 'Se añadió al carrito.',
-      duration: 2000, // Duración en milisegundos
+      duration: 5000, // Duración en milisegundos
       position: 'bottom',
       color: 'success',
     });

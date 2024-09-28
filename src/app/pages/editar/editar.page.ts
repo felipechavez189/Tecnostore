@@ -8,12 +8,10 @@ import { AlertController, ToastController } from '@ionic/angular';
   styleUrls: ['./editar.page.scss'],
 })
 export class EditarPage implements OnInit {
-  profile = {
-    name: '',
-    email: '',
-    phone: '',
-    address: ''
-  };
+    nombre: string = 'Juan Peréz';
+    correo: string ='admin&#64;example.com';
+    telefono: string ='+56 9xxxxxxxx';
+    direccion: string = 'Santiago, Chile';
 
   constructor(
     private alertController: AlertController,
@@ -25,7 +23,7 @@ export class EditarPage implements OnInit {
 
   async camposVacios() {
     // Validar que todos los campos estén llenos
-    if (!this.profile.name || !this.profile.email || !this.profile.phone || !this.profile.address) {
+    if (!this.nombre || !this.correo || !this.telefono || !this.direccion) {
       const alert = await this.alertController.create({
         header: 'Campos Vacíos',
         message: 'Por favor, complete todos los campos.',
@@ -39,7 +37,7 @@ export class EditarPage implements OnInit {
     // Mostrar toast de éxito
     const toast = await this.toastController.create({
       message: 'Cambios realizados',
-      duration: 2000,
+      duration: 5000,
       position: 'bottom'
     });
     await toast.present();

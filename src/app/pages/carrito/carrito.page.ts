@@ -18,7 +18,7 @@ export class CarritoPage implements OnInit {
     // Mostrar el toast
     const toast = await this.toastController.create({
       message: 'Compra realizada',
-      duration: 2000, // Duración en milisegundos
+      duration: 5000, // Duración en milisegundos
       position: 'bottom'
     });
     await toast.present();
@@ -26,7 +26,7 @@ export class CarritoPage implements OnInit {
     // Redirigir al home después de mostrar el toast
     setTimeout(() => {
       this.router.navigate(['/home']);
-    }, 2000); // Debe ser igual o mayor a la duración del toast
+    }, 5000); // Debe ser igual o mayor a la duración del toast
   }
 
 }

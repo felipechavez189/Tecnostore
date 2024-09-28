@@ -25,7 +25,7 @@ export class ModificarPage implements OnInit {
     if (!this.categoria || !this.nombre || this.stock < 0 || this.precio < 0) {
       const toast = await this.toastController.create({
         message: 'Por favor, completa todos los campos correctamente.',
-        duration: 2000,
+        duration: 5000,
         position: 'bottom',
         color: 'danger',
       });
@@ -36,7 +36,7 @@ export class ModificarPage implements OnInit {
     // Muestra el toast de éxito
     const toast = await this.toastController.create({
       message: 'Modificado correctamente',
-      duration: 2000,
+      duration: 5000,
       position: 'bottom',
       color: 'success',
     });

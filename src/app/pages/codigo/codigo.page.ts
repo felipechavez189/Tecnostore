@@ -16,7 +16,7 @@ export class CodigoPage implements OnInit {
   async reenviarCorreo() {
     const toast = await this.toastController.create({
       message: 'Correo reenviado',
-      duration: 3000,
+      duration: 5000,
       position: 'bottom',
     });
     toast.present();

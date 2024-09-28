@@ -61,7 +61,7 @@ export class AgregarPage implements OnInit {
   async mostrarToast(mensaje: string) {
     const toast = await this.toastController.create({
       message: mensaje,
-      duration: 2000, // Duración del toast en milisegundos
+      duration: 5000, // Duración del toast en milisegundos
       position: 'bottom' // Posición del toast en la pantalla
     });
 

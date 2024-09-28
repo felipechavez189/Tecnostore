@@ -4,6 +4,13 @@ ion-content {
 
 
 /* Estilo general para los botones personalizados */
+.banner-image {
+  margin-left: 30px;
+  width: 80%; /* Ajusta al ancho del contenedor */
+  height: auto; /* Ajusta el margen según tus necesidades (16px es un ejemplo) */
+}
+
+
 .custom-button {
   --background: #5fbded; /* Color celeste para el fondo del botón */
   --color: #ffffff; /* Color blanco para el texto del botón */

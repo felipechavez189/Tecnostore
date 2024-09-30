@@ -8,45 +8,41 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- Cuadro que encierra los campos de usuario y contraseña -->
   <ion-card class="content-center">
     <ion-card-header>
       <ion-card-title style="text-align: center;">Crear Cuenta</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
-      <!-- Campo de Usuario -->
       <ion-item>
-        <ion-input placeholder="Nombre"></ion-input>
+        <ion-input placeholder="Nombre" [(ngModel)]="nombre"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-input placeholder="Apellido"></ion-input>
+        <ion-input placeholder="Apellido" [(ngModel)]="apellido"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-input placeholder="Correo"></ion-input>
+        <ion-input placeholder="Correo" [(ngModel)]="correo"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-input placeholder="Teléfono"></ion-input>
+        <ion-input placeholder="Teléfono" [(ngModel)]="telefono"></ion-input>
       </ion-item>
 
-      <!-- Campo de Contraseña -->
       <ion-item>
-        <ion-input type="password" placeholder="Crea una contraseña">
+        <ion-input type="password" placeholder="Crea una contraseña" [(ngModel)]="contrasena">
           <ion-input-password-toggle slot="end"></ion-input-password-toggle>
         </ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-input type="password" placeholder="Valide su contraseña">
+        <ion-input type="password" placeholder="Valide su contraseña" [(ngModel)]="validarContrasena">
           <ion-input-password-toggle slot="end"></ion-input-password-toggle>
         </ion-input>
       </ion-item>
 
-      <!-- Botón de Crear Cuenta -->
-      <ion-button expand="block" class="create-account-button" [routerLink]="['/login']">Crear Cuenta</ion-button>
+      <ion-button expand="block" class="create-account-button" (click)="crearCuenta()">Crear Cuenta</ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>

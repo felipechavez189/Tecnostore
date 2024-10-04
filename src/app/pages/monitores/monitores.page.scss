@@ -24,26 +24,27 @@ ion-content {
   color: #000000;
 }
 
-/* Ajustar tamaño del texto h6 en las tarjetas */
-.card-1 ion-card-content h6,
-.card-2 ion-card-content h6,
-.card-3 ion-card-content h6,
-.card-4 ion-card-content h6,
-.card-5 ion-card-content h6,
-.card-6 ion-card-content h6 {
-  font-size: 20px !important; /* Tamaño de la fuente ajustado */
-  color: #000000;
+/* Estilo para el stock */
+.card-1 ion-card-content .stock,
+.card-2 ion-card-content .stock,
+.card-3 ion-card-content .stock,
+.card-4 ion-card-content .stock,
+.card-5 ion-card-content .stock,
+.card-6 ion-card-content .stock {
+  font-size: 16px !important; /* Tamaño del texto para stock */
 }
 
-/* Ajustar tamaño del texto p en las tarjetas */
-.card-1 ion-card-content p,
-.card-2 ion-card-content p,
-.card-3 ion-card-content p,
-.card-4 ion-card-content p,
-.card-5 ion-card-content p,
-.card-6 ion-card-content p {
-  font-size: 20px !important; /* Tamaño de la fuente ajustado */
+/* Estilo para el precio */
+.card-1 ion-card-content .precio,
+.card-2 ion-card-content .precio,
+.card-3 ion-card-content .precio,
+.card-4 ion-card-content .precio,
+.card-5 ion-card-content .precio,
+.card-6 ion-card-content .precio {
   color: #000000;
+  font-weight: bold; /* Negrita para que resalte más */
+  font-size: 22px !important; /* Tamaño de fuente más grande */
+  margin-top: 8px; /* Espacio superior para que se separe del stock */
 }
 
 /* Estilos adicionales para mejorar la apariencia de las tarjetas */

@@ -35,6 +35,18 @@ ion-content {
   color: #000000;
 }
 
+/* Estilo para el precio */
+.card-1 ion-card-content .precio,
+.card-2 ion-card-content .precio,
+.card-3 ion-card-content .precio,
+.card-4 ion-card-content .precio,
+.card-5 ion-card-content .precio,
+.card-6 ion-card-content .precio {
+  color: #000000;
+  font-weight: bold; /* Negrita para que resalte más */
+  font-size: 22px; /* Tamaño de fuente más grande */
+}
+
 /* Estilos adicionales para mejorar la apariencia de las tarjetas */
 ion-card {
   border-radius: 10px; /* Redondear las esquinas de las tarjetas */

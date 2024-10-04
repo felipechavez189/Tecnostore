@@ -88,3 +88,15 @@ ion-button {
 ion-icon {
   color: #ffffff;
 }
+
+/* Estilo para el precio */
+.card-1 ion-card-content .precio,
+.card-2 ion-card-content .precio,
+.card-3 ion-card-content .precio,
+.card-4 ion-card-content .precio,
+.card-5 ion-card-content .precio,
+.card-6 ion-card-content .precio {
+  color: #000000;
+  font-weight: bold; /* Negrita para que resalte más */
+  font-size: 24px; /* Tamaño de fuente más grande */
+}

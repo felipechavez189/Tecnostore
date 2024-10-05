@@ -6,7 +6,8 @@
   margin: 10px 0;
 }
 
-.custom-button:focus, .custom-button:hover {
+.custom-button:focus,
+.custom-button:hover {
   --background: #5fbded;
 }
 
@@ -49,7 +50,7 @@ ion-icon {
 .card-fixed-size {
   --background: #ffffff;
   border-radius: 14px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   min-height: 400px;
   display: flex;
   flex-direction: column;
@@ -106,6 +107,19 @@ ion-col {
   height: auto; /* Ajusta el margen según tus necesidades (16px es un ejemplo) */
 }
 
-ion-card-content h6, ion-card-content p {
+ion-card-content h6,
+ion-card-content p {
   color: #000000; /* Color negro para el texto dentro de las cards */
+}
+
+/* Estilo para el precio */
+.card-1 ion-card-content .precio,
+.card-2 ion-card-content .precio,
+.card-3 ion-card-content .precio,
+.card-4 ion-card-content .precio,
+.card-5 ion-card-content .precio,
+.card-6 ion-card-content .precio {
+  color: #000000;
+  font-weight: bold; /* Negrita para que resalte más */
+  font-size: 24px; /* Tamaño de fuente más grande */
 }

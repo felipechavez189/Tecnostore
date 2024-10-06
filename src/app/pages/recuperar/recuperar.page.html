@@ -7,7 +7,6 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content [fullscreen]="true">
   <!-- Cuadro que encierra los campos de usuario y contraseña -->
   <ion-card class="content-center">
@@ -20,12 +19,11 @@
       
       <!-- Campo de Usuario -->
       <ion-item>
-        <ion-input placeholder="Ingrese su correo"></ion-input>
+        <ion-input placeholder="Ingrese su correo" [(ngModel)]="correo"></ion-input>
       </ion-item>
 
       <!-- Botón de Enviar Código -->
-      <ion-button expand="block" class="custom-button" [routerLink]="['/codigo']">Enviar Código</ion-button>
+      <ion-button expand="block" class="custom-button" (click)="enviarCodigo()">Enviar Código</ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>
-

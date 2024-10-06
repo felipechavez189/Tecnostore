@@ -26,7 +26,7 @@ export class RecuperarPage implements OnInit {
     } else if (!this.correo.includes('@')) { // Verifica si el campo de correo contiene un '@'
       const alert = await this.alertController.create({
         header: 'Error',
-        message: 'Por favor, ingrese un correo electrónico válido que contenga "@"',
+        message: 'Por favor, ingrese un correo electrónico válido el cual contenga "@"',
         buttons: ['OK']
       });
       await alert.present();

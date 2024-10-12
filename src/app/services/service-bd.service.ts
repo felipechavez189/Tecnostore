@@ -11,7 +11,7 @@ export class ServiceBDService {
   public database!: SQLiteObject;
 
   // Variables de creación de Tablas
-  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario (id_usu INTEGER PRIMARY KEY AUTOINCREMENT, rut_usu VARCHAR(15) NOT NULL, nombre_usu VARCHAR(50) NOT NULL, apellido_usu VARCHAR(50) NOT NULL, nombre_usuario VARCHAR(50) NOT NULL, clave_usu VARCHAR(20) NOT NULL, correo_usu VARCHAR(50) NOT NULL, taken VARCHAR(20) NOT NULL, estado_usu VARCHAR(20) NOT NULL, rol_id INTEGER NOT NULL, FOREIGN KEY (rol_id) REFERENCES rol(id_rol));";
+  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario (id_usu INTEGER PRIMARY KEY AUTOINCREMENT, rut_usu VARCHAR(15) NOT NULL, nombre_usu VARCHAR(50) NOT NULL, apellido_usu VARCHAR(50) NOT NULL, nombre_usuario VARCHAR(50) NOT NULL, clave_usu VARCHAR(20) NOT NULL, correo_usu VARCHAR(50) NOT NULL, taken BOOLEAN NOT NULL, estado_usu VARCHAR(20) NOT NULL, rol_id INTEGER NOT NULL, FOREIGN KEY (rol_id) REFERENCES rol(id_rol));";
   
   tablaRol: string = "CREATE TABLE IF NOT EXISTS rol (id_rol INTEGER PRIMARY KEY AUTOINCREMENT, nombre_rol VARCHAR(50) NOT NULL);";
   
@@ -25,6 +25,7 @@ export class ServiceBDService {
   
   tablaCategoria: string = "CREATE TABLE IF NOT EXISTS categoria (id_categoria INTEGER PRIMARY KEY AUTOINCREMENT, nombre_cat VARCHAR(50) NOT NULL);";
   
+
   // Variables para guardar los datos de las consultas en las tablas
   listadoUsuarios = new BehaviorSubject([]);
   listadoProductos = new BehaviorSubject([]);
@@ -65,7 +66,7 @@ export class ServiceBDService {
     this.platform.ready().then(() => {
       // Crear la Base de Datos
       this.sqlite.create({
-        name: 'tecnostore.db',
+        name: 'tecnostore1.db',
         location: 'default'
       }).then((db: SQLiteObject) => {
         // Capturar la conexión a la BD
@@ -99,6 +100,8 @@ export class ServiceBDService {
     }
   }
 
+////USUARIOS
+
   // Seleccionar todos los usuarios
   seleccionarUsuarios() {
     return this.database.executeSql('SELECT * FROM usuario', []).then(res => {
@@ -118,25 +121,6 @@ export class ServiceBDService {
         }
       }
       this.listadoUsuarios.next(items as any);
-    });
-  }
-
-  // Seleccionar todos los productos
-  seleccionarProductos() {
-    return this.database.executeSql('SELECT * FROM producto', []).then(res => {
-      let items: any[] = [];
-      if (res.rows.length > 0) {
-        for (var i = 0; i < res.rows.length; i++) {
-          items.push({
-            id_producto: res.rows.item(i).id_producto,
-            nombre_prod: res.rows.item(i).nombre_prod,
-            precio_prod: res.rows.item(i).precio_prod,
-            stock_prod: res.rows.item(i).stock_prod,
-            descripcion_prod: res.rows.item(i).descripcion_prod
-          });
-        }
-      }
-      this.listadoProductos.next(items as any);
     });
   }
 
@@ -170,4 +154,42 @@ export class ServiceBDService {
         this.presentAlert('Insertar', 'Error: ' + JSON.stringify(e));
       });
   }
+
+  
+
+//// PRODUCTOS
+
+    // Seleccionar todos los productos
+    seleccionarProductos() {
+      return this.database.executeSql('SELECT * FROM producto', []).then(res => {
+        let items: any[] = [];
+        if (res.rows.length > 0) {
+          for (var i = 0; i < res.rows.length; i++) {
+            items.push({
+              id_producto: res.rows.item(i).id_producto,
+              nombre_prod: res.rows.item(i).nombre_prod,
+              precio_prod: res.rows.item(i).precio_prod,
+              stock_prod: res.rows.item(i).stock_prod,
+              descripcion_prod: res.rows.item(i).descripcion_prod
+            });
+          }
+        }
+        this.listadoProductos.next(items as any);
+      });
+    }
+
+    // Agregar este método en el servicio 'ServiceBDService'
+    insertarProducto(nombre: string, precio: number, stock: number, descripcion: string, categoria: string) {
+      return this.database.executeSql(
+        'INSERT INTO producto (nombre_prod, precio_prod, stock_prod, descripcion_prod, estatus_prod, categoria_id) VALUES (?, ?, ?, ?, ?, ?)', 
+        [nombre, precio, stock, descripcion, 'activo', categoria]
+      ).then(res => {
+        this.presentAlert("Insertar", "Producto Registrado");
+        this.seleccionarProductos(); // Refrescar la lista de productos
+      }).catch(e => {
+        this.presentAlert('Insertar', 'Error: ' + JSON.stringify(e));
+      });
+    }
+
+
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { Router } from '@angular/router';  // Importar el servicio Router
+import { Router } from '@angular/router';
+import { ServiceBDService } from 'src/app/services/service-bd.service';
 
 @Component({
   selector: 'app-signup',
@@ -9,23 +10,25 @@ import { Router } from '@angular/router';  // Importar el servicio Router
 })
 export class SignupPage implements OnInit {
 
+  rut: string = '';
   nombre: string = '';
   apellido: string = '';
+  nombreUsuario: string = '';
   correo: string = '';
-  telefono: string = '';
   contrasena: string = '';
   validarContrasena: string = '';
 
   constructor(
     private alertController: AlertController,
-    private router: Router  // Inyectar el Router en el constructor
+    private router: Router,
+    private dbService: ServiceBDService  // Inyectar el servicio ServiceBDService
   ) { }
 
   ngOnInit() { }
 
   async crearCuenta() {
     // Validación de campos vacíos
-    if (this.nombre === '' || this.apellido === '' || this.correo === '' || this.telefono === '' || this.contrasena === '' || this.validarContrasena === '') {
+    if (this.rut === '' || this.nombre === '' || this.apellido === '' || this.nombreUsuario === '' || this.correo === '' || this.contrasena === '' || this.validarContrasena === '') {
       await this.presentAlert('Error', 'Todos los campos son obligatorios.');
       return;
     }
@@ -43,9 +46,15 @@ export class SignupPage implements OnInit {
       return;
     }
 
-    // Si todo es válido, mostrar un mensaje de éxito y redirigir al login
-    await this.presentAlert('Éxito', 'Cuenta creada con éxito.');
-    this.router.navigate(['/login']);  // Redirigir al login
+    // Insertar el usuario en la base de datos
+    this.dbService.insertarUsuario(this.rut, this.nombre, this.apellido, this.nombreUsuario, this.contrasena, this.correo, 'activo', 2)
+      .then(async () => {
+        await this.presentAlert('Éxito', 'Cuenta creada con éxito.');
+        this.router.navigate(['/login']);  // Redirigir al login
+      })
+      .catch(async (error) => {
+        await this.presentAlert('Error', 'Hubo un problema al crear la cuenta.');
+      });
   }
 
   async presentAlert(header: string, message: string) {

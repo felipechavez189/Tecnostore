@@ -184,6 +184,17 @@ export class ServiceBDService {
     });
   }
 
+    // Insertar un usuario
+    insertarUsuario(rut: string, nombre: string, apellido: string, username: string, clave: string, correo: string, estado: string, rol_id: number) {
+      return this.database.executeSql('INSERT INTO usuario (rut_usu, nombre_usu, apellido_usu, nombre_usuario, clave_usu, correo_usu, estado_usu, rol_id) VALUES (?,?,?,?,?,?,?,?)',
+        [rut, nombre, apellido, username, clave, correo, estado, rol_id]).then(res => {
+          this.presentAlert("Insertar", "Usuario Registrado");
+          this.seleccionarUsuarios();
+        }).catch(e => {
+          this.presentAlert('Insertar', 'Error: ' + JSON.stringify(e));
+        });
+    }
+
   // Funciones para gestionar la foto de perfil
   async obtenerFotoPerfil(id: number): Promise<any> {
     return this.database.executeSql('SELECT foto_usu FROM usuario WHERE id_usu = ?', [id]).then(res => {

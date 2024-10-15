@@ -25,27 +25,16 @@ export class ServiceBDService {
   
   tablaCategoria: string = "CREATE TABLE IF NOT EXISTS categoria (id_categoria INTEGER PRIMARY KEY AUTOINCREMENT, nombre_cat VARCHAR(50) NOT NULL);";
 
-
   //INSERT
-
   rolUsuario1: string = "INSERT OR IGNORE INTO rol (nombre_rol) VALUES ('administrador');";
-
   rolUsuario2: string = "INSERT OR IGNORE INTO rol (nombre_rol) VALUES ('cliente');";
-
   registroUsuario: string = "INSERT OR IGNORE INTO usuario (rut_usu, nombre_usu, apellido_usu, nombre_usuario, clave_usu, correo_usu, token, foto_usu, estado_usu, rol_id) VALUES ('11.234.567-8', 'Felipe', 'Chávez', 'admin', 'Admin@123.', 'chavezfelipe179@gmail.com', 0, null, 1);";
-
   categoriaProducto1: string = "INSERT OR IGNORE INTO categoria (nombre_cat) VALUES ('Teclados');";
-
   categoriaProducto2: string = "INSERT OR IGNORE INTO categoria (nombre_cat) VALUES ('Monitores');";
-
   categoriaProducto3: string = "INSERT OR IGNORE INTO categoria (nombre_cat) VALUES ('Audífonos');";
-
   categoriaProducto4: string = "INSERT OR IGNORE INTO categoria (nombre_cat) VALUES ('Mouse');";
-
   categoriaProducto5: string = "INSERT OR IGNORE INTO categoria (nombre_cat) VALUES ('Sillas');";
-
   categoriaProducto6: string = "INSERT OR IGNORE INTO categoria (nombre_cat) VALUES ('PC Armado');";
-  
 
   // Variables para guardar los datos de las consultas en las tablas
   listadoUsuarios = new BehaviorSubject([]);
@@ -55,7 +44,7 @@ export class ServiceBDService {
   listadoMouse = new BehaviorSubject([]);
   listadoSillas = new BehaviorSubject([]);
   listadoPCArmado = new BehaviorSubject([]);
-  
+
   // Variable para el estado de la Base de datos
   private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
@@ -108,16 +97,12 @@ export class ServiceBDService {
 
   // Función para crear la Base de Datos
   createBD() {
-    // Verificar si la plataforma está disponible
     this.platform.ready().then(() => {
-      // Crear la Base de Datos
       this.sqlite.create({
         name: 'tecnostore2.db',
         location: 'default'
       }).then((db: SQLiteObject) => {
-        // Capturar la conexión a la BD
         this.database = db;
-        // Llamamos a la función para crear las tablas
         this.crearTablas();
       }).catch(e => {
         this.presentAlert('Base de Datos', 'Error en crear la BD: ' + JSON.stringify(e));
@@ -127,7 +112,6 @@ export class ServiceBDService {
 
   async crearTablas() {
     try {
-      // ejecuto la creación de Tablas
       await this.database.executeSql(this.tablaRol, []);
       await this.database.executeSql(this.tablaUsuario, []);
       await this.database.executeSql(this.tablaEstado, []);
@@ -156,7 +140,7 @@ export class ServiceBDService {
     }
   }
 
-////USUARIOS
+  ////USUARIOS
 
   // Seleccionar todos los usuarios
   seleccionarUsuarios() {
@@ -200,23 +184,93 @@ export class ServiceBDService {
     });
   }
 
-  // Insertar un usuario
-  insertarUsuario(rut: string, nombre: string, apellido: string, username: string, clave: string, correo: string, estado: string, rol_id: number) {
-    return this.database.executeSql('INSERT INTO usuario (rut_usu, nombre_usu, apellido_usu, nombre_usuario, clave_usu, correo_usu, estado_usu, rol_id) VALUES (?,?,?,?,?,?,?,?)',
-      [rut, nombre, apellido, username, clave, correo, estado, rol_id]).then(res => {
-        this.presentAlert("Insertar", "Usuario Registrado");
-        this.seleccionarUsuarios();
-      }).catch(e => {
-        this.presentAlert('Insertar', 'Error: ' + JSON.stringify(e));
-      });
+  // Funciones para gestionar la foto de perfil
+  async obtenerFotoPerfil(id: number): Promise<any> {
+    return this.database.executeSql('SELECT foto_usu FROM usuario WHERE id_usu = ?', [id]).then(res => {
+      if (res.rows.length > 0) {
+        return res.rows.item(0).foto_usu;
+      }
+      return null;
+    });
   }
 
-  
+  async cambiarFotoPerfil(id: number, foto: Blob) {
+    return this.database.executeSql('UPDATE usuario SET foto_usu = ? WHERE id_usu = ?', [foto, id]).then(res => {
+      this.presentAlert("Cambiar Foto", "Foto de perfil actualizada");
+    }).catch(e => {
+      this.presentAlert('Cambiar Foto', 'Error: ' + JSON.stringify(e));
+    });
+  }
 
-//// PRODUCTOS
+  async eliminarFotoPerfil(id: number) {
+    const foto = await this.obtenerFotoPerfil(id);
+    if (foto) {
+      return this.database.executeSql('UPDATE usuario SET foto_usu = NULL WHERE id_usu = ?', [id]).then(res => {
+        this.presentAlert("Eliminar Foto", "Foto de perfil eliminada");
+      }).catch(e => {
+        this.presentAlert('Eliminar Foto', 'Error: ' + JSON.stringify(e));
+      });
+    } else {
+      this.presentAlert('Eliminar Foto', 'No hay foto de perfil para eliminar');
+    }
+  }
 
-    
-   
+  ////PRODUCTOS
 
+  // Seleccionar todos los productos
+  seleccionarProductos() {
+    return this.database.executeSql('SELECT * FROM producto', []).then(res => {
+      let items: any[] = [];
+      if (res.rows.length > 0) {
+        for (var i = 0; i < res.rows.length; i++) {
+          items.push({
+            id_producto: res.rows.item(i).id_producto,
+            nombre_prod: res.rows.item(i).nombre_prod,
+            precio_prod: res.rows.item(i).precio_prod,
+            stock_prod: res.rows.item(i).stock_prod,
+            descripcion_prod: res.rows.item(i).descripcion_prod,
+            foto_prod: res.rows.item(i).foto_prod,
+            estatus_prod: res.rows.item(i).estatus_prod,
+            categoria_id: res.rows.item(i).categoria_id
+          });
+        }
+      }
+      this.listadoTeclados.next(items as any);
+      this.listadoMonitores.next(items as any);
+      this.listadoAudifonos.next(items as any);
+      this.listadoMouse.next(items as any);
+      this.listadoSillas.next(items as any);
+      this.listadoPCArmado.next(items as any);
+    });
+  }
 
+  // Agregar un producto
+  agregarProducto(nombre: string, precio: number, stock: number, descripcion: string, foto: Blob, categoriaId: number) {
+    return this.database.executeSql('INSERT INTO producto (nombre_prod, precio_prod, stock_prod, descripcion_prod, foto_prod, estatus_prod, categoria_id) VALUES (?, ?, ?, ?, ?, ?, ?)', [nombre, precio, stock, descripcion, foto, 'disponible', categoriaId]).then(res => {
+      this.presentAlert("Agregar Producto", "Producto agregado");
+      this.seleccionarProductos();
+    }).catch(e => {
+      this.presentAlert('Agregar Producto', 'Error: ' + JSON.stringify(e));
+    });
+  }
+
+  // Eliminar un producto
+  eliminarProducto(id: string) {
+    return this.database.executeSql('DELETE FROM producto WHERE id_producto = ?', [id]).then(res => {
+      this.presentAlert("Eliminar Producto", "Producto Eliminado");
+      this.seleccionarProductos();
+    }).catch(e => {
+      this.presentAlert('Eliminar Producto', 'Error: ' + JSON.stringify(e));
+    });
+  }
+
+  // Modificar un producto
+  modificarProducto(id: string, nombre: string, precio: number, stock: number, descripcion: string) {
+    return this.database.executeSql('UPDATE producto SET nombre_prod = ?, precio_prod = ?, stock_prod = ?, descripcion_prod = ? WHERE id_producto = ?', [nombre, precio, stock, descripcion, id]).then(res => {
+      this.presentAlert("Modificar Producto", "Producto Modificado");
+      this.seleccionarProductos();
+    }).catch(e => {
+      this.presentAlert('Modificar Producto', 'Error: ' + JSON.stringify(e));
+    });
+  }
 }

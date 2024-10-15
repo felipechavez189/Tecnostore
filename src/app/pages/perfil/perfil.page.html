@@ -22,15 +22,15 @@
 <ion-content [fullscreen]="true">
   
   <ion-card>
-    <img alt="Perfil" src="/assets/icon/perfil.jpg"/>
+    <img alt="Perfil" [src]="photoUrl || '/assets/icon/perfil.jpg'" />
     <ion-card-header>
       <ion-card-title>Juan Peréz</ion-card-title>
       <ion-card-subtitle>Administrador</ion-card-subtitle>
     </ion-card-header>
   </ion-card>
 
-  <ion-button class="center-button-container custom-button">
-    <ion-icon name="camera-outline"></ion-icon>
+  <ion-button class="center-button-container custom-button" (click)="selectImageOrTakePhoto()">
+    <ion-icon name="camera-outline"></ion-icon> Agregar Foto
   </ion-button>
 
   <ion-list>
@@ -40,7 +40,6 @@
     </ion-item>
     <ion-item class="profile-item">
       <ion-label>Email:</ion-label>
-      <!-- Aquí se muestra el correo recibido -->
       <ion-text>{{ email }}</ion-text>
     </ion-item>
     <ion-item class="profile-item">

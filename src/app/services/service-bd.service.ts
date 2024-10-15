@@ -11,7 +11,7 @@ export class ServiceBDService {
   public database!: SQLiteObject;
 
   // Variables de creación de Tablas
-  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario (id_usu INTEGER PRIMARY KEY AUTOINCREMENT, rut_usu VARCHAR(15) NOT NULL, nombre_usu VARCHAR(50) NOT NULL, apellido_usu VARCHAR(50) NOT NULL, nombre_usuario VARCHAR(50) NOT NULL, clave_usu VARCHAR(20) NOT NULL, correo_usu VARCHAR(50) NOT NULL, taken BOOLEAN NOT NULL, estado_usu VARCHAR(20) NOT NULL, rol_id INTEGER NOT NULL, FOREIGN KEY (rol_id) REFERENCES rol(id_rol));";
+  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario (id_usu INTEGER PRIMARY KEY AUTOINCREMENT, rut_usu VARCHAR(15) NOT NULL, nombre_usu VARCHAR(50) NOT NULL, apellido_usu VARCHAR(50) NOT NULL, nombre_usuario VARCHAR(50) NOT NULL, clave_usu VARCHAR(20) NOT NULL, correo_usu VARCHAR(50) NOT NULL, token BOOLEAN NOT NULL, foto_usu BLOB NOT NULL, estado_usu BOOLEAN NOT NULL, rol_id INTEGER NOT NULL, FOREIGN KEY (rol_id) REFERENCES rol(id_rol));";
   
   tablaRol: string = "CREATE TABLE IF NOT EXISTS rol (id_rol INTEGER PRIMARY KEY AUTOINCREMENT, nombre_rol VARCHAR(50) NOT NULL);";
   
@@ -24,11 +24,37 @@ export class ServiceBDService {
   tablaDetalle: string = "CREATE TABLE IF NOT EXISTS detalle (id_detalle INTEGER PRIMARY KEY AUTOINCREMENT, cantidad_det INTEGER NOT NULL, subtotal_det INTEGER NOT NULL, venta_id INTEGER NOT NULL, producto_id INTEGER NOT NULL, FOREIGN KEY (venta_id) REFERENCES venta(id_venta), FOREIGN KEY (producto_id) REFERENCES producto(id_producto));";
   
   tablaCategoria: string = "CREATE TABLE IF NOT EXISTS categoria (id_categoria INTEGER PRIMARY KEY AUTOINCREMENT, nombre_cat VARCHAR(50) NOT NULL);";
+
+
+  //INSERT
+
+  rolUsuario1: string = "INSERT OR IGNORE INTO rol (nombre_rol) VALUES ('administrador');";
+
+  rolUsuario2: string = "INSERT OR IGNORE INTO rol (nombre_rol) VALUES ('cliente');";
+
+  registroUsuario: string = "INSERT OR IGNORE INTO usuario (rut_usu, nombre_usu, apellido_usu, nombre_usuario, clave_usu, correo_usu, token, foto_usu, estado_usu, rol_id) VALUES ('11.234.567-8', 'Felipe', 'Chávez', 'admin', 'Admin@123.', 'chavezfelipe179@gmail.com', 0, null, 1);";
+
+  categoriaProducto1: string = "INSERT OR IGNORE INTO categoria (nombre_cat) VALUES ('Teclados');";
+
+  categoriaProducto2: string = "INSERT OR IGNORE INTO categoria (nombre_cat) VALUES ('Monitores');";
+
+  categoriaProducto3: string = "INSERT OR IGNORE INTO categoria (nombre_cat) VALUES ('Audífonos');";
+
+  categoriaProducto4: string = "INSERT OR IGNORE INTO categoria (nombre_cat) VALUES ('Mouse');";
+
+  categoriaProducto5: string = "INSERT OR IGNORE INTO categoria (nombre_cat) VALUES ('Sillas');";
+
+  categoriaProducto6: string = "INSERT OR IGNORE INTO categoria (nombre_cat) VALUES ('PC Armado');";
   
 
   // Variables para guardar los datos de las consultas en las tablas
   listadoUsuarios = new BehaviorSubject([]);
-  listadoProductos = new BehaviorSubject([]);
+  listadoTeclados = new BehaviorSubject([]);
+  listadoMonitores = new BehaviorSubject([]);
+  listadoAudifonos = new BehaviorSubject([]);
+  listadoMouse = new BehaviorSubject([]);
+  listadoSillas = new BehaviorSubject([]);
+  listadoPCArmado = new BehaviorSubject([]);
   
   // Variable para el estado de la Base de datos
   private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -52,8 +78,28 @@ export class ServiceBDService {
     return this.listadoUsuarios.asObservable();
   }
 
-  fetchProductos(): Observable<any[]> {
-    return this.listadoProductos.asObservable();
+  fetchTeclados(): Observable<any[]> {
+    return this.listadoTeclados.asObservable();
+  }
+
+  fetchMonitores(): Observable<any[]> {
+    return this.listadoMonitores.asObservable();
+  }
+
+  fetchAudifonos(): Observable<any[]> {
+    return this.listadoAudifonos.asObservable();
+  }
+
+  fetchMouse(): Observable<any[]> {
+    return this.listadoMouse.asObservable();
+  }
+
+  fetchSillas(): Observable<any[]> {
+    return this.listadoSillas.asObservable();
+  }
+
+  fetchPCArmado(): Observable<any[]> {
+    return this.listadoPCArmado.asObservable();
   }
 
   dbState() {
@@ -66,7 +112,7 @@ export class ServiceBDService {
     this.platform.ready().then(() => {
       // Crear la Base de Datos
       this.sqlite.create({
-        name: 'tecnostore1.db',
+        name: 'tecnostore2.db',
         location: 'default'
       }).then((db: SQLiteObject) => {
         // Capturar la conexión a la BD
@@ -81,7 +127,7 @@ export class ServiceBDService {
 
   async crearTablas() {
     try {
-      // Ejecutar la creación de Tablas
+      // ejecuto la creación de Tablas
       await this.database.executeSql(this.tablaRol, []);
       await this.database.executeSql(this.tablaUsuario, []);
       await this.database.executeSql(this.tablaEstado, []);
@@ -90,8 +136,18 @@ export class ServiceBDService {
       await this.database.executeSql(this.tablaProducto, []);
       await this.database.executeSql(this.tablaDetalle, []);
 
+      //ejecuto los insert por defecto en el caso que existan
+      await this.database.executeSql(this.rolUsuario1, []);
+      await this.database.executeSql(this.rolUsuario2, []);
+      await this.database.executeSql(this.registroUsuario, []);
+      await this.database.executeSql(this.categoriaProducto1, []);
+      await this.database.executeSql(this.categoriaProducto2, []);
+      await this.database.executeSql(this.categoriaProducto3, []);
+      await this.database.executeSql(this.categoriaProducto4, []);
+      await this.database.executeSql(this.categoriaProducto5, []);
+      await this.database.executeSql(this.categoriaProducto6, []);
+
       this.seleccionarUsuarios();
-      this.seleccionarProductos();
 
       // Modificar el estado de la Base de Datos
       this.isDBReady.next(true);
@@ -159,37 +215,8 @@ export class ServiceBDService {
 
 //// PRODUCTOS
 
-    // Seleccionar todos los productos
-    seleccionarProductos() {
-      return this.database.executeSql('SELECT * FROM producto', []).then(res => {
-        let items: any[] = [];
-        if (res.rows.length > 0) {
-          for (var i = 0; i < res.rows.length; i++) {
-            items.push({
-              id_producto: res.rows.item(i).id_producto,
-              nombre_prod: res.rows.item(i).nombre_prod,
-              precio_prod: res.rows.item(i).precio_prod,
-              stock_prod: res.rows.item(i).stock_prod,
-              descripcion_prod: res.rows.item(i).descripcion_prod
-            });
-          }
-        }
-        this.listadoProductos.next(items as any);
-      });
-    }
-
-    // Agregar este método en el servicio 'ServiceBDService'
-    insertarProducto(nombre: string, precio: number, stock: number, descripcion: string, categoria: string) {
-      return this.database.executeSql(
-        'INSERT INTO producto (nombre_prod, precio_prod, stock_prod, descripcion_prod, estatus_prod, categoria_id) VALUES (?, ?, ?, ?, ?, ?)', 
-        [nombre, precio, stock, descripcion, 'activo', categoria]
-      ).then(res => {
-        this.presentAlert("Insertar", "Producto Registrado");
-        this.seleccionarProductos(); // Refrescar la lista de productos
-      }).catch(e => {
-        this.presentAlert('Insertar', 'Error: ' + JSON.stringify(e));
-      });
-    }
+    
+   
 
 
 }

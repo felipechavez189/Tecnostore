@@ -283,18 +283,19 @@ obtenerProductoPorId(id: string) {
     });
 }
 
-// Modificar un producto incluyendo la imagen
-modificarProducto(id: string, nombre: string, precio: number, stock: number, descripcion: string, imagen: Blob | string) {
+modificarProducto(id: number, nombre: string, precio: number, stock: number, descripcion: string, imagen: Blob | string) {
   return this.database.executeSql(
     'UPDATE producto SET nombre_prod = ?, precio_prod = ?, stock_prod = ?, descripcion_prod = ?, foto_prod = ? WHERE id_producto = ?',
     [nombre, precio, stock, descripcion, imagen, id]
   ).then(res => {
-    this.presentAlert("Modificar Producto", "Producto Modificado");
-    this.seleccionarProductos(); // Actualizar la lista de productos
+    console.log('Producto modificado correctamente');
+    this.seleccionarProductos(); // Actualiza la lista de productos
   }).catch(e => {
-    this.presentAlert('Modificar Producto', 'Error: ' + JSON.stringify(e));
+    console.error('Error al modificar el producto:', e);
+    throw e;
   });
 }
+
 
 
   // Funciones para gestionar la foto de perfil

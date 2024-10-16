@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
-import { AgregarTecladoPage } from './agregar-teclado.page';
+import { RouterModule, Routes } from '@angular/router';
+import { AgregarTecladoPage } from './agregar-teclado.page';  // Importación consistente
 
 const routes: Routes = [
   {
     path: '',
-    component: AgregarTecladoPage
+    component: AgregarTecladoPage  // Referencia correcta del componente
   }
 ];
 

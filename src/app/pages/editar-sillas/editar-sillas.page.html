@@ -5,45 +5,37 @@
 </ion-header>
 
 <ion-content>
-  <!-- Campo para el nombre de la silla -->
   <ion-item>
     <ion-label position="floating">Nombre de la Silla</ion-label>
-    <ion-input [(ngModel)]="silla.nombre"></ion-input>
+    <ion-input [(ngModel)]="sillas.nombre"></ion-input>  <!-- Cambiado a 'sillas' -->
   </ion-item>
 
-  <!-- Campo para el precio -->
   <ion-item>
     <ion-label position="floating">Precio</ion-label>
-    <ion-input type="number" [(ngModel)]="silla.precio"></ion-input>
+    <ion-input type="number" [(ngModel)]="sillas.precio"></ion-input> <!-- Cambiado -->
   </ion-item>
 
-  <!-- Campo para el stock -->
   <ion-item>
     <ion-label position="floating">Stock</ion-label>
-    <ion-input type="number" [(ngModel)]="silla.stock"></ion-input>
+    <ion-input type="number" [(ngModel)]="sillas.stock"></ion-input> <!-- Cambiado -->
   </ion-item>
 
-  <!-- Campo para la descripción -->
   <ion-item>
     <ion-label position="floating">Descripción</ion-label>
-    <ion-textarea [(ngModel)]="silla.descripcion"></ion-textarea>
+    <ion-textarea [(ngModel)]="sillas.descripcion"></ion-textarea> <!-- Cambiado -->
   </ion-item>
 
-  <!-- Botón para capturar una imagen usando la cámara -->
   <ion-item>
     <ion-button (click)="capturarFoto()">Capturar Imagen</ion-button>
   </ion-item>
 
-  <!-- Botón para seleccionar una imagen desde la galería -->
   <ion-item>
     <ion-button (click)="seleccionarImagen()">Seleccionar Imagen</ion-button>
   </ion-item>
 
-  <!-- Vista previa de la imagen seleccionada o capturada -->
-  <ion-item *ngIf="silla.imagen">
-    <ion-img [src]="silla.imagen"></ion-img> <!-- Muestra la imagen capturada o seleccionada -->
+  <ion-item *ngIf="sillas.imagen">
+    <ion-img [src]="sillas.imagen"></ion-img>
   </ion-item>
 
-  <!-- Botón para guardar los cambios -->
   <ion-button expand="block" (click)="guardarCambios()">Guardar Cambios</ion-button>
 </ion-content>

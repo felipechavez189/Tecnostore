@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
-import { AgregarSillasPage } from './agregar-sillas.page';
+import { RouterModule, Routes } from '@angular/router';
+import { AgregarSillasPage } from './agregar-sillas.page';  // Importación consistente
 
 const routes: Routes = [
   {
     path: '',
-    component: AgregarSillasPage
+    component: AgregarSillasPage  // Referencia consistente
   }
 ];
 

@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
+import { RouterModule, Routes } from '@angular/router';
 import { EditarSillasPage } from './editar-sillas.page';
 
 const routes: Routes = [
   {
-    path: '',
-    component: EditarSillasPage
+    path: ':id',
+    component: EditarSillasPage,
   }
 ];
 

@@ -110,7 +110,8 @@ const routes: Routes = [
   {
     path: '**',
     loadChildren: () => import('./pages/notfound/notfound.module').then( m => m.NotfoundPageModule)
-  },  {
+  },
+  {
     path: 'agregar-audifono',
     loadChildren: () => import('./pages/agregar-audifono/agregar-audifono.module').then( m => m.AgregarAudifonoPageModule)
   },
@@ -144,7 +145,7 @@ const routes: Routes = [
   },
   {
     path: 'agregar-pc',
-    loadChildren: () => import('./pages/agregar-pc/agregar-pc.module').then( m => m.AgregarPcPageModule)
+    loadChildren: () => import('./pages/agregar-pc/agregar-pc.module').then(m => m.AgregarPCPageModule)
   },
   {
     path: 'editar-pc',

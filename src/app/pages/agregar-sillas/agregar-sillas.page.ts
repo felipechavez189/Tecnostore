@@ -1,68 +1,68 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ServiceBDService } from '../../services/service-bd.service'; // Asegúrate de que esté bien importado
-import { CamaraService } from '../../services/camara.service'; // Servicio de la cámara
+import { ServiceBDService } from 'src/app/services/service-bd.service';  // Verifica la ruta correcta
+import { CamaraService } from 'src/app/services/camara.service';  // Verifica la ruta correcta
 
 @Component({
-  selector: 'app-agregar-silla',
-  templateUrl: './agregar-silla.page.html',
-  styleUrls: ['./agregar-silla.page.scss'],
+  selector: 'app-agregar-sillas',
+  templateUrl: './agregar-sillas.page.html',
+  styleUrls: ['./agregar-sillas.page.scss'],
 })
-export class AgregarSillaPage {
-  silla = {
+export class AgregarSillasPage {  // <-- Asegúrate de usar mayúsculas consistentes
+  sillas = {
     nombre: '',
     precio: 0,
     stock: 0,
     descripcion: '',
-    imagen: null as Blob | null // Aquí guardaremos el Blob de la imagen
+    imagen: null as Blob | null,  // Imagen como Blob o null
   };
 
   constructor(
     private serviceBDService: ServiceBDService,
-    private camaraService: CamaraService, // Servicio para manejar la cámara
+    private camaraService: CamaraService,
     private router: Router
   ) {}
 
-  // Método para capturar una foto con la cámara y guardarla como Blob
+  // Método para capturar una foto con la cámara
   async capturarFoto() {
     try {
-      this.silla.imagen = await this.camaraService.takePhoto(); // Captura la imagen como Blob
-      console.log('Imagen capturada como Blob:', this.silla.imagen); // Verifica que el Blob es correcto
+      this.sillas.imagen = await this.camaraService.takePhoto();
+      console.log('Imagen capturada como Blob:', this.sillas.imagen);
     } catch (error) {
       console.error('Error al capturar la imagen:', error);
     }
   }
 
-  // Método para seleccionar una imagen desde la galería y guardarla como Blob
+  // Método para seleccionar una imagen desde la galería
   async seleccionarImagen() {
     try {
-      this.silla.imagen = await this.camaraService.pickImage(); // Selecciona la imagen como Blob
-      console.log('Imagen seleccionada como Blob:', this.silla.imagen); // Verifica que el Blob es correcto
+      this.sillas.imagen = await this.camaraService.pickImage();
+      console.log('Imagen seleccionada como Blob:', this.sillas.imagen);
     } catch (error) {
       console.error('Error al seleccionar la imagen:', error);
     }
   }
 
-  // Método para agregar la silla con la imagen como Blob
-  agregarSilla() {
-    const categoriaId = 5; // Asumiendo que 5 es la categoría para Sillas
+  // Método para agregar sillas con los datos del formulario
+  agregarSillas() {
+    const categoriaId = 8;  // Asumiendo que 8 es la categoría de sillas
 
-    if (!this.silla.imagen) {
+    if (!this.sillas.imagen) {
       console.error('Error: La imagen no está definida.');
-      return; // No continúes si no hay una imagen
+      return;
     }
 
     this.serviceBDService.agregarProducto(
-      this.silla.nombre,
-      this.silla.precio,
-      this.silla.stock,
-      this.silla.descripcion,
-      this.silla.imagen, // Pasamos el Blob de la imagen
+      this.sillas.nombre,
+      this.sillas.precio,
+      this.sillas.stock,
+      this.sillas.descripcion,
+      this.sillas.imagen,  // Imagen en formato Blob
       categoriaId
     ).then(() => {
-      this.router.navigateByUrl('/sillas'); // Redirige a la lista de sillas después de agregar
+      this.router.navigateByUrl('/sillas');  // Redirige a la lista de sillas
     }).catch(error => {
-      console.error('Error al agregar la silla:', error);
+      console.error('Error al agregar las sillas:', error);
     });
   }
 }

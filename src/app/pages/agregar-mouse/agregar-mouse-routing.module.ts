@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
-import { AgregarMousePage } from './agregar-mouse.page';
+import { RouterModule, Routes } from '@angular/router';
+import { AgregarMousePage } from './agregar-mouse.page';  // Importación consistente
 
 const routes: Routes = [
   {
     path: '',
-    component: AgregarMousePage
+    component: AgregarMousePage  // Uso consistente del nombre de la clase
   }
 ];
 

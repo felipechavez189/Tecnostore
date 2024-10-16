@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
-import { AgregarPcPage } from './agregar-pc.page';
+import { RouterModule, Routes } from '@angular/router';
+import { AgregarPCPage } from './agregar-pc.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: AgregarPcPage
+    component: AgregarPCPage,
   }
 ];
 
@@ -14,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AgregarPcPageRoutingModule {}
+export class AgregarPCPageRoutingModule {}

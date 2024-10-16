@@ -10,7 +10,7 @@ import { ActionSheetController } from '@ionic/angular';
 })
 export class PerfilPage implements OnInit {
   email: string = '';
-  photoUrl: string = '/assets/icon/perfil.jpg'; // URL por defecto de la imagen de perfil
+  photoUrl: string = '/assets/icon/perfil.jpg'; // Imagen por defecto
 
   constructor(
     private route: ActivatedRoute,
@@ -19,7 +19,7 @@ export class PerfilPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       if (params['email']) {
         this.email = params['email'];
       }
@@ -30,15 +30,15 @@ export class PerfilPage implements OnInit {
   async selectImageOrTakePhoto() {
     const action = await this.showActionSheet();
     if (action === 'camera') {
-      this.takePhoto();
+      await this.takePhoto();
     } else if (action === 'gallery') {
-      this.selectImage();
+      await this.selectImage();
     } else if (action === 'delete') {
       this.deletePhoto();
     }
   }
 
-  // ActionSheet con opciones para tomar foto, elegir de la galería o eliminar la foto
+  // Muestra las opciones en un ActionSheet
   async showActionSheet() {
     let selectedAction = '';
 
@@ -73,24 +73,28 @@ export class PerfilPage implements OnInit {
       ],
     });
     await actionSheet.present();
-
     await actionSheet.onDidDismiss();
+
     return selectedAction;
   }
 
-  // Método para tomar una foto
+  // Método para tomar una foto y convertirla a URL
   async takePhoto() {
     try {
-      this.photoUrl = await this.camaraService.takePhoto();
+      const photoBlob = await this.camaraService.takePhoto(); // Foto como Blob
+      this.photoUrl = URL.createObjectURL(photoBlob); // Convertir Blob a URL
+      console.log('Foto tomada:', this.photoUrl);
     } catch (error) {
       console.error('Error al tomar la foto:', error);
     }
   }
 
-  // Método para seleccionar una imagen de la galería
+  // Método para seleccionar una imagen de la galería y convertirla a URL
   async selectImage() {
     try {
-      this.photoUrl = await this.camaraService.pickImage();
+      const imageBlob = await this.camaraService.pickImage(); // Imagen como Blob
+      this.photoUrl = URL.createObjectURL(imageBlob); // Convertir Blob a URL
+      console.log('Imagen seleccionada:', this.photoUrl);
     } catch (error) {
       console.error('Error al seleccionar la imagen:', error);
     }
@@ -98,6 +102,6 @@ export class PerfilPage implements OnInit {
 
   // Método para eliminar la foto y volver a la imagen por defecto
   deletePhoto() {
-    this.photoUrl = '/assets/icon/perfil.jpg'; // Restablece la imagen de perfil por defecto
+    this.photoUrl = '/assets/icon/perfil.jpg'; // Restablecer imagen por defecto
   }
 }

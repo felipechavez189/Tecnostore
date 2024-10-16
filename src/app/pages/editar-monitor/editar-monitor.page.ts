@@ -1,77 +1,92 @@
-import { Injectable } from '@angular/core';
-import { SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
-import { BehaviorSubject } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ServiceBDService } from 'src/app/services/service-bd.service';
+import { CamaraService } from 'src/app/services/camara.service';
 
-@Injectable({
-  providedIn: 'root'
+@Component({
+  selector: 'app-editar-monitor',
+  templateUrl: './editar-monitor.page.html',
+  styleUrls: ['./editar-monitor.page.scss'],
 })
-export class ServiceBDService {
-  public database!: SQLiteObject;
-  private listadoMonitores = new BehaviorSubject<any[]>([]); // Observable para monitores
+export class EditarMonitorPage implements OnInit {
+  monitor = {
+    id: null as number | null,
+    nombre: '',
+    precio: 0,
+    stock: 0,
+    descripcion: '',
+    imagen: null as Blob | string | null,
+  };
 
-  constructor() { }
+  constructor(
+    private serviceBDService: ServiceBDService,
+    private camaraService: CamaraService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
-  // Método para obtener un monitor por su ID (similar al de audífonos)
-  obtenerProductoPorId(id: string) {
-    return this.database.executeSql('SELECT * FROM producto WHERE id_producto = ?', [id])
-      .then(res => {
-        if (res.rows.length > 0) {
-          return {
-            id_producto: res.rows.item(0).id_producto,
-            nombre_prod: res.rows.item(0).nombre_prod,
-            precio_prod: res.rows.item(0).precio_prod,
-            stock_prod: res.rows.item(0).stock_prod,
-            descripcion_prod: res.rows.item(0).descripcion_prod,
-            foto_prod: res.rows.item(0).foto_prod // Imagen del producto
+  ngOnInit() {
+    this.obtenerMonitor();
+  }
+
+  obtenerMonitor() {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.serviceBDService.obtenerProductoPorId(id).then((data: any) => {
+        if (data) {
+          this.monitor = {
+            id: data.id_producto,
+            nombre: data.nombre_prod,
+            precio: data.precio_prod,
+            stock: data.stock_prod,
+            descripcion: data.descripcion_prod,
+            imagen: data.foto_prod,
           };
         }
-        return null;
-      })
-      .catch(e => {
-        console.error('Error al obtener el producto por ID:', e);
-        throw e;
+      }).catch(error => {
+        console.error('Error al obtener el monitor:', error);
       });
+    } else {
+      console.error('ID no proporcionado en la ruta.');
+    }
   }
 
-  // Método para modificar un monitor (o cualquier producto)
-  modificarProducto(id: number, nombre: string, precio: number, stock: number, descripcion: string, imagen: Blob | string) {
-    return this.database.executeSql(
-      'UPDATE producto SET nombre_prod = ?, precio_prod = ?, stock_prod = ?, descripcion_prod = ?, foto_prod = ? WHERE id_producto = ?',
-      [nombre, precio, stock, descripcion, imagen, id]
-    ).then(res => {
-      console.log('Producto modificado correctamente');
-      this.seleccionarProductos(); // Actualiza la lista de productos
-    }).catch(e => {
-      console.error('Error al modificar el producto:', e);
-      throw e;
+  async capturarFoto() {
+    try {
+      this.monitor.imagen = await this.camaraService.takePhoto();
+      console.log('Imagen capturada como Blob:', this.monitor.imagen);
+    } catch (error) {
+      console.error('Error al capturar la imagen:', error);
+    }
+  }
+
+  async seleccionarImagen() {
+    try {
+      this.monitor.imagen = await this.camaraService.pickImage();
+      console.log('Imagen seleccionada como Blob:', this.monitor.imagen);
+    } catch (error) {
+      console.error('Error al seleccionar la imagen:', error);
+    }
+  }
+
+  guardarCambios() {
+    if (!this.monitor.imagen) {
+      console.error('Error: La imagen no está definida.');
+      return;
+    }
+
+    this.serviceBDService.modificarProducto(
+      this.monitor.id!,
+      this.monitor.nombre,
+      this.monitor.precio,
+      this.monitor.stock,
+      this.monitor.descripcion,
+      this.monitor.imagen
+    ).then(() => {
+      console.log('Cambios guardados con éxito.');
+      this.router.navigateByUrl('/monitores');
+    }).catch(error => {
+      console.error('Error al guardar los cambios:', error);
     });
-  }
-
-  // Método para seleccionar todos los productos (monitores, audífonos, etc.)
-  seleccionarProductos() {
-    return this.database.executeSql('SELECT * FROM producto', []).then(res => {
-      let items: any[] = [];
-      if (res.rows.length > 0) {
-        for (var i = 0; i < res.rows.length; i++) {
-          items.push({
-            id_producto: res.rows.item(i).id_producto,
-            nombre_prod: res.rows.item(i).nombre_prod,
-            precio_prod: res.rows.item(i).precio_prod,
-            stock_prod: res.rows.item(i).stock_prod,
-            descripcion_prod: res.rows.item(i).descripcion_prod,
-            foto_prod: res.rows.item(i).foto_prod
-          });
-        }
-      }
-      this.listadoMonitores.next(items as any[]); // Actualizamos la lista de monitores
-    }).catch(e => {
-      console.error('Error al seleccionar productos:', e);
-      throw e;
-    });
-  }
-
-  // Devuelve un observable para los monitores
-  fetchMonitores() {
-    return this.listadoMonitores.asObservable();
   }
 }

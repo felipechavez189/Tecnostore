@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
+import { RouterModule, Routes } from '@angular/router';
 import { EditarMousePage } from './editar-mouse.page';
 
 const routes: Routes = [
   {
-    path: '',
-    component: EditarMousePage
+    path: ':id',
+    component: EditarMousePage,
   }
 ];
 

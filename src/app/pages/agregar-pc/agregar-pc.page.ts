@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ServiceBDService } from '../../services/service-bd.service'; // Asegúrate de que esté bien importado
-import { CamaraService } from '../../services/camara.service'; // Servicio de la cámara
+import { ServiceBDService } from '../../services/service-bd.service';
+import { CamaraService } from '../../services/camara.service';
 
 @Component({
   selector: 'app-agregar-pc',
@@ -14,42 +14,38 @@ export class AgregarPCPage {
     precio: 0,
     stock: 0,
     descripcion: '',
-    imagen: null as Blob | null // Aquí guardaremos el Blob de la imagen
+    imagen: null as Blob | null,
   };
 
   constructor(
     private serviceBDService: ServiceBDService,
-    private camaraService: CamaraService, // Servicio para manejar la cámara
+    private camaraService: CamaraService,
     private router: Router
   ) {}
 
-  // Método para capturar una foto con la cámara y guardarla como Blob
   async capturarFoto() {
     try {
-      this.pc.imagen = await this.camaraService.takePhoto(); // Captura la imagen como Blob
-      console.log('Imagen capturada como Blob:', this.pc.imagen); // Verifica que el Blob es correcto
+      this.pc.imagen = await this.camaraService.takePhoto();
+      console.log('Imagen capturada:', this.pc.imagen);
     } catch (error) {
-      console.error('Error al capturar la imagen:', error);
+      console.error('Error al capturar la foto:', error);
     }
   }
 
-  // Método para seleccionar una imagen desde la galería y guardarla como Blob
   async seleccionarImagen() {
     try {
-      this.pc.imagen = await this.camaraService.pickImage(); // Selecciona la imagen como Blob
-      console.log('Imagen seleccionada como Blob:', this.pc.imagen); // Verifica que el Blob es correcto
+      this.pc.imagen = await this.camaraService.pickImage();
+      console.log('Imagen seleccionada:', this.pc.imagen);
     } catch (error) {
       console.error('Error al seleccionar la imagen:', error);
     }
   }
 
-  // Método para agregar el PC armado con la imagen como Blob
   agregarPC() {
-    const categoriaId = 6; // Asumiendo que 6 es la categoría para PC Armado
-
+    const categoriaId = 6;
     if (!this.pc.imagen) {
-      console.error('Error: La imagen no está definida.');
-      return; // No continúes si no hay una imagen
+      console.error('Error: La imagen es obligatoria.');
+      return;
     }
 
     this.serviceBDService.agregarProducto(
@@ -57,12 +53,12 @@ export class AgregarPCPage {
       this.pc.precio,
       this.pc.stock,
       this.pc.descripcion,
-      this.pc.imagen, // Pasamos el Blob de la imagen
+      this.pc.imagen,
       categoriaId
     ).then(() => {
-      this.router.navigateByUrl('/pc-armado'); // Redirige a la lista de PC Armado después de agregar
+      this.router.navigateByUrl('/pc');
     }).catch(error => {
-      console.error('Error al agregar el PC armado:', error);
+      console.error('Error al agregar el PC:', error);
     });
   }
 }

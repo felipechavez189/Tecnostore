@@ -49,8 +49,16 @@ export class SignupPage implements OnInit {
     // Insertar el usuario en la base de datos
     this.dbService.insertarUsuario(this.rut, this.nombre, this.apellido, this.nombreUsuario, this.contrasena, this.correo, 'activo', 2)
       .then(async () => {
+        // Almacenar datos del usuario en localStorage
+        localStorage.setItem('userData', JSON.stringify({
+          rut: this.rut,
+          nombre: this.nombre,
+          apellido: this.apellido,
+          correo: this.correo
+        }));
+
         await this.presentAlert('Éxito', 'Cuenta creada con éxito.');
-        this.router.navigate(['/login']);  // Redirigir al login
+        this.router.navigate(['/login']);  // Redirigir al perfil
       })
       .catch(async (error) => {
         await this.presentAlert('Error', 'Hubo un problema al crear la cuenta.');

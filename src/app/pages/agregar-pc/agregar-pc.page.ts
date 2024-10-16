@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ServiceBDService } from '../../services/service-bd.service';
-import { CamaraService } from '../../services/camara.service';
+import { ServiceBDService } from 'src/app/services/service-bd.service';
+import { CamaraService } from 'src/app/services/camara.service';
 
 @Component({
   selector: 'app-agregar-pc',

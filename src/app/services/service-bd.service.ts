@@ -11,7 +11,7 @@ export class ServiceBDService {
   public database!: SQLiteObject;
 
   // Variables de creación de Tablas
-  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario (id_usu INTEGER PRIMARY KEY AUTOINCREMENT, rut_usu VARCHAR(15) NOT NULL, nombre_usu VARCHAR(50) NOT NULL, apellido_usu VARCHAR(50) NOT NULL, nombre_usuario VARCHAR(50) NOT NULL, clave_usu VARCHAR(20) NOT NULL, correo_usu VARCHAR(50) NOT NULL, token BOOLEAN NOT NULL, foto_usu BLOB NOT NULL, estado_usu BOOLEAN NOT NULL, rol_id INTEGER NOT NULL, FOREIGN KEY (rol_id) REFERENCES rol(id_rol));";
+  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario (id_usu INTEGER PRIMARY KEY AUTOINCREMENT, rut_usu VARCHAR(15) NOT NULL, nombre_usu VARCHAR(50) NOT NULL, apellido_usu VARCHAR(50) NOT NULL, nombre_usuario VARCHAR(50) NOT NULL, clave_usu VARCHAR(20) NOT NULL, correo_usu VARCHAR(50) NOT NULL, token BOOLEAN NOT NULL, foto_usu BLOB , estado_usu BOOLEAN NOT NULL, rol_id INTEGER NOT NULL, FOREIGN KEY (rol_id) REFERENCES rol(id_rol));";
   
   tablaRol: string = "CREATE TABLE IF NOT EXISTS rol (id_rol INTEGER PRIMARY KEY AUTOINCREMENT, nombre_rol VARCHAR(50) NOT NULL);";
   
@@ -28,7 +28,7 @@ export class ServiceBDService {
   //INSERT
   rolUsuario1: string = "INSERT OR IGNORE INTO rol (nombre_rol) VALUES ('administrador');";
   rolUsuario2: string = "INSERT OR IGNORE INTO rol (nombre_rol) VALUES ('cliente');";
-  registroUsuario: string = "INSERT OR IGNORE INTO usuario (rut_usu, nombre_usu, apellido_usu, nombre_usuario, clave_usu, correo_usu, token, foto_usu, estado_usu, rol_id) VALUES ('11.234.567-8', 'Felipe', 'Chávez', 'admin', 'Admin@123.', 'chavezfelipe179@gmail.com', 0, null, 1);";
+  registroUsuario: string = "INSERT OR IGNORE INTO usuario (rut_usu, nombre_usu, apellido_usu, nombre_usuario, clave_usu, correo_usu, token, foto_usu, estado_usu, rol_id) VALUES ('11.234.567-8', 'Felipe', 'Chávez', 'admin', 'Admin@123.', 'chavezfelipe179@gmail.com', 0, null, 1, 1);";
   categoriaProducto1: string = "INSERT OR IGNORE INTO categoria (nombre_cat) VALUES ('Teclados');";
   categoriaProducto2: string = "INSERT OR IGNORE INTO categoria (nombre_cat) VALUES ('Monitores');";
   categoriaProducto3: string = "INSERT OR IGNORE INTO categoria (nombre_cat) VALUES ('Audífonos');";
@@ -99,7 +99,7 @@ export class ServiceBDService {
   createBD() {
     this.platform.ready().then(() => {
       this.sqlite.create({
-        name: 'tecnostore2.db',
+        name: 'tecnostore5.db',
         location: 'default'
       }).then((db: SQLiteObject) => {
         this.database = db;
@@ -184,16 +184,36 @@ export class ServiceBDService {
     });
   }
 
-    // Insertar un usuario
-    insertarUsuario(rut: string, nombre: string, apellido: string, username: string, clave: string, correo: string, estado: string, rol_id: number) {
-      return this.database.executeSql('INSERT INTO usuario (rut_usu, nombre_usu, apellido_usu, nombre_usuario, clave_usu, correo_usu, estado_usu, rol_id) VALUES (?,?,?,?,?,?,?,?)',
-        [rut, nombre, apellido, username, clave, correo, estado, rol_id]).then(res => {
-          this.presentAlert("Insertar", "Usuario Registrado");
-          this.seleccionarUsuarios();
-        }).catch(e => {
-          this.presentAlert('Insertar', 'Error: ' + JSON.stringify(e));
-        });
-    }
+    
+  // Insertar un usuario
+  insertarUsuario(rut: string, nombre: string, apellido: string, username: string, clave: string, correo: string, estado: string, rol_id: number) {
+    return this.database.executeSql(
+      'INSERT INTO usuario (rut_usu, nombre_usu, apellido_usu, nombre_usuario, clave_usu, correo_usu, estado_usu, rol_id, token, foto_usu) VALUES (?,?,?,?,?,?,?,?,?,?)',
+      [rut, nombre, apellido, username, clave, correo, estado, rol_id, 0] // 0 como valor por defecto para el token
+    ).then(res => {
+      this.presentAlert("Insertar", "Usuario Registrado");
+      this.seleccionarUsuarios(); // Actualizar lista de usuarios
+    }).catch(e => {
+      this.presentAlert('Insertar', 'Error: ' + JSON.stringify(e));
+    });
+  }
+
+  // En tu ServiceBDService
+  validarUsuario(email: string, password: string): Promise<any> {
+    return this.database.executeSql('SELECT * FROM usuario WHERE correo_usu = ? AND clave_usu = ?', [email, password])
+      .then(res => {
+        if (res.rows.length > 0) {
+          // Devuelve el primer usuario que coincide
+          return res.rows.item(0);
+        }
+        return null; // No se encontró ningún usuario
+      })
+      .catch(e => {
+        console.error('Error al validar usuario:', e);
+        return null; // Manejo de errores
+      });
+  }
+
 
   // Funciones para gestionar la foto de perfil
   async obtenerFotoPerfil(id: number): Promise<any> {

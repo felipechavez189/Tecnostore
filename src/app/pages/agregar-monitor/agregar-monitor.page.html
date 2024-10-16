@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Agregar Monitor</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Nombre del Monitor</ion-label>
+    <ion-input [(ngModel)]="monitor.nombre"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Precio</ion-label>
+    <ion-input type="number" [(ngModel)]="monitor.precio"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Stock</ion-label>
+    <ion-input type="number" [(ngModel)]="monitor.stock"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Descripción</ion-label>
+    <ion-textarea [(ngModel)]="monitor.descripcion"></ion-textarea>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Imagen</ion-label>
+    <ion-input [(ngModel)]="monitor.imagen"></ion-input>
+  </ion-item>
+
+  <ion-button expand="block" (click)="agregarMonitor()">Agregar Monitor</ion-button>
+</ion-content>

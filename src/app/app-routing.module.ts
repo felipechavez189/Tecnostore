@@ -110,7 +110,55 @@ const routes: Routes = [
   {
     path: '**',
     loadChildren: () => import('./pages/notfound/notfound.module').then( m => m.NotfoundPageModule)
+  },  {
+    path: 'agregar-audifono',
+    loadChildren: () => import('./pages/agregar-audifono/agregar-audifono.module').then( m => m.AgregarAudifonoPageModule)
   },
+  {
+    path: 'editar-audifono',
+    loadChildren: () => import('./pages/editar-audifono/editar-audifono.module').then( m => m.EditarAudifonoPageModule)
+  },
+  {
+    path: 'agregar-monitor',
+    loadChildren: () => import('./pages/agregar-monitor/agregar-monitor.module').then( m => m.AgregarMonitorPageModule)
+  },
+  {
+    path: 'editar-monitor',
+    loadChildren: () => import('./pages/editar-monitor/editar-monitor.module').then( m => m.EditarMonitorPageModule)
+  },
+  {
+    path: 'agregar-mouse',
+    loadChildren: () => import('./pages/agregar-mouse/agregar-mouse.module').then( m => m.AgregarMousePageModule)
+  },
+  {
+    path: 'editar-mouse',
+    loadChildren: () => import('./pages/editar-mouse/editar-mouse.module').then( m => m.EditarMousePageModule)
+  },
+  {
+    path: 'agregar-teclado',
+    loadChildren: () => import('./pages/agregar-teclado/agregar-teclado.module').then( m => m.AgregarTecladoPageModule)
+  },
+  {
+    path: 'editar-teclado',
+    loadChildren: () => import('./pages/editar-teclado/editar-teclado.module').then( m => m.EditarTecladoPageModule)
+  },
+  {
+    path: 'agregar-pc',
+    loadChildren: () => import('./pages/agregar-pc/agregar-pc.module').then( m => m.AgregarPcPageModule)
+  },
+  {
+    path: 'editar-pc',
+    loadChildren: () => import('./pages/editar-pc/editar-pc.module').then( m => m.EditarPcPageModule)
+  },
+  {
+    path: 'agregar-sillas',
+    loadChildren: () => import('./pages/agregar-sillas/agregar-sillas.module').then( m => m.AgregarSillasPageModule)
+  },
+  {
+    path: 'editar-sillas',
+    loadChildren: () => import('./pages/editar-sillas/editar-sillas.module').then( m => m.EditarSillasPageModule)
+  },
+
 
 ];
 

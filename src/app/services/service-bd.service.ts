@@ -132,6 +132,7 @@ export class ServiceBDService {
       await this.database.executeSql(this.categoriaProducto6, []);
 
       this.seleccionarUsuarios();
+      this.seleccionarProductos();
 
       // Modificar el estado de la Base de Datos
       this.isDBReady.next(true);
@@ -195,37 +196,6 @@ export class ServiceBDService {
         });
     }
 
-  // Funciones para gestionar la foto de perfil
-  async obtenerFotoPerfil(id: number): Promise<any> {
-    return this.database.executeSql('SELECT foto_usu FROM usuario WHERE id_usu = ?', [id]).then(res => {
-      if (res.rows.length > 0) {
-        return res.rows.item(0).foto_usu;
-      }
-      return null;
-    });
-  }
-
-  async cambiarFotoPerfil(id: number, foto: Blob) {
-    return this.database.executeSql('UPDATE usuario SET foto_usu = ? WHERE id_usu = ?', [foto, id]).then(res => {
-      this.presentAlert("Cambiar Foto", "Foto de perfil actualizada");
-    }).catch(e => {
-      this.presentAlert('Cambiar Foto', 'Error: ' + JSON.stringify(e));
-    });
-  }
-
-  async eliminarFotoPerfil(id: number) {
-    const foto = await this.obtenerFotoPerfil(id);
-    if (foto) {
-      return this.database.executeSql('UPDATE usuario SET foto_usu = NULL WHERE id_usu = ?', [id]).then(res => {
-        this.presentAlert("Eliminar Foto", "Foto de perfil eliminada");
-      }).catch(e => {
-        this.presentAlert('Eliminar Foto', 'Error: ' + JSON.stringify(e));
-      });
-    } else {
-      this.presentAlert('Eliminar Foto', 'No hay foto de perfil para eliminar');
-    }
-  }
-
   ////PRODUCTOS
 
   // Seleccionar todos los productos
@@ -275,13 +245,66 @@ export class ServiceBDService {
     });
   }
 
-  // Modificar un producto
-  modificarProducto(id: string, nombre: string, precio: number, stock: number, descripcion: string) {
-    return this.database.executeSql('UPDATE producto SET nombre_prod = ?, precio_prod = ?, stock_prod = ?, descripcion_prod = ? WHERE id_producto = ?', [nombre, precio, stock, descripcion, id]).then(res => {
-      this.presentAlert("Modificar Producto", "Producto Modificado");
-      this.seleccionarProductos();
-    }).catch(e => {
-      this.presentAlert('Modificar Producto', 'Error: ' + JSON.stringify(e));
+// Método para obtener un producto por su ID
+obtenerProductoPorId(id: string) {
+  return this.database.executeSql('SELECT * FROM producto WHERE id_producto = ?', [id])
+    .then(res => {
+      if (res.rows.length > 0) {
+        return {
+          id_producto: res.rows.item(0).id_producto, // ID del producto
+          nombre_prod: res.rows.item(0).nombre_prod,
+          precio_prod: res.rows.item(0).precio_prod,
+          stock_prod: res.rows.item(0).stock_prod,
+          descripcion_prod: res.rows.item(0).descripcion_prod,
+          foto_prod: res.rows.item(0).foto_prod // Imagen del producto
+        };
+      }
+      return null;
     });
+}
+
+// Modificar un producto incluyendo la imagen
+modificarProducto(id: string, nombre: string, precio: number, stock: number, descripcion: string, imagen: Blob | string) {
+  return this.database.executeSql(
+    'UPDATE producto SET nombre_prod = ?, precio_prod = ?, stock_prod = ?, descripcion_prod = ?, foto_prod = ? WHERE id_producto = ?',
+    [nombre, precio, stock, descripcion, imagen, id]
+  ).then(res => {
+    this.presentAlert("Modificar Producto", "Producto Modificado");
+    this.seleccionarProductos(); // Actualizar la lista de productos
+  }).catch(e => {
+    this.presentAlert('Modificar Producto', 'Error: ' + JSON.stringify(e));
+  });
+}
+
+
+  // Funciones para gestionar la foto de perfil
+  async obtenerFotoPerfil(id: number): Promise<any> {
+    return this.database.executeSql('SELECT foto_usu FROM usuario WHERE id_usu = ?', [id]).then(res => {
+      if (res.rows.length > 0) {
+        return res.rows.item(0).foto_usu;
+      }
+      return null;
+    });
+  }
+
+  async cambiarFotoPerfil(id: number, foto: Blob) {
+    return this.database.executeSql('UPDATE usuario SET foto_usu = ? WHERE id_usu = ?', [foto, id]).then(res => {
+      this.presentAlert("Cambiar Foto", "Foto de perfil actualizada");
+    }).catch(e => {
+      this.presentAlert('Cambiar Foto', 'Error: ' + JSON.stringify(e));
+    });
+  }
+
+  async eliminarFotoPerfil(id: number) {
+    const foto = await this.obtenerFotoPerfil(id);
+    if (foto) {
+      return this.database.executeSql('UPDATE usuario SET foto_usu = NULL WHERE id_usu = ?', [id]).then(res => {
+        this.presentAlert("Eliminar Foto", "Foto de perfil eliminada");
+      }).catch(e => {
+        this.presentAlert('Eliminar Foto', 'Error: ' + JSON.stringify(e));
+      });
+    } else {
+      this.presentAlert('Eliminar Foto', 'No hay foto de perfil para eliminar');
+    }
   }
 }

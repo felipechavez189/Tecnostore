@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Editar Audífono</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="guardarCambios()">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input [(ngModel)]="audifono.nombre" name="nombre" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Precio</ion-label>
+      <ion-input type="number" [(ngModel)]="audifono.precio" name="precio" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Stock</ion-label>
+      <ion-input type="number" [(ngModel)]="audifono.stock" name="stock" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Descripción</ion-label>
+      <ion-textarea [(ngModel)]="audifono.descripcion" name="descripcion" required></ion-textarea>
+    </ion-item>
+
+    <!-- Botones para capturar o seleccionar una nueva imagen -->
+    <ion-item>
+      <ion-label>Imagen</ion-label>
+      <ion-button (click)="capturarFoto()">Tomar Foto</ion-button>
+      <ion-button (click)="seleccionarImagen()">Seleccionar Imagen</ion-button>
+    </ion-item>
+
+    <!-- Vista previa de la imagen actual -->
+    <ion-item *ngIf="audifono.imagen">
+      <img [src]="audifono.imagen" alt="Vista previa de la imagen">
+    </ion-item>
+
+    <ion-button expand="full" type="submit">Guardar Cambios</ion-button>
+  </form>
+</ion-content>

@@ -158,7 +158,11 @@ const routes: Routes = [
   {
     path: 'editar-sillas',
     loadChildren: () => import('./pages/editar-sillas/editar-sillas.module').then( m => m.EditarSillasPageModule)
+  },  {
+    path: 'productos-por-categoria',
+    loadChildren: () => import('./pages/productos-por-categoria/productos-por-categoria.module').then( m => m.ProductosPorCategoriaPageModule)
   },
+
 
 
 ];

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, NavigationExtras } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 
 @Component({
@@ -23,5 +23,13 @@ export class AppComponent {
     } else {
       this.menuCtrl.enable(true);
     }
+  }
+  irCategoria(id:number){
+    let NavigationExtras: NavigationExtras = {
+      state:{
+        idCategoriaSeleccionada: id
+      }
+    }
+    this.router.navigate(['/productos-por-categoria'],NavigationExtras)
   }
 }

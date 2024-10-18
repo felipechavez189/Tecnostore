@@ -13,6 +13,7 @@ export class PerfilPage implements OnInit {
   nombre: string = '';
   apellido: string = '';
   email: string = '';
+  nombreUsuario: string ='';
   photoUrl: string = '/assets/icon/perfil.jpg'; // Imagen por defecto
 
   constructor(
@@ -30,6 +31,7 @@ export class PerfilPage implements OnInit {
       this.nombre = userData.nombre;
       this.apellido = userData.apellido;
       this.email = userData.correo;
+      this.nombreUsuario = userData.nombreUsuario;
     }
   }
   

@@ -54,7 +54,8 @@ export class SignupPage implements OnInit {
           rut: this.rut,
           nombre: this.nombre,
           apellido: this.apellido,
-          correo: this.correo
+          correo: this.correo,
+          nombreUsuario: this.nombreUsuario
         }));
 
         await this.presentAlert('Éxito', 'Cuenta creada con éxito.');

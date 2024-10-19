@@ -26,7 +26,7 @@ export class ServiceBDService {
   
   tablaCategoria: string = "CREATE TABLE IF NOT EXISTS categoria (id_categoria INTEGER PRIMARY KEY AUTOINCREMENT, nombre_cat VARCHAR(50) NOT NULL);";
 
-  tablaCarrito: string = "CREATE TABLE IF NOT EXISTS carrito (id_articulo_carrito INTEGER PRIMARY KEY AUTOINCREMENT, id_usu INTEGER, id_producto INTEGER, cantidad INTEGER DEFAULT 1, FOREIGN KEY (id_usu) REFERENCES usuario(id_usu) FOREIGN KEY (id_producto) REFERENCES producto(id_producto))"
+  tablaCarrito: string = "CREATE TABLE IF NOT EXISTS carrito (id_articulo_carrito INTEGER PRIMARY KEY AUTOINCREMENT, id_usu INTEGER, id_producto INTEGER, cantidad INTEGER DEFAULT 1, FOREIGN KEY (id_usu) REFERENCES usuario(id_usu) FOREIGN KEY (id_producto) REFERENCES producto(id_producto))";
 
   //INSERT
   rolUsuario1: string = "INSERT OR IGNORE INTO rol (nombre_rol) VALUES ('administrador');";
@@ -108,7 +108,7 @@ export class ServiceBDService {
   createBD() {
     this.platform.ready().then(() => {
       this.sqlite.create({
-        name: 'tecnostore17.db',
+        name: 'tecnostore23.db',
         location: 'default'
       }).then((db: SQLiteObject) => {
         this.database = db;
@@ -236,11 +236,13 @@ export class ServiceBDService {
 
 
   ////PRODUCTOS 
-  seleccionarProductosPorCategoria(id_categoria: number){
-    return this.database.executeSql('SELECT * FROM producto WHERE id_categoria = ?', [id_categoria]).then(res=>{
-      let items: Producto[]=[]
-      if (res.rows.length > 0){
-        for (let i = 0; i < res.rows.length; i++){
+  async seleccionarProductosPorCategoria(id_categoria: number): Promise<Producto[]> { // Cambia el tipo de retorno a Promise<Producto[]>
+    try {
+      const res = await this.database.executeSql('SELECT * FROM producto WHERE id_categoria = ?', [id_categoria]);
+      const items: Producto[] = [];
+  
+      if (res.rows.length > 0) {
+        for (let i = 0; i < res.rows.length; i++) {
           items.push({
             id_producto: res.rows.item(i).id_producto,
             nombre_prod: res.rows.item(i).nombre_prod,
@@ -250,14 +252,17 @@ export class ServiceBDService {
             foto_prod: res.rows.item(i).foto_prod,
             estatus_prod: res.rows.item(i).estatus_prod,
             categoria_id: res.rows.item(i).categoria_id,
-          })
+          });
         }
-        this.listadoProductoPorCategoria.next(items as any)
       }
-    }).catch(e=>{
-      console.log('Error','Error al insertar estrenos admin'+JSON.stringify(e))
-    })
+  
+      return items; // Retorna el array de productos
+    } catch (e) {
+      console.error('Error al seleccionar productos por categoría:', JSON.stringify(e));
+      return []; // Retorna un array vacío en caso de error
+    }
   }
+  
 
   // Seleccionar todos los productos
   seleccionarProductos() {
@@ -323,6 +328,43 @@ obtenerProductoPorId(id: string) {
       return null;
     });
 }
+
+obtenerTodosLosProductos() {
+  return this.database.executeSql('SELECT * FROM producto', []).then(res => {
+    const productos = [];
+    for (let i = 0; i < res.rows.length; i++) {
+      productos.push({
+        id_producto: res.rows.item(i).id_producto,
+        nombre_prod: res.rows.item(i).nombre_prod,
+        precio_prod: res.rows.item(i).precio_prod,
+        stock_prod: res.rows.item(i).stock_prod,
+        descripcion_prod: res.rows.item(i).descripcion_prod,
+        foto_prod: res.rows.item(i).foto_prod
+      });
+    }
+    return productos;
+  });
+}
+
+async obtenerIdCategoriaTeclados(): Promise<number> {
+  const res = await this.database.executeSql('SELECT id_categoria FROM categoria WHERE nombre_cat = ?', ['Teclados']);
+  if (res.rows.length > 0) {
+    return res.rows.item(0).id_categoria;
+  }
+  throw new Error('Categoría no encontrada');
+}
+
+async obtenerProductosTeclados(): Promise<Producto[]> {
+  try {
+    const idCategoriaTeclados = await this.obtenerIdCategoriaTeclados();
+    return await this.seleccionarProductosPorCategoria(idCategoriaTeclados); // Ahora retornará los productos
+  } catch (error) {
+    console.error('Error al obtener productos de la categoría Teclados:', error);
+    return []; // Retorna un array vacío en caso de error
+  }
+}
+
+
 
 modificarProducto(id: number, nombre: string, precio: number, stock: number, descripcion: string, imagen: Blob | string) {
   return this.database.executeSql(

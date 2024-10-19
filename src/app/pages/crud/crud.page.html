@@ -21,7 +21,7 @@
 
 <ion-content [fullscreen]="true" class="no-background">
 
-  <!-- Botón "Agregar" con el color #5fbded aplicado -->
+  <!-- Botones para acceder a los CRUD -->
   <ion-button expand="block" class="center-buttons button-margin custom-agregar-btn" [routerLink]="'/crudteclados'">
     Crud Teclados
   </ion-button>
@@ -46,6 +46,29 @@
     Crud PC Armado
   </ion-button>
 
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let producto of productos">
+        <ion-card>
+          <ion-thumbnail>
+            <img [src]="producto.foto_prod" alt="Foto del producto">
+          </ion-thumbnail>
+          <ion-card-header>
+            <ion-card-title>{{ producto.nombre_prod }}</ion-card-title>
+            <ion-card-subtitle>Precio: {{ producto.precio_prod }}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <p>Stock: {{ producto.stock_prod }}</p>
+            <p>{{ producto.descripcion_prod }}</p>
+            <ion-button color="danger" (click)="EliminarAlerta()">Eliminar</ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
+  <ion-item *ngIf="productos.length === 0">
+    <ion-label>No se encontraron productos.</ion-label>
+  </ion-item>
   
 </ion-content>

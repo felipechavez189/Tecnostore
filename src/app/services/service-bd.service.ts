@@ -317,6 +317,9 @@ obtenerTodosLosProductos() {
       });
     }
     return productos;
+  }).catch(error => {
+    console.error('Error al obtener productos:', error);
+    return [];
   });
 }
 
@@ -413,7 +416,7 @@ modificarProducto(id: number, nombre: string, precio: number, stock: number, des
     }
    )
   }
-
+  
 
 
 

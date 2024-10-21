@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { Producto } from 'src/app/services/producto';
 import { ServiceBDService } from 'src/app/services/service-bd.service';
+
 
 @Component({
   selector: 'app-crudteclados',
@@ -9,32 +11,50 @@ import { ServiceBDService } from 'src/app/services/service-bd.service';
 })
 export class CrudtecladosPage implements OnInit {
 
-    Teclados: any[] = [
-    {
-      id_producto: '',
-      nombre_prod: '',
-      precio_prod: '',
-      stock_prod:  '', 
-      descripcion_prod: '',
-      foto_prod: '',
-      estatus_prod: '',
-      categoria_id: ''
-    },
-  ];
-
-  productosFiltrados: any[] = []; // Arreglo para almacenar solo teclados
+  teclados: Producto[] = []; // Arreglo para almacenar los teclados
+  tecladosFiltrados: Producto[] = []; // Arreglo para almacenar los teclados filtrados
 
   constructor(private alertController: AlertController, private serviceBD: ServiceBDService) { }
 
   ngOnInit() {
-    this.cargarProductos(); // Cargar productos al inicializar
+    this.cargarTeclados(); // Cargar teclados al inicializar
   }
 
-  cargarProductos() {
-    this.serviceBD.obtenerProductosTeclados().then((productos: any[]) => {
-      this.productosFiltrados = productos; // Almacena solo teclados en el arreglo filtrado
-    }).catch((error) => {
-      console.error('Error al cargar los productos:', error);
+  cargarTeclados() {
+    this.serviceBD.seleccionarTeclados().then(teclados => {
+      this.teclados = teclados; // Asignar teclados al arreglo principal
+      this.tecladosFiltrados = teclados; // Mostrar todos los teclados inicialmente
+    }).catch(error => {
+      console.error('Error al cargar teclados:', error);
+    });
+
+    // Suscribirse al listadoTeclados para recibir actualizaciones
+    this.serviceBD.listadoTeclados.subscribe(teclados => {
+      this.teclados = teclados; // Actualiza el arreglo de teclados
+      this.tecladosFiltrados = teclados; // Actualiza también los teclados filtrados
     });
   }
+
+  
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

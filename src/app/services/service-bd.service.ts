@@ -46,6 +46,7 @@ export class ServiceBDService {
   listadoUsuarios = new BehaviorSubject([]);
   listadoCarrito = new BehaviorSubject([])
   listadoProductoPorCategoria = new BehaviorSubject([]);
+  listadoTeclados = new BehaviorSubject([]);
 
   listadoPRODUCTOS = new BehaviorSubject([]);
 
@@ -74,6 +75,11 @@ export class ServiceBDService {
   fetchProductoPorCategoria():  Observable<Producto[]>{
     return this.listadoProductoPorCategoria.asObservable();
   }
+
+  fetchlistadoTeclados():  Observable<Producto[]>{
+    return this.listadoTeclados.asObservable();
+  }
+  
   dbState() {
     return this.isDBReady.asObservable();
   }
@@ -242,6 +248,33 @@ export class ServiceBDService {
     }
   }
   
+  async seleccionarTeclados(): Promise<Producto[]> {
+    try {
+      const res = await this.database.executeSql('SELECT * FROM producto WHERE id_categoria = 1', []);
+      const items: Producto[] = [];
+  
+      if (res.rows.length > 0) {
+        for (let i = 0; i < res.rows.length; i++) {
+          items.push({
+            id_producto: res.rows.item(i).id_producto,
+            nombre_prod: res.rows.item(i).nombre_prod,
+            precio_prod: res.rows.item(i).precio_prod,
+            stock_prod: res.rows.item(i).stock_prod,
+            descripcion_prod: res.rows.item(i).descripcion_prod,
+            foto_prod: res.rows.item(i).foto_prod,
+            estatus_prod: res.rows.item(i).estatus_prod,
+            categoria_id: res.rows.item(i).categoria_id,
+          });
+        }
+      }
+  
+      return items; // Asegúrate de retornar el array de productos
+    } catch (error) {
+      console.error('Error al seleccionar productos de la categoría Teclados:', error);
+      return []; // Retorna un array vacío en caso de error
+    }
+  }
+  
 
   // Seleccionar todos los productos
   seleccionarProductos() {
@@ -261,7 +294,7 @@ export class ServiceBDService {
           });
         }
       }
-  
+      return items;
     });
   }
 
@@ -334,7 +367,7 @@ async obtenerIdCategoriaTeclados(): Promise<number> {
 async obtenerProductosTeclados(): Promise<Producto[]> {
   try {
     const idCategoriaTeclados = await this.obtenerIdCategoriaTeclados();
-    return await this.seleccionarProductosPorCategoria(idCategoriaTeclados); // Ahora retornará los productos
+    return await this.seleccionarTeclados(); // Ahora retornará los productos
   } catch (error) {
     console.error('Error al obtener productos de la categoría Teclados:', error);
     return []; // Retorna un array vacío en caso de error

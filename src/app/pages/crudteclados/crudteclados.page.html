@@ -20,17 +20,15 @@
 </ion-header>
 
 <ion-content>
-
-    <ion-list>
-      <ion-item *ngFor="let teclado of productosFiltrados">
-        <ion-label>
-          <h2>{{ teclado.nombre_prod }}</h2>
-          <p>Precio: {{ teclado.precio_prod | currency }}</p>
-          <p>Stock: {{ teclado.stock_prod }}</p>
-          <p>{{ teclado.descripcion_prod }}</p>
-        </ion-label>
-      </ion-item>
-    </ion-list>
-    <ion-button style="color: green;" [routerLink]="'/agregar-teclado'">Agregar Teclado</ion-button>
-  
+  <ion-list>
+    <ion-item *ngFor="let teclado of tecladosFiltrados">
+      <ion-label>
+        <h2>{{ teclado.nombre_prod }}</h2>
+        <p>Precio: {{ teclado.precio_prod | currency }}</p>
+        <p>Stock: {{ teclado.stock_prod }}</p>
+        <p>{{ teclado.descripcion_prod }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-button style="color: green;" [routerLink]="'/agregar-teclado'">Agregar Teclado</ion-button>
 </ion-content>

@@ -16,7 +16,6 @@ export class CrudtecladosPage implements OnInit {
     this.cargarProductos(); // Cargar productos al inicializar
   }
 
-  // Función para obtener solo los productos de la categoría 'Teclados'
   cargarProductos() {
     this.serviceBD.obtenerProductosTeclados().then((productos: any[]) => {
       this.productosFiltrados = productos; // Almacena solo teclados en el arreglo filtrado
@@ -24,7 +23,4 @@ export class CrudtecladosPage implements OnInit {
       console.error('Error al cargar los productos:', error);
     });
   }
-
-  
-  
 }

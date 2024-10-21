@@ -42,7 +42,7 @@ export class AgregarAudifonoPage {
   }
 
   agregarAudifono() {
-    const categoriaId = 5; // Suponiendo que 5 es la categoría de audífonos
+    const categoriaId = 3; // Suponiendo que 5 es la categoría de audífonos
 
     if (!this.audifono.imagen) {
       console.error('Error: La imagen no está definida.');
@@ -57,7 +57,7 @@ export class AgregarAudifonoPage {
       this.audifono.imagen,
       categoriaId
     ).then(() => {
-      this.router.navigateByUrl('/audifonos'); // Redirige a la lista de audífonos
+      this.router.navigateByUrl('/crud'); // Redirige a la lista de audífonos
     }).catch(error => {
       console.error('Error al agregar el audífono:', error);
     });

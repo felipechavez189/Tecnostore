@@ -45,7 +45,7 @@ export class AgregarSillasPage {  // <-- Asegúrate de usar mayúsculas consiste
 
   // Método para agregar sillas con los datos del formulario
   agregarSillas() {
-    const categoriaId = 8;  // Asumiendo que 8 es la categoría de sillas
+    const categoriaId = 5;  // Asumiendo que 8 es la categoría de sillas
 
     if (!this.sillas.imagen) {
       console.error('Error: La imagen no está definida.');
@@ -60,7 +60,7 @@ export class AgregarSillasPage {  // <-- Asegúrate de usar mayúsculas consiste
       this.sillas.imagen,  // Imagen en formato Blob
       categoriaId
     ).then(() => {
-      this.router.navigateByUrl('/sillas');  // Redirige a la lista de sillas
+      this.router.navigateByUrl('/crud');  // Redirige a la lista de sillas
     }).catch(error => {
       console.error('Error al agregar las sillas:', error);
     });

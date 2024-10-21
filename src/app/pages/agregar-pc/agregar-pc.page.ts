@@ -56,7 +56,7 @@ export class AgregarPCPage {
       this.pc.imagen,
       categoriaId
     ).then(() => {
-      this.router.navigateByUrl('/pc');
+      this.router.navigateByUrl('/crud');
     }).catch(error => {
       console.error('Error al agregar el PC:', error);
     });

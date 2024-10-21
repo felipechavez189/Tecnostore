@@ -45,7 +45,7 @@ export class AgregarMousePage {  // <-- Asegúrate de que el nombre esté en may
 
   // Método para agregar un mouse con los datos del formulario
   agregarMouse() {
-    const categoriaId = 7;  // Suponiendo que 7 es la categoría de mouse
+    const categoriaId = 4;  // Suponiendo que 7 es la categoría de mouse
 
     if (!this.mouse.imagen) {
       console.error('Error: La imagen no está definida.');
@@ -60,7 +60,7 @@ export class AgregarMousePage {  // <-- Asegúrate de que el nombre esté en may
       this.mouse.imagen,  // Imagen en formato Blob
       categoriaId
     ).then(() => {
-      this.router.navigateByUrl('/mouse');  // Redirige a la lista de mouse
+      this.router.navigateByUrl('/crud');  // Redirige a la lista de mouse
     }).catch(error => {
       console.error('Error al agregar el mouse:', error);  // Manejo de errores
     });

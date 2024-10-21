@@ -45,7 +45,7 @@ export class AgregarTecladoPage {  // <-- Verificación del nombre en mayúscula
 
   // Método para agregar el teclado con los datos ingresados
   agregarTeclado() {
-    const categoriaId = 9;  // Asumiendo que 9 es la categoría de teclados
+    const categoriaId = 1;  // Asumiendo que 9 es la categoría de teclados
 
     if (!this.teclado.imagen) {
       console.error('Error: La imagen no está definida.');
@@ -60,7 +60,7 @@ export class AgregarTecladoPage {  // <-- Verificación del nombre en mayúscula
       this.teclado.imagen,  // Imagen en formato Blob
       categoriaId
     ).then(() => {
-      this.router.navigateByUrl('/teclados');  // Redirige a la lista de teclados
+      this.router.navigateByUrl('/crud');  // Redirige a la lista de teclados
     }).catch(error => {
       console.error('Error al agregar el teclado:', error);
     });

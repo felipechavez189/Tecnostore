@@ -42,7 +42,7 @@ export class AgregarMonitorPage {
   }
 
   agregarMonitor() {
-    const categoriaId = 4; // Suponiendo que 4 es la categoría de monitores
+    const categoriaId = 2; // Suponiendo que 4 es la categoría de monitores
 
     if (!this.monitor.imagen) {
       console.error('Error: La imagen no está definida.');
@@ -57,7 +57,7 @@ export class AgregarMonitorPage {
       this.monitor.imagen,
       categoriaId
     ).then(() => {
-      this.router.navigateByUrl('/monitores'); // Redirige a la lista de monitores
+      this.router.navigateByUrl('/crud'); // Redirige a la lista de monitores
     }).catch(error => {
       console.error('Error al agregar el monitor:', error);
     });

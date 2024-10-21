@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CamaraService } from 'src/app/services/camara.service';
 import { ActionSheetController } from '@ionic/angular';
+import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 
 @Component({
   selector: 'app-perfil',
@@ -19,7 +20,9 @@ export class PerfilPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private camaraService: CamaraService,
-    private actionSheetController: ActionSheetController
+    private actionSheetController: ActionSheetController,
+    private router: Router,
+    private storage : NativeStorage
   ) {}
 
   ngOnInit() {
@@ -101,6 +104,13 @@ export class PerfilPage implements OnInit {
     } catch (error) {
       console.error('Error al seleccionar la imagen:', error);
     }
+  }
+
+
+  async cerrarSesion(){
+    await this.storage.remove('Usuario_logueado')
+
+    this.router.navigate(['/login'])
   }
 
   deletePhoto() {

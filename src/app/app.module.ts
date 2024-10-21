@@ -13,6 +13,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 
 // Importar SQLite
 import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
+import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +26,7 @@ import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    SQLite,                   // Agregar SQLite a los providers
+    SQLite,NativeStorage,                   // Agregar SQLite a los providers
     provideAnimationsAsync(),
   ],
   bootstrap: [AppComponent],

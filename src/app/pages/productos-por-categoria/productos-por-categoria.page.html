@@ -26,7 +26,7 @@
     <ion-row>
 
       <ion-col size="6" *ngFor="let x of productos">
-        <ion-card class="card-1" [routerLink]="'/monitor1'">
+        <ion-card class="card-1" (click)="irDetalleProducto(x)" >
           <ion-img *ngIf="x.foto_prod" [src]="x.foto_prod"></ion-img>
           <ion-card-content>
             <h6>{{x.nombre_prod}}</h6>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
+import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 import { AlertController, ToastController } from '@ionic/angular';
 import { ServiceBDService } from 'src/app/services/service-bd.service'; // Asegúrate de importar tu servicio correctamente
 
@@ -17,7 +18,8 @@ export class LoginPage implements OnInit {
     private router: Router,
     private alertController: AlertController,
     private toastController: ToastController,
-    private dbService: ServiceBDService // Inyectar el servicio de base de datos
+    private dbService: ServiceBDService, // Inyectar el servicio de base de datos
+    private storage : NativeStorage
   ) { }
 
   ngOnInit() { }
@@ -36,20 +38,37 @@ export class LoginPage implements OnInit {
     }
 
     // Verificar las credenciales en la base de datos
-    const usuario = await this.dbService.validarUsuario(this.email, this.password);
-    if (usuario) {
-      // Define los NavigationExtras para pasar el correo
+   this.dbService.validarUsuario(this.email,this.password).then(usuario=>{
+    if(usuario){
+
       let navigationExtras: NavigationExtras = {
         queryParams: {
           email: this.email
         }
       };
+
+      const idUsuario = usuario.id_usu
+      
+      this.guardarIdUsuario(idUsuario)
+
       this.router.navigate(['/perfil'], navigationExtras);  // Navegación con extras
-      await this.presentToast('Inicio de sesión exitoso');
-    } else {
-      await this.presentAlert('Usuario o contraseña incorrectas');
+      this.presentToast('Inicio de sesión exitoso');
+
+    }else{
+      this.presentAlert('Usuario o contraseña incorrectas');
+    }
+   })
+  }
+
+  async guardarIdUsuario(idUsuario : number){
+    try{
+      await this.storage.setItem('Usuario_logueado',idUsuario)
+    }catch(e){
+      console.log('Error al guardar el id de usuario'+JSON.stringify(e))
     }
   }
+ 
+
 
   validarCorreo(email: string): boolean {
     // Verifica que haya solo un @ en el correo

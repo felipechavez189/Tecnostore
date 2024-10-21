@@ -8,6 +8,20 @@ import { ServiceBDService } from 'src/app/services/service-bd.service';
   styleUrls: ['./crudteclados.page.scss'],
 })
 export class CrudtecladosPage implements OnInit {
+
+    Teclados: any[] = [
+    {
+      id_producto: '',
+      nombre_prod: '',
+      precio_prod: '',
+      stock_prod:  '', 
+      descripcion_prod: '',
+      foto_prod: '',
+      estatus_prod: '',
+      categoria_id: ''
+    },
+  ];
+
   productosFiltrados: any[] = []; // Arreglo para almacenar solo teclados
 
   constructor(private alertController: AlertController, private serviceBD: ServiceBDService) { }

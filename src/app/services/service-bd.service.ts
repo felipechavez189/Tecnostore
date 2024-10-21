@@ -337,23 +337,24 @@ obtenerProductoPorId(id: string) {
 }
 
 obtenerTodosLosProductos() {
-  return this.database.executeSql('SELECT * FROM producto', []).then(res => {
-    const productos = [];
-    for (let i = 0; i < res.rows.length; i++) {
-      productos.push({
-        id_producto: res.rows.item(i).id_producto,
-        nombre_prod: res.rows.item(i).nombre_prod,
-        precio_prod: res.rows.item(i).precio_prod,
-        stock_prod: res.rows.item(i).stock_prod,
-        descripcion_prod: res.rows.item(i).descripcion_prod,
-        foto_prod: res.rows.item(i).foto_prod
-      });
-    }
-    return productos;
-  }).catch(error => {
-    console.error('Error al obtener productos:', error);
-    return [];
-  });
+  return this.database.executeSql('SELECT * FROM producto', [])
+    .then(res => {
+      const productos = [];
+      for (let i = 0; i < res.rows.length; i++) {
+        productos.push({
+          id_producto: res.rows.item(i).id_producto,
+          nombre_prod: res.rows.item(i).nombre_prod,
+          precio_prod: res.rows.item(i).precio_prod,
+          stock_prod: res.rows.item(i).stock_prod,
+          descripcion_prod: res.rows.item(i).descripcion_prod,
+          foto_prod: res.rows.item(i).foto_prod
+        });
+      }
+      return productos;
+    }).catch(error => {
+      console.error('Error al obtener productos:', error);
+      return [];
+    });
 }
 
 async obtenerIdCategoriaTeclados(): Promise<number> {

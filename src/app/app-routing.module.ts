@@ -162,9 +162,34 @@ const routes: Routes = [
     loadChildren: () => import('./pages/detalle-producto/detalle-producto.module').then( m => m.DetalleProductoPageModule)
   },
   {
+    path: 'teclados',
+    loadChildren: () => import('./pages/teclados/teclados.module').then( m => m.TecladosPageModule)
+  },
+  {
+    path: 'sillas',
+    loadChildren: () => import('./pages/sillas/sillas.module').then( m => m.SillasPageModule)
+  },
+  {
+    path: 'pc',
+    loadChildren: () => import('./pages/pc/pc.module').then( m => m.PcPageModule)
+  },
+  {
+    path: 'mouse',
+    loadChildren: () => import('./pages/mouse/mouse.module').then( m => m.MousePageModule)
+  },
+  {
+    path: 'monitores',
+    loadChildren: () => import('./pages/monitores/monitores.module').then( m => m.MonitoresPageModule)
+  },
+  {
+    path: 'audifonos',
+    loadChildren: () => import('./pages/audifonos/audifonos.module').then( m => m.AudifonosPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/notfound/notfound.module').then( m => m.NotfoundPageModule)
-  }
+  },
+
 
 ];
 

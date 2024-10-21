@@ -131,6 +131,30 @@ const routes: Routes = [
     path: 'productos-por-categoria',
     loadChildren: () => import('./pages/productos-por-categoria/productos-por-categoria.module').then( m => m.ProductosPorCategoriaPageModule)
   },
+  {
+    path: 'crudteclados',
+    loadChildren: () => import('./pages/crudteclados/crudteclados.module').then( m => m.CrudtecladosPageModule)
+  },
+  {
+    path: 'crudmonitores',
+    loadChildren: () => import('./pages/crudmonitores/crudmonitores.module').then( m => m.CrudmonitoresPageModule)
+  },
+  {
+    path: 'crudaudifonos',
+    loadChildren: () => import('./pages/crudaudifonos/crudaudifonos.module').then( m => m.CrudaudifonosPageModule)
+  },
+  {
+    path: 'crudmouse',
+    loadChildren: () => import('./pages/crudmouse/crudmouse.module').then( m => m.CrudmousePageModule)
+  },
+  {
+    path: 'crudsillas',
+    loadChildren: () => import('./pages/crudsillas/crudsillas.module').then( m => m.CrudsillasPageModule)
+  },
+  {
+    path: 'crudpcarmado',
+    loadChildren: () => import('./pages/crudpcarmado/crudpcarmado.module').then( m => m.CrudpcarmadoPageModule)
+  },
 
   {
     path: 'detalle-producto',

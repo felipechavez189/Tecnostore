@@ -160,12 +160,14 @@ export class ServiceBDService {
 
   // Eliminar un usuario
   eliminarUsuario(id: string) {
-    return this.database.executeSql('DELETE FROM usuario WHERE id_usu = ?', [id]).then(res => {
-      this.presentAlert("Eliminar", "Usuario Eliminado");
-      this.seleccionarUsuarios();
-    }).catch(e => {
-      this.presentAlert('Eliminar', 'Error: ' + JSON.stringify(e));
-    });
+    return this.database.executeSql('DELETE FROM usuario WHERE id_usu = ?', [id])
+      .then(() => {
+        console.log('Usuario eliminado correctamente');
+      })
+      .catch(e => {
+        console.error('Error al eliminar usuario:', e);
+        throw e;
+      });
   }
 
   // Modificar un usuario

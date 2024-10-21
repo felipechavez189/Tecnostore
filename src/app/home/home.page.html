@@ -21,7 +21,14 @@
   </ion-header>
 
   <ion-content [fullscreen]="true" id="main-content">
-    <ion-searchbar color="light" placeholder="Buscar"></ion-searchbar>
+    <!-- Barra de búsqueda -->
+    <ion-searchbar 
+      [(ngModel)]="searchTerm" 
+      (ionInput)="filtrarProductos($event)" 
+      color="light" 
+      placeholder="Buscar">
+    </ion-searchbar>
+
     <img style="border-radius: 15px;" class="banner-image" alt="amd" src="/assets/icon/logo.jpeg"/>
     <h6 class="featured-title"><b>PRODUCTOS DESTACADOS</b></h6>
 

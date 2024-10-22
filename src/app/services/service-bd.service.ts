@@ -463,7 +463,8 @@ modificarProducto(id: number, nombre: string, precio: number, stock: number, des
             nombre_prod: res.rows.item(i).nombre_prod ,
             precio_prod: res.rows.item(i).precio_prod ,
             stock_prod: res.rows.item(i).stock_prod ,
-            foto_prod: res.rows.item(i).foto_prod 
+            foto_prod: res.rows.item(i).foto_prod,
+            cantidad: res.rows.item(i).cantidad
           })
           this.listadoCarrito.next(items as any)
         }
@@ -471,6 +472,18 @@ modificarProducto(id: number, nombre: string, precio: number, stock: number, des
     }
    )
   }
+
+  actualizarCantidad(idArticuloCarrito: number, nuevaCantidad: number) {
+  return this.database.executeSql(
+    `UPDATE carrito SET cantidad = ? WHERE id_articulo_carrito = ?`,
+    [nuevaCantidad, idArticuloCarrito]
+  ).then(() => {
+    console.log('Cantidad actualizada correctamente');
+  }).catch(error => {
+    console.error('Error al actualizar la cantidad:', error);
+  });
+}
+
   
 
 

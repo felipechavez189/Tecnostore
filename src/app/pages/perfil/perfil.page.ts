@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CamaraService } from 'src/app/services/camara.service';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, AlertController } from '@ionic/angular';
 import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
+import { ServiceBDService } from 'src/app/services/service-bd.service'; // Asegúrate de que la ruta sea correcta
 
 @Component({
   selector: 'app-perfil',
@@ -14,15 +15,18 @@ export class PerfilPage implements OnInit {
   nombre: string = '';
   apellido: string = '';
   email: string = '';
-  nombreUsuario: string ='';
+  nombreUsuario: string = '';
   photoUrl: string = '/assets/icon/perfil.jpg'; // Imagen por defecto
+  idUsuario: number = 0; // ID del usuario para eliminar
 
   constructor(
     private route: ActivatedRoute,
     private camaraService: CamaraService,
     private actionSheetController: ActionSheetController,
     private router: Router,
-    private storage : NativeStorage
+    private storage: NativeStorage,
+    private alertController: AlertController,
+    private bdService: ServiceBDService // Servicio de BD para eliminar usuario
   ) {}
 
   ngOnInit() {
@@ -35,9 +39,10 @@ export class PerfilPage implements OnInit {
       this.apellido = userData.apellido;
       this.email = userData.correo;
       this.nombreUsuario = userData.nombreUsuario;
+      this.idUsuario = userData.id_usu; // Almacenar el ID del usuario
     }
   }
-  
+
   async selectImageOrTakePhoto() {
     const action = await this.showActionSheet();
     if (action === 'camera') {
@@ -106,14 +111,39 @@ export class PerfilPage implements OnInit {
     }
   }
 
-
-  async cerrarSesion(){
-    await this.storage.remove('Usuario_logueado')
-
-    this.router.navigate(['/login'])
+  async cerrarSesion() {
+    await this.storage.remove('Usuario_logueado');
+    this.router.navigate(['/login']);
   }
 
   deletePhoto() {
     this.photoUrl = '/assets/icon/perfil.jpg'; // Restablecer imagen por defecto
+  }
+
+  async eliminarPerfil() {
+    const alert = await this.alertController.create({
+      header: 'Eliminar Perfil',
+      message: '¿Estás seguro de que deseas eliminar tu perfil? Esta acción no se puede deshacer.',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Eliminar',
+          handler: async () => {
+            try {
+              await this.bdService.eliminarUsuario(this.idUsuario.toString());
+              await this.storage.remove('Usuario_logueado');
+              localStorage.removeItem('userData');
+              this.router.navigate(['/login']);
+            } catch (error) {
+              console.error('Error al eliminar el perfil:', error);
+            }
+          },
+        },
+      ],
+    });
+    await alert.present();
   }
 }

@@ -3,21 +3,24 @@
   --background: #5fbded; /* Color celeste para el fondo del botón */
   --color: #ffffff; /* Color blanco para el texto del botón */
   --border-radius: 4px; /* Radio de borde más pequeño para un diseño rectangular */
-  padding: 12px 20px; /* Ajusta el tamaño del botón para hacerlo más rectangular */
-  margin: 10px 0; /* Añade márgenes verticales si es necesario */
+  padding: 12px 20px; /* Ajusta el tamaño del botón */
+  margin: 10px 0; /* Añade márgenes verticales entre botones */
 }
 
-.custom-button:focus, .custom-button:hover {
-  --background: #5fbded; /* Color celeste más oscuro al hacer hover o al enfocar el botón */
+/* Hover y focus para los botones */
+.custom-button:focus,
+.custom-button:hover {
+  --background: #3d8fb5; /* Color más oscuro en hover o focus */
 }
 
-/* Mantener los estilos actuales */
+/* Contenido del fondo */
 ion-content {
   --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
 }
 
 ion-content {
-  ion-list, ion-item {
+  ion-list,
+  ion-item {
     background: transparent;
   }
 
@@ -27,39 +30,62 @@ ion-content {
   }
 }
 
+/* Contenedor centrado para botones */
 .center-button-container {
   display: flex;
-  justify-content: center; /* Centra horizontalmente */
-  align-items: center;     /* Centra verticalmente */
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
-/* Asegura que el fondo de los elementos sea blanco y el texto negro */
-ion-item {
-  --background: transparent; /* Mantiene el fondo transparente por defecto */
+/* Grupo de botones */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Espacio entre botones */
+  padding: 20px;
 }
 
+/* Asegura que los ítems del perfil tengan fondo blanco y texto negro */
 ion-item.profile-item {
-  background-color: #ffffff !important; /* Fondo blanco para los ítems de perfil */
+  background-color: #ffffff !important;
 }
 
 ion-item.profile-item ion-label,
 ion-item.profile-item ion-text {
-  color: #000000; /* Texto negro para los ítems de perfil */
+  color: #000000; /* Texto negro */
 }
 
-/* Estilo para el encabezado */
+/* Estilo del encabezado */
 ion-header {
-  --background: #004d74; /* Fondo del encabezado */
-  color: #ffffff; /* Color del texto en el encabezado */
+  --background: #004d74; /* Fondo azul oscuro */
+  color: #ffffff; /* Texto blanco */
 }
 
 /* Estilo para los botones del encabezado */
 ion-button {
-  --background: #004d74; /* Fondo del botón */
-  --color: #ffffff; /* Color del texto en el botón */
+  --background: #004d74; /* Fondo azul oscuro */
+  --color: #ffffff; /* Texto blanco */
 }
 
-/* Estilo para los íconos dentro de los botones */
+/* Íconos dentro de los botones */
 ion-icon {
-  color: #ffffff; /* Color de los íconos */
+  color: #ffffff; /* Íconos en blanco */
+}
+
+/* Imagen de perfil */
+ion-card img {
+  border-radius: 50%; /* Hacer la imagen circular */
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin: 0 auto; /* Centrar la imagen */
+  display: block;
+}
+
+/* Estilo adicional para mejorar la visualización en móviles */
+ion-card {
+  text-align: center;
+  padding: 10px;
+  margin: 20px;
 }

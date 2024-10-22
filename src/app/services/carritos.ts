@@ -6,4 +6,5 @@ export class Carritos {
     precio_prod!: number; 
     stock_prod!: number; 
     foto_prod!: string;
+    cantidad!: number; // Agregamos la propiedad cantidad
 }

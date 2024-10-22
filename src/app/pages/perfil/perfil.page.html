@@ -23,25 +23,24 @@
   <ion-card>
     <img alt="Perfil" [src]="photoUrl || '/assets/icon/perfil.jpg'" />
     <ion-card-header>
-      <ion-card-subtitle>{{nombreUsuario}}</ion-card-subtitle>
+      <ion-card-subtitle>{{ nombreUsuario }}</ion-card-subtitle>
     </ion-card-header>
   </ion-card>
 
-  <ion-button
-    class="center-button-container custom-button"
-    (click)="selectImageOrTakePhoto()"
-  >
-    <ion-icon name="camera-outline"></ion-icon> Agregar Foto
-  </ion-button>
+  <div class="center-button-container">
+    <ion-button class="custom-button" (click)="selectImageOrTakePhoto()">
+      <ion-icon name="camera-outline"></ion-icon> Agregar Foto
+    </ion-button>
+  </div>
 
   <ion-list>
     <ion-item class="profile-item">
       <ion-label>Rut:</ion-label>
-      <ion-text>{{rut}}</ion-text>
+      <ion-text>{{ rut }}</ion-text>
     </ion-item>
     <ion-item class="profile-item">
       <ion-label>Nombre:</ion-label>
-      <ion-text>{{nombre}} {{apellido}}</ion-text>
+      <ion-text>{{ nombre }} {{ apellido }}</ion-text>
     </ion-item>
     <ion-item class="profile-item">
       <ion-label>Email:</ion-label>
@@ -49,17 +48,32 @@
     </ion-item>
   </ion-list>
 
-  <ion-button
-    expand="full"
-    class="custom-button"
-    style="margin: 20px;"
-    [routerLink]="'/editar'"
-  >
-    Editar Perfil
-  </ion-button>
+  <div class="button-group">
+    <ion-button
+      expand="full"
+      class="custom-button"
+      [routerLink]="'/editar'"
+    >
+      Editar Perfil
+    </ion-button>
 
-  <ion-button expand="full" class="custom-button" (click)="cerrarSesion()">
-    Cerrar Sesión
-    <ion-icon name="log-out-outline"></ion-icon>
-  </ion-button>
+    <ion-button
+      expand="full"
+      class="custom-button"
+      color="danger"
+      (click)="eliminarPerfil()"
+    >
+      Eliminar Perfil
+      <ion-icon name="trash-outline"></ion-icon>
+    </ion-button>
+
+    <ion-button
+      expand="full"
+      class="custom-button"
+      (click)="cerrarSesion()"
+    >
+      Cerrar Sesión
+      <ion-icon name="log-out-outline"></ion-icon>
+    </ion-button>
+  </div>
 </ion-content>

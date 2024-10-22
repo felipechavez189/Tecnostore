@@ -7,5 +7,5 @@ export class Usuario {
     clave_usu!: string;
     correo_usu!: string;
     estado_usu!: string;
-    rol_id!: number;
+    id_rol!: number;
   }

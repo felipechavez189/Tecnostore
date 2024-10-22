@@ -3,5 +3,5 @@ export class Venta {
     f_venta!: number;
     total_venta!: number;
     usuario_id!: number;
-    estado_id!: number;
+    id_estado!: number;
   }

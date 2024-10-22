@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular'; // Importa AlertController
-import { ServiceBDService } from 'src/app/services/service-bd.service'; // Ajusta la ruta al servicio donde tienes tus métodos
+import { AlertController } from '@ionic/angular';
+import { ServiceBDService } from 'src/app/services/service-bd.service';
+
 
 @Component({
   selector: 'app-crud',
@@ -18,28 +19,51 @@ export class CrudPage implements OnInit {
 
   // Función para obtener todos los productos
   cargarProductos() {
-    this.serviceBD.obtenerTodosLosProductos().then((productos) => {
+    this.serviceBD.seleccionarProductos().then((productos) => {
       this.productos = productos;
     }).catch((error) => {
       console.error('Error al cargar los productos:', error);
     });
   }
 
-  // Función para mostrar la alerta
-  async EliminarAlerta() {
+  // Función para mostrar la alerta de confirmación y eliminar el producto
+  async EliminarAlerta(id_producto: string) {
     const alert = await this.alertController.create({
       header: 'Confirmar Eliminación',
       message: '¿Estás seguro de que deseas eliminar este producto?',
       buttons: [
         {
           text: 'Cancelar',
+          role: 'cancel',
         },
         {
           text: 'Eliminar',
+          handler: () => {
+            this.eliminarProducto(id_producto); // Llamar a la función para eliminar el producto
+          }
         }
       ]
     });
 
     await alert.present();
+  }
+
+  // Función para eliminar el producto
+  eliminarProducto(id_producto: string) {
+    this.serviceBD.eliminarProducto(id_producto).then(() => {
+      // Filtrar el producto eliminado de la lista local
+      this.productos = this.productos.filter(producto => producto.id_producto !== id_producto);
+    }).catch((error) => {
+      console.error('Error al eliminar el producto:', error);
+    });
+  }
+
+  // Método para agregar un producto
+  agregarProducto(nombre: string, precio: number, stock: number, descripcion: string, foto: Blob, id_categoria: number) {
+    this.serviceBD.agregarProducto(nombre, precio, stock, descripcion, foto, id_categoria).then(() => {
+      this.cargarProductos(); // Recargar la lista de productos después de agregar uno nuevo
+    }).catch((error) => {
+      console.error('Error al agregar el producto:', error);
+    });
   }
 }

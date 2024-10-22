@@ -6,5 +6,5 @@ export class Producto {
     descripcion_prod!: string;
     foto_prod!: Blob;
     estatus_prod!: string;
-    categoria_id!: number;
+    id_categoria!: number;
   }

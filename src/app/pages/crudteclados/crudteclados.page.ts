@@ -3,7 +3,6 @@ import { AlertController } from '@ionic/angular';
 import { Producto } from 'src/app/services/producto';
 import { ServiceBDService } from 'src/app/services/service-bd.service';
 
-
 @Component({
   selector: 'app-crudteclados',
   templateUrl: './crudteclados.page.html',
@@ -17,44 +16,26 @@ export class CrudtecladosPage implements OnInit {
   constructor(private alertController: AlertController, private serviceBD: ServiceBDService) { }
 
   ngOnInit() {
-    this.cargarTeclados(); // Cargar teclados al inicializar
+    // Inicializa el arreglo filtrado
+    this.tecladosFiltrados = this.teclados; 
   }
 
-  cargarTeclados() {
-    this.serviceBD.seleccionarTeclados().then(teclados => {
-      this.teclados = teclados; // Asignar teclados al arreglo principal
-      this.tecladosFiltrados = teclados; // Mostrar todos los teclados inicialmente
-    }).catch(error => {
-      console.error('Error al cargar teclados:', error);
-    });
+  ionViewWillEnter() {
+    // Este método se ejecuta cada vez que la vista va a entrar
+    this.serviceBD.dbState().subscribe(data => {
+      if (data) {
+        // Llama al método fetch para asegurarte de que se ha conectado correctamente a la base de datos
+        this.serviceBD.fetchlistadoTeclados().subscribe(() => {
+          // Llama a seleccionarTeclados() y usa 'then' para manejar la promesa
+          this.serviceBD.seleccionarTeclados().then(teclados => {
+            // Asigna los teclados obtenidos al arreglo 'teclados'
+            this.teclados = teclados;
 
-    // Suscribirse al listadoTeclados para recibir actualizaciones
-    this.serviceBD.listadoTeclados.subscribe(teclados => {
-      this.teclados = teclados; // Actualiza el arreglo de teclados
-      this.tecladosFiltrados = teclados; // Actualiza también los teclados filtrados
+            // Actualiza tecladosFiltrados para mostrar los teclados obtenidos
+            this.tecladosFiltrados = teclados;
+          });
+        });
+      }
     });
   }
-
-  
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

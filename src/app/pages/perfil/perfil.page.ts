@@ -133,17 +133,41 @@ export class PerfilPage implements OnInit {
           text: 'Eliminar',
           handler: async () => {
             try {
-              await this.bdService.eliminarUsuario(this.idUsuario.toString());
-              await this.storage.remove('Usuario_logueado');
-              localStorage.removeItem('userData');
-              this.router.navigate(['/login']);
+              // Verificar que el ID del usuario sea válido
+              if (this.idUsuario) {
+                await this.bdService.eliminarUsuario(this.idUsuario.toString());
+  
+                // Eliminar datos de sesión y almacenamiento local
+                await this.storage.remove('Usuario_logueado');
+                localStorage.removeItem('userData');
+  
+                // Mostrar mensaje de éxito
+                const successAlert = await this.alertController.create({
+                  header: 'Perfil Eliminado',
+                  message: 'Tu perfil ha sido eliminado con éxito.',
+                  buttons: ['OK'],
+                });
+                await successAlert.present();
+  
+                // Redirigir al inicio de sesión
+                this.router.navigate(['/login']);
+              } else {
+                throw new Error('ID de usuario no encontrado.');
+              }
             } catch (error) {
               console.error('Error al eliminar el perfil:', error);
+              const errorAlert = await this.alertController.create({
+                header: 'Error',
+                message: 'Hubo un problema al eliminar tu perfil. Inténtalo de nuevo.',
+                buttons: ['OK'],
+              });
+              await errorAlert.present();
             }
           },
         },
       ],
     });
+  
     await alert.present();
   }
-}
+}  

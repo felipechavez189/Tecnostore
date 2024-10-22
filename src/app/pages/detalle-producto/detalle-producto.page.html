@@ -20,40 +20,29 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  
+  <ion-content [fullscreen]="true">
+    <ion-card *ngIf="productoSolo">
+      <ion-card-header>
+        <ion-card-title>{{ productoSolo.nombre_prod }}</ion-card-title>
+        <ion-card-subtitle>Precio: {{ productoSolo.precio_prod }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-thumbnail>
+          <img [src]="productoSolo.foto_prod" alt="Foto del producto">
+        </ion-thumbnail>
+        <p>Stock: {{ productoSolo.stock_prod }}</p>
+        <p>{{ productoSolo.descripcion_prod }}</p>
 
-
-  <ion-grid>
-    <ion-row>
-      <ion-col size="12">
-        <!-- Imagen del Monitor sin título encima -->
-        <ion-img *ngIf="producto.foto_prod" [src]="producto.foto_prod" style="width: 100%;"></ion-img>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12" class="product-description">
-        <!-- Breve descripción del monitor con fondo blanco -->
-        <h3>{{producto.nombre_prod}}</h3>
-        <p>
-        {{producto.descripcion_prod}}
-        </p>
-        <p><b>{{producto.stock_prod}} </b></p>
-        <!-- Precio del monitor -->
-        <h3><b> {{producto.precio_prod}}</b></h3>
-        <!-- Botón de agregar al carrito -->
-
-        <div>
-
-          <ion-button (click)="aumentarCantidad()"> <ion-icon name="add-outline"></ion-icon> </ion-button>
-
-          <ion-button (click)="disminuirCantidad()"> <ion-icon name="remove-outline"></ion-icon> </ion-button>
-
-        </div>
-
-        <ion-button expand="block" class="custom-button" (click)="alarmaCarrito(producto.id_producto)">Agregar al carrito</ion-button>
-        <!-- Botón para volver a la página de monitores -->
-        <ion-button expand="block" color="light" (click)="volverSeccionAnterior(producto.categoria_id)">Volver a seccion de monitores</ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+        <!--<ion-button (click)="agregarCarrito()">Agregar al Carrito</ion-button>-->
+      </ion-card-content>
+    </ion-card>
+  
+    <ion-item *ngIf="!productoSolo">
+      <ion-label>No se encontraron detalles del producto.</ion-label>
+    </ion-item>
+   
+    
+  </ion-content>
 
 </ion-content>

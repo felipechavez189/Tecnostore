@@ -9,62 +9,33 @@ import { ServiceBDService } from 'src/app/services/service-bd.service';
   styleUrls: ['./detalle-producto.page.scss'],
 })
 export class DetalleProductoPage implements OnInit {
-  cantidad : number = 1
-  producto : any 
-  idUsuario! : number
-
-  constructor(private activated : ActivatedRoute, private router : Router, private storage :NativeStorage, private dbService : ServiceBDService) {
-    this.activated.queryParams.subscribe(res=>{
-      if(this.router.getCurrentNavigation()?.extras.state){
-        this.producto = this.router.getCurrentNavigation()?.extras.state?.['productoEnviado']
-      }
-    })
-
-   }
-
-  ngOnInit() {
-    this.obtenerIdUsuario()
-  }
-
-  async obtenerIdUsuario(){
-    this.idUsuario = await this.storage.getItem('Usuario_logueado')
-  }
-
-  alarmaCarrito(idproducto : number){
-    if(this.idUsuario){
-      this.dbService.agregarACarrito(this.idUsuario,idproducto,this.cantidad).then(()=>{
-        console.log('Añadido correctanmente')
-      })
+    productoSolo: any;
+  
+    constructor(
+      private bd: ServiceBDService, 
+      private router: Router, 
+      private activedroute: ActivatedRoute, 
+    ) {
+      this.activedroute.queryParams.subscribe((res) => {
+        if (this.router.getCurrentNavigation()?.extras.state) {
+          this.productoSolo = this.router.getCurrentNavigation()?.extras?.state?.['productoVa'];
+        }
+      });
     }
-  }
-
-
-  volverSeccionAnterior(idcategoria : number){
-    let NavigationExtras: NavigationExtras = {
-      state:{
-        idCategoriaSeleccionada: idcategoria
-      }
+  
+    ngOnInit() {
+      this.bd.dbState().subscribe(async (data) => {
+        if (data) {
+          
+        }
+      });
     }
-    this.router.navigate(['/productos-por-categoria'],NavigationExtras)
-  }
 
-
-
- aumentarCantidad(){
-  this.cantidad = this.cantidad++
- }  
-
-
- disminuirCantidad(){
-  if(this.cantidad !== 1){
-    this.cantidad = this.cantidad--
-  }
-
-
-  }
-
-
-
+    //async agregarCarrito() {
+        //await this.bd.agregarDetalleVenta(
+          //this.idVentaActiva,
+          //this.productoVa.precio_prod,
+          //this.productoVa.id_producto
+        //);
 }
-
-
+  

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { ServiceBDService } from 'src/app/services/service-bd.service';
+
 
 
 @Component({
@@ -11,7 +13,7 @@ import { ServiceBDService } from 'src/app/services/service-bd.service';
 export class CrudPage implements OnInit {
   productos: any[] = []; // Arreglo para almacenar los productos
 
-  constructor(private alertController: AlertController, private serviceBD: ServiceBDService) { }
+  constructor(private alertController: AlertController, private serviceBD: ServiceBDService, private router: Router) { }
 
   ngOnInit() {
     this.cargarProductos(); // Cargar productos al inicializar
@@ -65,5 +67,14 @@ export class CrudPage implements OnInit {
     }).catch((error) => {
       console.error('Error al agregar el producto:', error);
     });
+  }
+
+  irproductoSolo(x: any) {
+    let navigationExtras: NavigationExtras = {
+      state: {
+        productoVa: x
+      }
+    };
+    this.router.navigate(['/detalle-producto'], navigationExtras);
   }
 }

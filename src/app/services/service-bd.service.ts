@@ -48,6 +48,8 @@ tablaCarrito: string = "CREATE TABLE IF NOT EXISTS carrito (id_articulo_carrito 
   listadoCarrito = new BehaviorSubject([])
   listadoProductoPorCategoria = new BehaviorSubject([]);
   listadoTeclados = new BehaviorSubject([]);
+  listadoproductoSolo = new BehaviorSubject([]);
+
 
   listadoPRODUCTOS = new BehaviorSubject([]);
 
@@ -80,6 +82,10 @@ tablaCarrito: string = "CREATE TABLE IF NOT EXISTS carrito (id_articulo_carrito 
   fetchlistadoTeclados():  Observable<Producto[]>{
     return this.listadoTeclados.asObservable();
   }
+
+  fetchlistadoproductoSolo(): Observable<Producto[]>{
+    return this.listadoproductoSolo.asObservable();
+  }
   
   dbState() {
     return this.isDBReady.asObservable();
@@ -89,7 +95,7 @@ tablaCarrito: string = "CREATE TABLE IF NOT EXISTS carrito (id_articulo_carrito 
   createBD() {
     this.platform.ready().then(() => {
       this.sqlite.create({
-        name: 'tecnostore45.db',
+        name: 'tecnostore46.db',
         location: 'default'
       }).then((db: SQLiteObject) => {
         this.database = db;
@@ -166,13 +172,17 @@ tablaCarrito: string = "CREATE TABLE IF NOT EXISTS carrito (id_articulo_carrito 
   }
 
   // Eliminar un usuario
-  eliminarUsuario(id: string) {
-    return this.database.executeSql('DELETE FROM usuario WHERE id_usu = ?', [id]).then(res => {
-      this.presentAlert("Eliminar", "Usuario Eliminado");
-      this.seleccionarUsuarios();
-    }).catch(e => {
-      this.presentAlert('Eliminar', 'Error: ' + JSON.stringify(e));
-    });
+  eliminarUsuario(id: string): Promise<void> {
+    return this.database
+      .executeSql('DELETE FROM usuario WHERE id_usu = ?', [id])
+      .then(() => {
+        this.presentAlert('Eliminar', 'Usuario Eliminado');
+        this.seleccionarUsuarios(); // Actualiza la lista de usuarios
+      })
+      .catch((e) => {
+        this.presentAlert('Eliminar', 'Error: ' + JSON.stringify(e));
+        throw e; // Propagamos el error para gestionarlo en el componente
+      });
   }
 
   // Modificar un usuario

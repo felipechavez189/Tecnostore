@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastController } from '@ionic/angular'; 
-import { ServiceBDService } from 'src/app/services/service-bd.service'; 
-import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx'; 
+import { ToastController } from '@ionic/angular';
+import { ServiceBDService } from 'src/app/services/service-bd.service';
+import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 
 @Component({
   selector: 'app-teclado1',
@@ -20,10 +20,10 @@ export class Teclado1Page implements OnInit {
   ) {}
 
   async ngOnInit() {
-    await this.obtenerUsuario(); // Obtener el usuario logueado
+    await this.obtenerUsuario(); // Obtener el usuario logueado al iniciar
   }
 
-  // Obtener el usuario logueado desde NativeStorage
+  // Método para obtener el usuario logueado
   async obtenerUsuario() {
     try {
       this.idusuario = await this.storage.getItem('Usuario_logueado');
@@ -33,17 +33,26 @@ export class Teclado1Page implements OnInit {
     }
   }
 
-  // Agregar el teclado al carrito
+  // Método para agregar el producto al carrito
   async agregarAlCarrito() {
+    if (!this.idusuario) {
+      console.error('No hay usuario logueado. No se puede agregar al carrito.');
+      return;
+    }
+
     try {
-      await this.dbService.agregarACarrito(this.idusuario, this.idProducto, this.cantidad);
-      this.mostrarAlertaCarrito(); // Mostrar el toast de confirmación
+      await this.dbService.agregarACarrito(
+        this.idusuario,
+        this.idProducto,
+        this.cantidad
+      );
+      this.mostrarAlertaCarrito(); // Mostrar el mensaje de confirmación
     } catch (error) {
       console.error('Error al agregar al carrito:', error);
     }
   }
 
-  // Mostrar mensaje de confirmación (toast)
+  // Mostrar mensaje de confirmación al agregar al carrito
   async mostrarAlertaCarrito() {
     const toast = await this.toastController.create({
       message: 'Teclado añadido al carrito.',
@@ -51,6 +60,6 @@ export class Teclado1Page implements OnInit {
       position: 'bottom',
       color: 'success',
     });
-    toast.present();
+    await toast.present();
   }
 }

@@ -186,6 +186,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/audifonos/audifonos.module').then( m => m.AudifonosPageModule)
   },
   {
+    path: 'carrito',
+    loadChildren: () => import('./pages/carrito/carrito.module').then(m => m.CarritoPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/notfound/notfound.module').then( m => m.NotfoundPageModule)
   },

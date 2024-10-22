@@ -10,7 +10,7 @@ import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 })
 export class Teclado1Page implements OnInit {
   idusuario!: number; // Usuario logueado
-  idProducto: number = 5; // ID del teclado (ajustar según tu base de datos)
+  idProducto: number = 1; // ID del teclado (ajustar según tu base de datos)
   cantidad: number = 1; // Cantidad inicial
 
   constructor(

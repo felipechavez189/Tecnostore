@@ -1,6 +1,10 @@
 /* Fondo del ion-content */
 ion-content {
   --background: url('/assets/icon/home.jpg') no-repeat center center / cover;
+  --padding-start: 10px;
+  --padding-end: 10px;
+  --padding-top: 10px;
+  --padding-bottom: 10px;
 }
 
 /* Estilo para el encabezado */
@@ -20,59 +24,65 @@ ion-icon {
   color: #ffffff;
 }
 
-/* Ajustar tamaño del texto h6 */
-ion-label h6 {
-  font-size: 16px; /* Tamaño reducido del texto h6 */
-}
-
 /* Estilo para el ion-thumbnail */
 ion-thumbnail {
-  width: 120px; /* Ajusta el tamaño según sea necesario */
-  height: 120px; /* Ajusta el tamaño según sea necesario */
+  width: 120px;
+  height: 120px;
 }
 
 ion-thumbnail img {
   width: 100%;
   height: 100%;
   object-fit: cover; /* Mantiene la proporción de la imagen */
+  border-radius: 8px; /* Opcional: redondear esquinas */
+}
+
+/* Estilo del ítem del carrito con fondo blanco */
+ion-item {
+  --background: #ffffff; /* Fondo blanco para los productos del carrito */
+  border-radius: 10px; /* Esquinas redondeadas */
+  margin-bottom: 10px; /* Espacio entre ítems */
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* Estilo del contenedor del ítem */
+.item-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  min-height: 120px;
 }
 
 /* Alinear horizontalmente los elementos dentro del ion-label */
 .horizontal-align {
   display: flex;
-  flex-direction: row; /* Alinea los elementos horizontalmente */
-  align-items: center; /* Centra verticalmente los elementos */
+  flex-direction: row;
+  align-items: center;
 }
 
 .horizontal-align h6, .horizontal-align p {
-  margin: 0 4px; /* Ajusta el espacio entre los elementos */
+  margin: 0 4px;
 }
 
-.item-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px; /* Ajusta el padding si es necesario para aumentar la altura del contenedor */
-  min-height: 120px; /* Ajusta la altura mínima si es necesario */
-}
-
-/* Estilo para el contenido del ítem */
+/* Estilo del contenido del ítem */
 .item-details {
   flex: 1;
   margin-right: 10px;
+  color: black; /* Asegura que el texto se vea bien sobre el fondo blanco */
 }
 
-/* Estilo para el contenedor de las acciones */
+/* Contenedor de las acciones (por ejemplo: cantidad, botones) */
 .action-container {
   display: flex;
-  flex-direction: column; /* Alinea verticalmente los elementos */
-  align-items: center; /* Centra los elementos horizontalmente */
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
 }
 
-/* Estilo para el botón de basura */
+/* Botón de basura */
 .trash-button {
-  margin-top: 10px; /* Espacio entre el número y el botón de basura */
+  margin-top: 10px;
   --padding-start: 12px;
   --padding-end: 12px;
   --padding-top: 12px;
@@ -80,14 +90,19 @@ ion-thumbnail img {
   --font-size: 24px;
 }
 
-/* Estilo para el número grande en la acción */
+/* Número grande en la acción */
 .large-label {
-  font-size: 24px; /* Ajusta el tamaño de la fuente a tu preferencia */
-  font-weight: bold; /* Opcional: hace que el texto sea negrita */
-  margin: 0 15px; /* Espacio entre los botones y el número */
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0 15px;
 }
 
-/* Estilo para el texto del ítem */
+/* Color del texto en ion-item */
 .colorp {
-  color: white;
+  color: black;
+}
+
+/* Ajustar tamaño del texto h6 */
+ion-label h6 {
+  font-size: 16px;
 }

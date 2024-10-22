@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ServiceBDService } from '../services/service-bd.service';  // Asegúrate de la ruta correcta
+import { ServiceBDService } from 'src/app/services/service-bd.service';
 
 @Component({
   selector: 'app-home',

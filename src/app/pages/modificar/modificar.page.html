@@ -4,9 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title style="text-align: center;">
-      <ion-button fill="clear" [routerLink]="['/home']">
-        TECNO STORE
-      </ion-button>
+      Modificar Producto
     </ion-title>
     <ion-buttons slot="end">
       <ion-button [routerLink]="['/perfil']">
@@ -21,12 +19,7 @@
 
 <ion-content [fullscreen]="true" class="no-background">
   <ion-card>
-    <ion-img src="/assets/icon/monitor1.jpg"></ion-img>
-    <ion-button expand="block" style="color: blue;">
-      <ion-icon name="image-outline"></ion-icon>
-    </ion-button>
     <ion-card-content>
-
       <ion-item>
         <ion-label>Categoria:</ion-label>
         <ion-input type="text" [(ngModel)]="categoria"></ion-input>
@@ -45,6 +38,16 @@
       <ion-item>
         <ion-label>Precio:</ion-label>
         <ion-input type="number" [(ngModel)]="precio"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Descripción:</ion-label>
+        <ion-input type="text" [(ngModel)]="descripcion"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Imagen:</ion-label>
+        <ion-input type="text" [(ngModel)]="imagen"></ion-input>
       </ion-item>
 
       <!-- Botones para guardar cambios o cancelar -->

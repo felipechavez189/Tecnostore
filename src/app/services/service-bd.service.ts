@@ -389,13 +389,20 @@ modificarProducto(id: number, nombre: string, precio: number, stock: number, des
   }
 
        
-  agregarACarrito(idUsuario: number, idProducto : number, cantidad : number){   
-    return this.database.executeSql('INSERT INTO carrito (id_usu, id_producto, cantidad) VALUES(?,?,?);',[idUsuario,idProducto,cantidad]).then(()=>{
-      console.log('Producto insertado correctamente')
-    }).catch(error=>{
-      console.log('Error al insertar datos a carrito'+JSON.stringify(error))
-    })
+  agregarACarrito(idUsuario: number, idProducto: number, cantidad: number) {
+    return this.database
+      .executeSql(
+        'INSERT INTO carrito (id_usu, id_producto, cantidad) VALUES (?, ?, ?)',
+        [idUsuario, idProducto, cantidad]
+      )
+      .then(() => {
+        console.log('Producto agregado al carrito correctamente');
+      })
+      .catch((error) => {
+        console.error('Error al agregar producto al carrito:', error);
+      });
   }
+  
 
   selectCarrito(idUsuario: number){
     return this.database.executeSql('SELECT carrito.id_articulo_carrito, carrito.id_usu, carrito.id_producto, producto.nombre_prod, producto.precio_prod, producto.stock_prod, producto.foto_prod FROM carrito JOIN producto ON producto.id_producto = carrito.id_producto WHERE id_usu = ?').then(res=>{

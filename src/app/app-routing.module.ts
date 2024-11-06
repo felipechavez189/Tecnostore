@@ -196,9 +196,18 @@ const routes: Routes = [
     loadChildren: () => import('./pages/carrito/carrito.module').then(m => m.CarritoPageModule)
   },
   {
+    path: 'cambiarcontrasena',
+    loadChildren: () => import('./pages/cambiarcontrasena/cambiarcontrasena.module').then( m => m.CambiarcontrasenaPageModule)
+  },
+  {
+    path: 'nuevacontrasena',
+    loadChildren: () => import('./pages/nuevacontrasena/nuevacontrasena.module').then( m => m.NuevacontrasenaPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/notfound/notfound.module').then( m => m.NotfoundPageModule)
-  },
+  }
+
 
 
 ];

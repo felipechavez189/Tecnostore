@@ -3,7 +3,7 @@ import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { AlertController, Platform } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Producto } from './producto';
-import { Carritos } from './carritos';
+import { Carritos } from './carritos'; 
 
 @Injectable({
   providedIn: 'root'
@@ -230,6 +230,47 @@ tablaCarrito: string = "CREATE TABLE IF NOT EXISTS carrito (id_articulo_carrito 
       });
   }
 
+    // Método para obtener un usuario por su correo
+    async obtenerUsuarioPorCorreo(correo: string): Promise<any> {
+      const query = 'SELECT * FROM usuario WHERE correo_usu = ?';
+      
+      try {
+        const result = await this.database.executeSql(query, [correo]);
+  
+        if (result.rows.length > 0) {
+          const usuario = result.rows.item(0);  // Obtenemos el primer registro
+          return {
+            id: usuario.id_usu,
+            rut: usuario.rut_usu,
+            nombre: usuario.nombre_usu,
+            apellido: usuario.apellido_usu,
+            nombreUsuario: usuario.nombre_usuario,
+            clave_usu: usuario.clave_usu,  // Contraseña del usuario
+            correo: usuario.correo_usu,
+            estado: usuario.estado_usu,
+            rol: usuario.id_rol
+          };
+        } else {
+          return null;  // Si no se encuentra el usuario, retorna null
+        }
+      } catch (error) {
+        console.error('Error al obtener el usuario por correo:', error);
+        throw new Error('No se pudo obtener el usuario.');
+      }
+    }
+
+    async actualizarContrasena(id: number, nuevaContrasena: string): Promise<void> {
+      const query = 'UPDATE usuario SET clave_usu = ? WHERE id_usu = ?';
+      
+      try {
+        await this.database.executeSql(query, [nuevaContrasena, id]);
+      } catch (error) {
+        console.error('Error al actualizar la contraseña:', error);
+        throw new Error('No se pudo actualizar la contraseña.');
+      }
+    }
+    
+  
 
   ////PRODUCTOS 
   async seleccionarProductosPorCategoria(id_categoria: number): Promise<Producto[]> { // Cambia el tipo de retorno a Promise<Producto[]>

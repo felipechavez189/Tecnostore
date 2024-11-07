@@ -1,9 +1,9 @@
+// PerfilPage.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CamaraService } from 'src/app/services/camara.service';
-import { ActionSheetController, AlertController } from '@ionic/angular';
-import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
-import { ServiceBDService } from 'src/app/services/service-bd.service'; // Asegúrate de que la ruta sea correcta
+import { CamaraPerfilService } from 'src/app/services/camara-perfil.service';
+import { AlertController } from '@ionic/angular';
+import { ServiceBDService } from 'src/app/services/service-bd.service';
 
 @Component({
   selector: 'app-perfil',
@@ -16,69 +16,63 @@ export class PerfilPage implements OnInit {
   apellido: string = '';
   email: string = '';
   nombreUsuario: string = '';
-  photoUrl: string = '/assets/icon/perfil.jpg'; // Imagen por defecto
-  idUsuario: number = 0; // ID del usuario para eliminar
+  photoUrl: string = '/assets/icon/perfil.jpg';
+  idUsuario: number = 0;
 
   constructor(
     private route: ActivatedRoute,
-    private camaraService: CamaraService,
-    private actionSheetController: ActionSheetController,
+    private camaraPerfilService: CamaraPerfilService,
     private router: Router,
-    private storage: NativeStorage,
     private alertController: AlertController,
-    private bdService: ServiceBDService // Servicio de BD para eliminar usuario
+    private bdService: ServiceBDService
   ) {}
 
   ngOnInit() {
-    // Recuperar los datos almacenados en localStorage
-    const storedUserData = localStorage.getItem('userData');
-    if (storedUserData) {
-      const userData = JSON.parse(storedUserData);
-      this.rut = userData.rut;
-      this.nombre = userData.nombre;
-      this.apellido = userData.apellido;
-      this.email = userData.correo;
-      this.nombreUsuario = userData.nombreUsuario;
-      this.idUsuario = userData.id_usu; // Almacenar el ID del usuario
+    this.route.queryParams.subscribe(params => {
+      if (params['idUsuario']) {
+        this.idUsuario = params['idUsuario'];
+        this.cargarDatosUsuario();
+      }
+    });
+  }
+
+  async cargarDatosUsuario() {
+    try {
+      const usuario = await this.bdService.obtenerUsuarioPorId(this.idUsuario);
+      if (usuario) {
+        this.rut = usuario.rut_usu;
+        this.nombre = usuario.nombre_usu;
+        this.apellido = usuario.apellido_usu;
+        this.email = usuario.correo_usu;
+        this.nombreUsuario = usuario.nombre_usuario;
+        this.photoUrl = usuario.foto_usu || '/assets/icon/perfil.jpg';
+      } else {
+        await this.presentAlert('Error', 'Usuario no encontrado.');
+      }
+    } catch (error) {
+      console.error('Error al cargar datos del usuario:', error);
+      await this.presentAlert('Error', 'No se pudieron cargar los datos del usuario.');
     }
   }
 
-  async selectImageOrTakePhoto() {
-    const action = await this.showActionSheet();
-    if (action === 'camera') {
-      await this.takePhoto();
-    } else if (action === 'gallery') {
-      await this.selectImage();
-    } else if (action === 'delete') {
-      this.deletePhoto();
-    }
-  }
-
-  async showActionSheet() {
-    let selectedAction = '';
-
-    const actionSheet = await this.actionSheetController.create({
-      header: 'Selecciona una opción',
+  // Método para tomar o seleccionar una foto de perfil
+  async updateProfilePhoto() {
+    const alert = await this.alertController.create({
+      header: 'Actualizar Foto de Perfil',
+      message: 'Elige una opción para actualizar la foto de perfil',
       buttons: [
         {
           text: 'Tomar Foto',
-          handler: () => {
-            selectedAction = 'camera';
-            return true;
+          handler: async () => {
+            const base64Image = await this.camaraPerfilService.tomarFoto();
+            await this.guardarFotoPerfil(base64Image);
           },
         },
         {
-          text: 'Elegir de la Galería',
-          handler: () => {
-            selectedAction = 'gallery';
-            return true;
-          },
-        },
-        {
-          text: 'Eliminar Foto',
-          handler: () => {
-            selectedAction = 'delete';
-            return true;
+          text: 'Elegir de Galería',
+          handler: async () => {
+            const base64Image = await this.camaraPerfilService.seleccionarImagen();
+            await this.guardarFotoPerfil(base64Image);
           },
         },
         {
@@ -87,37 +81,22 @@ export class PerfilPage implements OnInit {
         },
       ],
     });
-    await actionSheet.present();
-    await actionSheet.onDidDismiss();
-
-    return selectedAction;
+    await alert.present();
   }
 
-  async takePhoto() {
+  // Método para guardar la foto de perfil en la base de datos
+  private async guardarFotoPerfil(base64Image: string) {
     try {
-      const photoBlob = await this.camaraService.takePhoto();
-      this.photoUrl = URL.createObjectURL(photoBlob);
+      await this.bdService.actualizarFotoPerfil(this.idUsuario, base64Image);
+      this.photoUrl = base64Image; // Muestra la imagen recién seleccionada
     } catch (error) {
-      console.error('Error al tomar la foto:', error);
-    }
-  }
-
-  async selectImage() {
-    try {
-      const imageBlob = await this.camaraService.pickImage();
-      this.photoUrl = URL.createObjectURL(imageBlob);
-    } catch (error) {
-      console.error('Error al seleccionar la imagen:', error);
+      console.error('Error al actualizar la foto de perfil:', error);
+      await this.presentAlert('Error', 'No se pudo actualizar la foto de perfil.');
     }
   }
 
   async cerrarSesion() {
-    await this.storage.remove('Usuario_logueado');
     this.router.navigate(['/login']);
-  }
-
-  deletePhoto() {
-    this.photoUrl = '/assets/icon/perfil.jpg'; // Restablecer imagen por defecto
   }
 
   async eliminarPerfil() {
@@ -125,49 +104,34 @@ export class PerfilPage implements OnInit {
       header: 'Eliminar Perfil',
       message: '¿Estás seguro de que deseas eliminar tu perfil? Esta acción no se puede deshacer.',
       buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-        },
+        { text: 'Cancelar', role: 'cancel' },
         {
           text: 'Eliminar',
           handler: async () => {
             try {
-              // Verificar que el ID del usuario sea válido
               if (this.idUsuario) {
                 await this.bdService.eliminarUsuario(this.idUsuario.toString());
-  
-                // Eliminar datos de sesión y almacenamiento local
-                await this.storage.remove('Usuario_logueado');
-                localStorage.removeItem('userData');
-  
-                // Mostrar mensaje de éxito
-                const successAlert = await this.alertController.create({
-                  header: 'Perfil Eliminado',
-                  message: 'Tu perfil ha sido eliminado con éxito.',
-                  buttons: ['OK'],
-                });
-                await successAlert.present();
-  
-                // Redirigir al inicio de sesión
                 this.router.navigate(['/login']);
               } else {
                 throw new Error('ID de usuario no encontrado.');
               }
             } catch (error) {
               console.error('Error al eliminar el perfil:', error);
-              const errorAlert = await this.alertController.create({
-                header: 'Error',
-                message: 'Hubo un problema al eliminar tu perfil. Inténtalo de nuevo.',
-                buttons: ['OK'],
-              });
-              await errorAlert.present();
+              await this.presentAlert('Error', 'Hubo un problema al eliminar tu perfil. Inténtalo de nuevo.');
             }
           },
         },
       ],
     });
-  
     await alert.present();
   }
-}  
+
+  async presentAlert(header: string, message: string) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['OK'],
+    });
+    await alert.present();
+  }
+}

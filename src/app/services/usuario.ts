@@ -6,6 +6,8 @@ export class Usuario {
     nombre_usuario!: string;
     clave_usu!: string;
     correo_usu!: string;
+    foto_usu!: Blob;
     estado_usu!: string;
+    loggeo!: boolean;
     id_rol!: number;
   }

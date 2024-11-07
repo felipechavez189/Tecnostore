@@ -62,7 +62,7 @@ export class LoginPage implements OnInit {
   }
 
   validarContrasena(password: string): boolean {
-    const passwordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+    const passwordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*\W)[A-Za-z\d\W]{6,}$/;
     return passwordPattern.test(password);
   }
 

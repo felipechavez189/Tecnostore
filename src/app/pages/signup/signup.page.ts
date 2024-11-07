@@ -21,9 +21,9 @@ export class SignupPage implements OnInit {
     private alertController: AlertController,
     private router: Router,
     private dbService: ServiceBDService  // Inyectar el servicio ServiceBDService
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   async crearCuenta() {
     // Validación de campos vacíos
@@ -33,11 +33,12 @@ export class SignupPage implements OnInit {
     }
 
     // Validación de la contraseña
-    const contrasenaRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{6,}$/;
+    const contrasenaRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*\W).{6,}$/;
     if (!contrasenaRegex.test(this.contrasena)) {
       await this.presentAlert('Error', 'La contraseña debe tener un mínimo de 6 caracteres, una mayúscula, un número y un carácter especial.');
       return;
     }
+
 
     // Validación de coincidencia de contraseñas
     if (this.contrasena !== this.validarContrasena) {

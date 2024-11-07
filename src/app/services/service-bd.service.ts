@@ -235,7 +235,7 @@ tablaCarrito: string = "CREATE TABLE IF NOT EXISTS carrito (id_articulo_carrito 
   }
 
   // Modificar un usuario
-  modificarUsuario(id: string, nombre: string, apellido: string) {
+  async modificarUsuario(id: string, nombre: string, apellido: string) {
     return this.database.executeSql('UPDATE usuario SET nombre_usu = ?, apellido_usu = ? WHERE id_usu = ?', [nombre, apellido, id]).then(res => {
       this.presentAlert("Modificar", "Usuario Modificado");
       this.seleccionarUsuarios();

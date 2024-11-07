@@ -19,6 +19,8 @@ export class PerfilPage implements OnInit {
   photoUrl: string = '/assets/icon/perfil.jpg'; // Imagen por defecto
   idUsuario: number = 0; // ID del usuario para eliminar
 
+  UsuariConectado: [] = [];
+
   constructor(
     private route: ActivatedRoute,
     private camaraService: CamaraService,
@@ -29,19 +31,16 @@ export class PerfilPage implements OnInit {
     private bdService: ServiceBDService // Servicio de BD para eliminar usuario
   ) {}
 
-  ngOnInit() {
-    // Recuperar los datos almacenados en localStorage
-    const storedUserData = localStorage.getItem('userData');
-    if (storedUserData) {
-      const userData = JSON.parse(storedUserData);
-      this.rut = userData.rut;
-      this.nombre = userData.nombre;
-      this.apellido = userData.apellido;
-      this.email = userData.correo;
-      this.nombreUsuario = userData.nombreUsuario;
-      this.idUsuario = userData.id_usu; // Almacenar el ID del usuario
-    }
+  async ngOnInit() {
+    // Verificar si la base de datos está lista
+    this.bdService.dbState().subscribe(data => {
+      if (data) {
+        this.bdService.seleccionarUsuarios(); // Cargar usuarios cuando la base de datos esté lista
+      }
+    });
   }
+
+
 
   async selectImageOrTakePhoto() {
     const action = await this.showActionSheet();

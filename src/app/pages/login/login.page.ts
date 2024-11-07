@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
-import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 import { AlertController, ToastController } from '@ionic/angular';
-import { ServiceBDService } from 'src/app/services/service-bd.service'; // Asegúrate de importar tu servicio correctamente
+import { ServiceBDService } from 'src/app/services/service-bd.service';
 
 @Component({
   selector: 'app-login',
@@ -18,67 +17,51 @@ export class LoginPage implements OnInit {
     private router: Router,
     private alertController: AlertController,
     private toastController: ToastController,
-    private dbService: ServiceBDService, // Inyectar el servicio de base de datos
-    private storage : NativeStorage
-  ) { }
+    private dbService: ServiceBDService
+  ) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   async onLogin() {
-    // Validación del correo
+    // Validación del correo y contraseña
     if (!this.validarCorreo(this.email)) {
       await this.presentAlert('El correo debe contener un único @.');
       return;
     }
 
-    // Validación de la contraseña
     if (!this.validarContrasena(this.password)) {
       await this.presentAlert('La contraseña debe tener al menos 6 caracteres, una mayúscula, un número y un carácter especial.');
       return;
     }
 
     // Verificar las credenciales en la base de datos
-   this.dbService.validarUsuario(this.email,this.password).then(usuario=>{
-    if(usuario){
-
-      let navigationExtras: NavigationExtras = {
-        queryParams: {
-          email: this.email
-        }
-      };
-
-      const idUsuario = usuario.id_usu
-      
-      this.guardarIdUsuario(idUsuario)
-
-      this.router.navigate(['/perfil'], navigationExtras);  // Navegación con extras
-      this.presentToast('Inicio de sesión exitoso');
-
-    }else{
-      this.presentAlert('Usuario o contraseña incorrectas');
-    }
-   })
-  }
-
-  async guardarIdUsuario(idUsuario : number){
-    try{
-      await this.storage.setItem('Usuario_logueado',idUsuario)
-    }catch(e){
-      console.log('Error al guardar el id de usuario'+JSON.stringify(e))
+    try {
+      const usuario = await this.dbService.validarUsuario(this.email, this.password);
+      if (usuario) {
+        // Pasar el ID del usuario como parámetro al perfil
+        let navigationExtras: NavigationExtras = {
+          queryParams: {
+            idUsuario: usuario.id_usu
+          }
+        };
+        this.router.navigate(['/perfil'], navigationExtras);  // Navegación con extras
+        await this.presentToast('Inicio de sesión exitoso');
+      } else {
+        await this.presentAlert('Usuario o contraseña incorrectas');
+      }
+    } catch (error) {
+      console.error('Error al iniciar sesión:', error);
+      await this.presentAlert('Error al verificar las credenciales.');
     }
   }
- 
-
 
   validarCorreo(email: string): boolean {
-    // Verifica que haya solo un @ en el correo
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const atSymbolCount = email.split('@').length - 1;
     return emailPattern.test(email) && atSymbolCount === 1;
   }
 
   validarContrasena(password: string): boolean {
-    // Este patrón verifica que la contraseña tenga al menos 6 caracteres, una mayúscula, un número y un carácter especial
     const passwordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
     return passwordPattern.test(password);
   }
@@ -89,7 +72,6 @@ export class LoginPage implements OnInit {
       message: message,
       buttons: ['OK']
     });
-
     await alert.present();
   }
 
@@ -99,7 +81,6 @@ export class LoginPage implements OnInit {
       duration: 5000,
       position: 'bottom'
     });
-
     toast.present();
   }
 

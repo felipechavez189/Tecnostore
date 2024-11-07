@@ -34,7 +34,7 @@ tablaCarrito: string = "CREATE TABLE IF NOT EXISTS carrito (id_articulo_carrito 
   //INSERT
   rolUsuario1: string = "INSERT OR IGNORE INTO rol (nombre_rol) VALUES ('administrador');";
   rolUsuario2: string = "INSERT OR IGNORE INTO rol (nombre_rol) VALUES ('cliente');";
-  registroUsuario: string = "INSERT OR IGNORE INTO usuario (rut_usu, nombre_usu, apellido_usu, nombre_usuario, clave_usu, correo_usu, token, foto_usu, estado_usu, id_rol) VALUES ('11.234.567-8', 'Felipe', 'Chávez', 'admin', 'Admin@123.', 'chavezfelipe179@gmail.com', 0, null, 0, 1, 1);";
+  registroUsuario: string = "INSERT OR IGNORE INTO usuario (rut_usu, nombre_usu, apellido_usu, nombre_usuario, clave_usu, correo_usu, token, foto_usu, estado_usu, loggeo, id_rol) VALUES ('11.234.567-8', 'Felipe', 'Chávez', 'admin', 'Admin@123.', 'chavezfelipe179@gmail.com', 0, null, 1, 0, 1);";
   categoriaProducto1: string = "INSERT OR IGNORE INTO categoria (nombre_cat) VALUES ('Teclados');";
   categoriaProducto2: string = "INSERT OR IGNORE INTO categoria (nombre_cat) VALUES ('Monitores');";
   categoriaProducto3: string = "INSERT OR IGNORE INTO categoria (nombre_cat) VALUES ('Audífonos');";
@@ -246,16 +246,14 @@ tablaCarrito: string = "CREATE TABLE IF NOT EXISTS carrito (id_articulo_carrito 
 
     
   // Insertar un usuario
-  insertarUsuario(rut: string, nombre: string, apellido: string, username: string, clave: string, correo: string, estado: string, id_rol: number) {
-    return this.database.executeSql(
-      'INSERT INTO usuario (rut_usu, nombre_usu, apellido_usu, nombre_usuario, clave_usu, correo_usu, estado_usu, id_rol, token, foto_usu) VALUES (?,?,?,?,?,?,?,?,?,?)',
-      [rut, nombre, apellido, username, clave, correo, estado, id_rol, 0] // 0 como valor por defecto para el token
-    ).then(res => {
-      this.presentAlert("Insertar", "Usuario Registrado");
-      this.seleccionarUsuarios(); // Actualizar lista de usuarios
-    }).catch(e => {
-      this.presentAlert('Insertar', 'Error: ' + JSON.stringify(e));
-    });
+  async insertarUsuario(rut: string, nombre: string, apellido: string, username: string, clave: string, correo: string, estado: string, id_rol: number): Promise<void> {
+    const query = 'INSERT INTO usuario (rut_usu, nombre_usu, apellido_usu, nombre_usuario, clave_usu, correo_usu, estado_usu, id_rol, token, foto_usu) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, NULL)';
+    try {
+      await this.database.executeSql(query, [rut, nombre, apellido, username, clave, correo, estado, id_rol]);
+    } catch (error) {
+      console.error('Error al insertar usuario:', error);
+      throw new Error('No se pudo insertar el usuario en la base de datos.');
+    }
   }
 
   // En tu ServiceBDService
@@ -591,11 +589,45 @@ modificarProducto(id: number, nombre: string, precio: number, stock: number, des
   });
 }
 
+ ////////////////////////////////////
+ 
+    // Método para actualizar la foto de perfil en la base de datos
+   // Método para obtener datos de usuario por ID, incluyendo la foto
+   // ServiceBDService.ts
+   async obtenerUsuarioPorId(idUsuario: number): Promise<any> {
+    const res = await this.database.executeSql('SELECT * FROM usuario WHERE id_usu = ?', [idUsuario]);
+    
+    if (res.rows.length > 0) {
+      const user = res.rows.item(0);
+      return {
+        id_usu: user.id_usu,
+        rut_usu: user.rut_usu,
+        nombre_usu: user.nombre_usu,
+        apellido_usu: user.apellido_usu,
+        correo_usu: user.correo_usu,
+        nombre_usuario: user.nombre_usuario,
+        foto_usu: user.foto_usu // Almacena el base64 directamente
+      };
+    } else {
+      return null;
+    }
+  }
+
+
+  // Método para actualizar la foto de perfil en la base de datos
+  async actualizarFotoPerfil(idUsuario: number, fotoBase64: string): Promise<void> {
+    await this.database.executeSql(
+      'UPDATE usuario SET foto_usu = ? WHERE id_usu = ?',
+      [fotoBase64, idUsuario]
+    );
+  }
+
+
   
-
-
-
 }
+
+ 
+
 // tablaCarrito: string = "CREATE TABLE IF NOT EXISTS carrito (id_articulo_carrito INTEGER PRIMARY KEY AUTOINCREMENT, id_usu INTEGER, id_producto INTEGER, cantidad INTEGER DEFAULT 1, FOREIGN KEY (id_usu) REFERENCES usuario(id_usu) FOREIGN KEY (id_producto) REFERENCES producto(id_producto))"
 
 // tablaProducto: string = "CREATE TABLE IF NOT EXISTS producto (id_producto INTEGER PRIMARY KEY AUTOINCREMENT, nombre_prod VARCHAR(50) NOT NULL, precio_prod INTEGER NOT NULL, stock_prod INTEGER NOT NULL, descripcion_prod VARCHAR(100) NOT NULL, foto_prod BLOB, estatus_prod BOOLEAN DEFAULT 1, categoria_id INTEGER NOT NULL, FOREIGN KEY (categoria_id) REFERENCES categoria(id_categoria));";

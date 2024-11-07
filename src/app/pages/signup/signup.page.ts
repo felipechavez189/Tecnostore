@@ -9,7 +9,6 @@ import { ServiceBDService } from 'src/app/services/service-bd.service';
   styleUrls: ['./signup.page.scss'],
 })
 export class SignupPage implements OnInit {
-
   rut: string = '';
   nombre: string = '';
   apellido: string = '';
@@ -22,13 +21,13 @@ export class SignupPage implements OnInit {
     private alertController: AlertController,
     private router: Router,
     private dbService: ServiceBDService  // Inyectar el servicio ServiceBDService
-  ) { }
+  ) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   async crearCuenta() {
     // Validación de campos vacíos
-    if (this.rut === '' || this.nombre === '' || this.apellido === '' || this.nombreUsuario === '' || this.correo === '' || this.contrasena === '' || this.validarContrasena === '') {
+    if (!this.rut || !this.nombre || !this.apellido || !this.nombreUsuario || !this.correo || !this.contrasena || !this.validarContrasena) {
       await this.presentAlert('Error', 'Todos los campos son obligatorios.');
       return;
     }
@@ -46,24 +45,31 @@ export class SignupPage implements OnInit {
       return;
     }
 
-    // Insertar el usuario en la base de datos
-    this.dbService.insertarUsuario(this.rut, this.nombre, this.apellido, this.nombreUsuario, this.contrasena, this.correo, 'activo', 2)
-      .then(async () => {
-        // Almacenar datos del usuario en localStorage
-        localStorage.setItem('userData', JSON.stringify({
-          rut: this.rut,
-          nombre: this.nombre,
-          apellido: this.apellido,
-          correo: this.correo,
-          nombreUsuario: this.nombreUsuario
-        }));
+    // Validación de correo único en la base de datos
+    const usuarioExistente = await this.dbService.obtenerUsuarioPorCorreo(this.correo);
+    if (usuarioExistente) {
+      await this.presentAlert('Error', 'El correo ya está en uso. Por favor, elige otro.');
+      return;
+    }
 
-        await this.presentAlert('Éxito', 'Cuenta creada con éxito.');
-        this.router.navigate(['/login']);  // Redirigir al perfil
-      })
-      .catch(async (error) => {
-        await this.presentAlert('Error', 'Hubo un problema al crear la cuenta.');
-      });
+    // Insertar el usuario en la base de datos
+    try {
+      await this.dbService.insertarUsuario(
+        this.rut,
+        this.nombre,
+        this.apellido,
+        this.nombreUsuario,
+        this.contrasena,
+        this.correo,
+        'activo',
+        2
+      );
+
+      await this.presentAlert('Éxito', 'Cuenta creada con éxito.');
+      this.router.navigate(['/login']); // Redirigir al perfil o página de inicio de sesión
+    } catch (error) {
+      await this.presentAlert('Error', 'Hubo un problema al crear la cuenta. Inténtalo nuevamente.');
+    }
   }
 
   async presentAlert(header: string, message: string) {
@@ -72,7 +78,6 @@ export class SignupPage implements OnInit {
       message,
       buttons: ['OK'],
     });
-
     await alert.present();
   }
 }
